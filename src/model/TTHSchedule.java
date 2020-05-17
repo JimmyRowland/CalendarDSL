@@ -1,4 +1,4 @@
 package model;
 
-public class TTHSchedule implements Day {
+public class TTHSchedule implements Something {
 }

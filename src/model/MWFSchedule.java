@@ -1,6 +1,6 @@
 package model;
 
-public class MWFSchedule implements Day {
+public class MWFSchedule implements Something {
     @Override
     public void delete(int id) {
 

@@ -7,16 +7,8 @@ public class Scheduler {
     List<Day> schedules;
     public Scheduler(){
         schedules = new ArrayList<>();
-        schedules.add(new MWFSchedule());
-        schedules.add(new TTHSchedule());
-        schedules.add(new MWFSchedule());
-        schedules.add(new TTHSchedule());
-        schedules.add(new MWFSchedule());
-        schedules.add(new SSSchedule());
-        schedules.add(new SSSchedule());
+        for(int i = 0;  i < 7; i++){
+            schedules.add(new Day());
+        }
     }
-
-
-
-
 }

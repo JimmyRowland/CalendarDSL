@@ -11,4 +11,19 @@ public class Scheduler {
             schedules.add(new Day());
         }
     }
+    public void addFlexibleEvent(FlexibleEvent flexibleEvent){
+
+    }
+    public Scheduler getScheduler(int priority){
+
+    }
+
+    public Scheduler getScheduler(String day){
+
+    }
+
+    public Scheduler getScheduler(int startDate, int endDate){
+
+    }
+
 }

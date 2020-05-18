@@ -1,4 +1,4 @@
-package libs;
+package model.io;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

@@ -7,6 +7,6 @@ public interface ASTnode {
     public void parse();
 
     public void evaluate();
-    
+
 
 }

@@ -9,11 +9,11 @@ public class Day {
     public Day(){
 
     }
-    public boolean hasTimeSlot(int duration){
-
+    public boolean hasTimeSlot(int duration) {
+        return false;
     }
 
     public boolean addFlexibleEvent(FlexibleEvent flexibleEvent){
-
+        return false;
     }
 }

@@ -14,16 +14,19 @@ public class Scheduler {
     public void addFlexibleEvent(FlexibleEvent flexibleEvent){
 
     }
-    public Scheduler getScheduler(int priority){
+    public Scheduler getScheduler(int priority) {
 
+        return null;
     }
 
     public Scheduler getScheduler(String day){
 
+        return null;
     }
 
     public Scheduler getScheduler(int startDate, int endDate){
 
+        return null;
     }
 
 }

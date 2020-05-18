@@ -1,6 +1,28 @@
 package AST;
 
-public enum Day {
-Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+import model.io.Tokenizer;
 
+public class Day implements ASTnode {
+    String day = null;
+
+    @Override
+    public void parse() {
+        Tokenizer t = Tokenizer.getTokenizer();
+        String token = t.checkNext();
+        String[] days = {"monday","tuesday","wednesday","thursday","friday","saturday", "sunday"};
+        for (String s : days) {
+            if (token.equalsIgnoreCase(s)) {
+                day = token;
+                break;
+            }
+        }
+        if (day == null) {
+            // not a valid day
+        }
+    }
+
+    @Override
+    public void evaluate() {
+
+    }
 }

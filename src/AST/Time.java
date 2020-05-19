@@ -11,7 +11,11 @@ public class Time implements ASTnode{
         t.getAndCheckNext("at");
         String timeStr = t.getNext();
         timeStr = timeStr.replace(":", "");
-        time = Integer.parseInt(timeStr);
+        try {
+            time = Integer.parseInt(timeStr);
+        } catch (Exception err) {
+            throw new RuntimeException("Not a valid time");
+        }
     }
 
     @Override

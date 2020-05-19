@@ -63,6 +63,7 @@ public class Tokenizer {
 //        else
 //            token="NO_MORE_TOKENS";
 //        return token;
+        return null;
     }
 
     public String getNext(){
@@ -74,6 +75,7 @@ public class Tokenizer {
 //        else
 //            token="NULLTOKEN";
 //        return token;
+        return null;
     }
 
 

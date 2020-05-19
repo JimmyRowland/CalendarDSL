@@ -1,5 +1,4 @@
 package model.io;
-//package libs;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -64,7 +63,6 @@ public class Tokenizer {
 //        else
 //            token="NO_MORE_TOKENS";
 //        return token;
-        return null;
     }
 
     public String getNext(){
@@ -76,7 +74,6 @@ public class Tokenizer {
 //        else
 //            token="NULLTOKEN";
 //        return token;
-        return null;
     }
 
 
@@ -88,7 +85,7 @@ public class Tokenizer {
     }
 
 
-    public String getAndCheckNext(String regexp) {
+    public String getAndCheckNext(String regexp){
 //        String s = getNext();
 //        if (!s.matches(regexp)) {
 //            throw new RuntimeException("Unexpected next token for Parsing! Expected something matching: " + regexp + " but got: " + s);
@@ -98,9 +95,8 @@ public class Tokenizer {
         return null;
     }
 
-    public boolean moreTokens() {
+    public boolean moreTokens(){
         return currentToken<tokens.length;
-
     }
 
     public static void makeTokenizer(String filename, List<String> literals){

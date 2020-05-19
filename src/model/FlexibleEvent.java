@@ -2,7 +2,7 @@ package model;
 
 import java.util.Calendar;
 
-public class FlexibleEvent implements Event {
+public class FlexibleEvent implements Event, Comparable<Event> {
     int duration;
     Calendar start;
     Calendar end;
@@ -17,16 +17,16 @@ public class FlexibleEvent implements Event {
 
     }
 
-    @Override
-    public int compareTo(Object o) {
-        return 0;
-    }
-
     public Calendar getStart(){
         return this.start;
     }
     @Override
     public int getDayOfWeek() {
         return start.get(Calendar.DAY_OF_WEEK);
+    }
+
+    @Override
+    public int compareTo(Event event) {
+        return 0;
     }
 }

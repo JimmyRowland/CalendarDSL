@@ -3,7 +3,7 @@ package model;
 import java.util.Calendar;
 
 
-public class IndividualEvent implements Event{
+public class IndividualEvent implements Event, Comparable<Event>{
     Calendar start;
     Calendar end;
     public IndividualEvent(Calendar start, Calendar end, String name, int priority, String location, String description){
@@ -12,8 +12,7 @@ public class IndividualEvent implements Event{
     }
 
     @Override
-    public int compareTo(Object o) {
-        Event event = (Event) o;
+    public int compareTo(Event event) {
         return start.compareTo(event.getStart());
     }
 

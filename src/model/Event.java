@@ -2,7 +2,7 @@ package model;
 
 import java.util.Calendar;
 
-public interface Event extends Comparable {
+public interface Event {
     public Calendar getStart();
     public int getDayOfWeek();
 }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class GroupEvent implements Event{
+public class GroupEvent implements Event, Comparable<Event>{
     Calendar start;
     Calendar end;
 
@@ -31,7 +31,7 @@ public class GroupEvent implements Event{
     }
 
     @Override
-    public int compareTo(Object o) {
+    public int compareTo(Event event) {
         return 0;
     }
 

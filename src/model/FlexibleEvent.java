@@ -16,4 +16,17 @@ public class FlexibleEvent implements Event {
     void setEnd(){
 
     }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
+    }
+
+    public Calendar getStart(){
+        return this.start;
+    }
+    @Override
+    public int getDayOfWeek() {
+        return start.get(Calendar.DAY_OF_WEEK);
+    }
 }

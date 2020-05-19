@@ -14,10 +14,25 @@ public class GroupEvent implements Event{
     void addEvent(Event event){
 
     };
+//
+//    boolean hasConflict(Event event) throws Exception {
+//
+//    }
 
-    boolean hasConflict(Event event) throws Exception {
 
+    @Override
+    public Calendar getStart() {
+        return null;
     }
 
+    @Override
+    public int getDayOfWeek() {
+        return start.get(Calendar.DAY_OF_WEEK);
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
+    }
 
 }

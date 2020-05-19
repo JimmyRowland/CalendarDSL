@@ -5,15 +5,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Day {
-    List Events = new ArrayList<Event>();
+    ArrayList<Event> events = new ArrayList<Event>();
     public Day(){
-
     }
-    public boolean hasTimeSlot(int duration){
+
+    // modifies flexible event
+    public boolean hasTimeSlot(FlexibleEvent flexibleEvent){
+        return false;
+    }
+
+    public boolean hasTimeSlot(Event event){
+        return false;
+    }
+
+    // Inefficient but less code
+    public void sortEvent(){
 
     }
 
     public boolean addFlexibleEvent(FlexibleEvent flexibleEvent){
+        events.add(flexibleEvent);
+        sortEvent();
+        return false;
+    }
 
+    public Event getEvent(int index){
+        return events.get(index);
+    }
+
+    public int size(){
+        return events.size();
+    }
+
+    public void addEvent(Event event){
+        if(hasTimeSlot(event)){
+            events.add(event);
+            sortEvent();
+        }
     }
 }

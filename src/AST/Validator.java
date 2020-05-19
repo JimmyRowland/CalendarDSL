@@ -60,7 +60,7 @@ public class Validator {
             }
         }
         if (value == null) {
-            throw new RuntimeException("Invalud repition");
+            throw new RuntimeException("Invalid repetition");
         }
         return value;
     }

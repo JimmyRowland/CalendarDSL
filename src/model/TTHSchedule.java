@@ -1,5 +1,5 @@
-package model;
-
-public class TTHSchedule implements Something {
-
-}
+//package model;
+//
+//public class TTHSchedule implements Something {
+//
+//}

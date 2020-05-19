@@ -1,4 +1,4 @@
-package libs;
+package model.io;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -55,31 +55,7 @@ public class Tokenizer {
 //        System.out.println(Arrays.asList(tokens));
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    private String checkNext(){
+    public String checkNext(){
 //        String token="";
 //        if (currentToken<tokens.length){
 //            token = tokens[currentToken];
@@ -87,6 +63,7 @@ public class Tokenizer {
 //        else
 //            token="NO_MORE_TOKENS";
 //        return token;
+        return null;
     }
 
     public String getNext(){
@@ -98,6 +75,7 @@ public class Tokenizer {
 //        else
 //            token="NULLTOKEN";
 //        return token;
+        return null;
     }
 
 
@@ -105,6 +83,7 @@ public class Tokenizer {
 //        String s = checkNext();
 //        System.out.println("comparing: |"+s+"|  to  |"+regexp+"|");
 //        return (s.matches(regexp));
+        return false;
     }
 
 
@@ -115,6 +94,7 @@ public class Tokenizer {
 //        }
 //        System.out.println("matched: "+s+"  to  "+regexp);
 //        return s;
+        return null;
     }
 
     public boolean moreTokens(){

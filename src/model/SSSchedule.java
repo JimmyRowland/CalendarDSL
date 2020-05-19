@@ -1,5 +1,5 @@
-package model;
-
-public class SSSchedule implements Something {
-
-}
+//package model;
+//
+//public class SSSchedule implements Something {
+//
+//}

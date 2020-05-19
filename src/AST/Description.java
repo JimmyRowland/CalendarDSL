@@ -10,6 +10,7 @@ public class Description implements Setting, ASTnode {
         Tokenizer t = Tokenizer.getTokenizer();
         t.getAndCheckNext("description:");
         desc = t.getNext();
+        Validator.validateString(desc);
         t.getAndCheckNext(";");
     }
 

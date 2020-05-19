@@ -9,7 +9,7 @@ public class Location implements Setting, ASTnode {
     public void parse() {
         Tokenizer t = Tokenizer.getTokenizer();
         t.getAndCheckNext("location:");
-        name = t.getNext();
+        name = Validator.validateString(t.getNext());
         t.getAndCheckNext(";");
     }
 

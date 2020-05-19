@@ -57,6 +57,7 @@ public class Validator {
         for (String s: repeatable) {
             if (token.equalsIgnoreCase(s)) {
                 value = token;
+                break;
             }
         }
         if (value == null) {

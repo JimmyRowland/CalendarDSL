@@ -2,8 +2,6 @@ package AST;
 
 import model.io.Tokenizer;
 
-import java.util.Arrays;
-
 public class Validator {
 
     public static String validateDay(String token) {

@@ -9,7 +9,7 @@ public class Title implements ASTnode {
     public void parse() {
         Tokenizer t = Tokenizer.getTokenizer();
         t.getAndCheckNext("called:");
-        title = t.getNext();
+        title = Validator.validateString(t.getNext());
         t.getAndCheckNext(";");
     }
 

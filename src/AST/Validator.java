@@ -2,11 +2,15 @@ package AST;
 
 import model.io.Tokenizer;
 
-public class Validator {
+import java.util.ArrayList;
+import java.util.Arrays;
 
+public class Validator {
+    final static String[] days = {"monday","tuesday","wednesday","thursday","friday","saturday","sunday"};
+    final static String[] settingkeys = {"location:", "repeat:", "priority:", "description:"};
     public static String validateDay(String token) {
         String value;
-        String[] days = {"monday","tuesday","wednesday","thursday","friday","saturday","sunday"};
+
         for (String s : days) {
             if (token.equalsIgnoreCase(s)) {
                 value = s;
@@ -17,14 +21,17 @@ public class Validator {
         throw new RuntimeException("Invalid day");
     }
 
-    public static int validateInt(String token) {
-        int value;
+    // Checks token for numeric integer value and within given range (inclusive)
+    public static int validateTime(String token, int start, int end) {
         try {
-            value = Integer.parseInt(token);
+            int value = Integer.parseInt(token);
+            if(value > end || value < start){
+                throw new RuntimeException("Value out of range");
+            }
+            return value;
         } catch (NumberFormatException e) {
             throw new RuntimeException("Invalid time");
         }
-        return value;
     }
 
     public static String validateString(String token) {
@@ -71,5 +78,47 @@ public class Validator {
             throw new RuntimeException("Invalid repetition");
         }
         return value;
+    }
+
+
+    public static ASTnode validateOccurrence(String token) {
+        Tokenizer t = Tokenizer.getTokenizer();
+        if (Arrays.asList(days).contains(token)) {
+            return new Day();
+        } else if (token.equals("at")) {
+            return new Time();
+        } else if (token.equals("from")) {
+            return new DayRange();
+        } else if (token.equals("on")) {
+            return new TimeRange();
+        }else {
+            throw new RuntimeException("Invalid Occurrence type");
+        }
+    }
+
+    public static String validateExistingEvent(String next) {
+        // todo check for events already in model so grouping knows if exists and add
+        return next;
+    }
+
+    public static boolean getValidSettingKeyword(String token) {
+        return (Arrays.asList(settingkeys).contains(token));
+    }
+
+    // REQUIRES: Validated token by getValidSettingKeyword()
+    public static Setting getSettingType(String token) {
+        // todo refactor this to something smarter
+        switch (token) {
+            case "location:":
+                return new Location();
+            case "repeat:":
+                return new Repetition();
+            case "priority:":
+                return new Priority();
+            case "description:":
+                return new Description();
+            default:
+                throw new RuntimeException("Not a valid setting type");
+        }
     }
 }

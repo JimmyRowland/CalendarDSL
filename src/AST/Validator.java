@@ -31,6 +31,12 @@ public class Validator {
 
     public static String validateString(String token) {
         // check that its a string and contains no reserved symbols
+        String[] reservedWords = { ";", "<", ">", ":" };
+        for (String s: reservedWords) {
+            if (token.contains(s)) {
+                throw new RuntimeException("String contains reserved word");
+            }
+        }
         return token;
     }
 

@@ -26,4 +26,17 @@ public class Util {
         if(dayOfTheWeek.equals("Saturday")) return 7;
         return 0;
     }
+
+    //https://stackoverflow.com/questions/3463756/is-there-a-good-way-to-get-the-date-of-the-coming-wednesday
+    public static Calendar nextDayOfWeek(int dayOfWeek) {
+        Calendar date = Calendar.getInstance();
+        int diff = dayOfWeek - date.get(Calendar.DAY_OF_WEEK);
+        if (diff <= 0) {
+            diff += 7;
+        }
+        date.add(Calendar.DAY_OF_MONTH, diff);
+        date.set(Calendar.HOUR,6);
+        return date;
+    }
+
 }

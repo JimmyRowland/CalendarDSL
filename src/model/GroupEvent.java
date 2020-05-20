@@ -42,6 +42,14 @@ public class GroupEvent implements Event, Comparable<Event>{
     }
 
     @Override
+    public boolean hasConflict(Calendar start, Calendar end) {
+        if(this.start.after(start)&& this.end.before(end)){
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public int compareTo(Event event) {
         return start.compareTo(event.getStart());
     }

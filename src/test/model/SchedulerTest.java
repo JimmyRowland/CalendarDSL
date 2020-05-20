@@ -1,5 +1,6 @@
 package test.model;
 
+import model.Day;
 import model.IndividualEvent;
 import model.Scheduler;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +18,9 @@ class SchedulerTest {
     }
     @Test
     void addEvent() {
+
         Calendar start0 = Calendar.getInstance();
+        System.out.println(start0.get(Calendar.DAY_OF_WEEK));
         Calendar end0 = Calendar.getInstance();
         end0.add(Calendar.HOUR,2);
         Calendar start1 = Calendar.getInstance();

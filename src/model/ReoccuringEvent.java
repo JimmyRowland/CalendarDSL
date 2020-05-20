@@ -31,12 +31,17 @@ public class ReoccuringEvent implements Event, Comparable<Event>{
 
     @Override
     public Calendar getStart() {
-        return null;
+        return start;
     }
 
     @Override
     public int getDayOfWeek() {
         return start.get(Calendar.DAY_OF_WEEK);
+    }
+    //TODO
+    @Override
+    public boolean hasConflict(Calendar start, Calendar end) {
+        return true;
     }
 
     @Override

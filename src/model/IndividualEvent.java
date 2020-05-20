@@ -35,6 +35,14 @@ public class IndividualEvent implements Event, Comparable<Event>{
     }
 
     @Override
+    public boolean hasConflict(Calendar start, Calendar end) {
+        if(this.start.after(start)&& this.end.before(end)){
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public Calendar getEnd() {
         return end;
     }

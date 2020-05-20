@@ -46,6 +46,17 @@ public class FlexibleEvent implements Event, Comparable<Event> {
     }
 
     @Override
+    public boolean hasConflict(Calendar start, Calendar end) {
+        int space = start.compareTo(end);
+        if(this.getDurationInMS()>space){
+                this.setStart((Calendar) start.clone());
+                this.setEnd((Calendar) end.clone());
+                return false;
+            }
+        return true;
+    }
+
+    @Override
     public int compareTo(Event event) {
         return start.compareTo(event.getStart());
     }

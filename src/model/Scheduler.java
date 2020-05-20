@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class Scheduler {
@@ -16,8 +17,9 @@ public class Scheduler {
     List<FlexibleEvent> flexibleEventList;
     public Scheduler(){
         days = new ArrayList<>();
-        for(int i = 0;  i < 7; i++){
-            days.add(new Day());
+        for(int i = 1;  i < 8; i++){
+            Calendar startOfTheDay = Util.nextDayOfWeek(i);
+            days.add(new Day(startOfTheDay));
         }
         flexibleEventList = new ArrayList<>();
     }

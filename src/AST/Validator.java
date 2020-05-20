@@ -54,13 +54,17 @@ public class Validator {
         Tokenizer t = Tokenizer.getTokenizer();
         String value = null;
         String[] repeatable = {"daily","MWF","TTH"};
-        if (token.equalsIgnoreCase("every")) {
-            value = token + Validator.validateDay(t.getNext());
+
+        String str = token.substring(0,4);
+        if (str.contains("every")) {
+            // validate the string starting from after the word every
+            value = "every " + Validator.validateDay(token.substring(6));
+            return value;
         }
         for (String s: repeatable) {
             if (token.equalsIgnoreCase(s)) {
                 value = token;
-                break;
+                return value;
             }
         }
         if (value == null) {

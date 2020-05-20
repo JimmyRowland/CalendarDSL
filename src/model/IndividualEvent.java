@@ -6,10 +6,18 @@ import java.util.Calendar;
 public class IndividualEvent implements Event, Comparable<Event>{
     Calendar start;
     Calendar end;
-    public IndividualEvent(Calendar start, Calendar end, String name, int priority, String location, String description){
-//     int timeRange    repetition
+    String name;
+    String location;
+    String description;
 
+    public IndividualEvent(Calendar start, Calendar end, String name, String location, String description) {
+        this.start = start;
+        this.end = end;
+        this.name = name;
+        this.location = location;
+        this.description = description;
     }
+
 
     @Override
     public int compareTo(Event event) {
@@ -24,5 +32,22 @@ public class IndividualEvent implements Event, Comparable<Event>{
     @Override
     public int getDayOfWeek() {
         return start.get(Calendar.DAY_OF_WEEK);
+    }
+
+    @Override
+    public Calendar getEnd() {
+        return end;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

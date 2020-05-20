@@ -4,6 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Scheduler {
+    public List<Day> getDays() {
+        return days;
+    }
+
+    public List<FlexibleEvent> getFlexibleEventList() {
+        return flexibleEventList;
+    }
+
     List<Day> days;
     List<FlexibleEvent> flexibleEventList;
     public Scheduler(){
@@ -16,6 +24,7 @@ public class Scheduler {
     public void addFlexibleEvent(FlexibleEvent flexibleEvent){
         flexibleEventList.add(flexibleEvent);
     }
+
     public void addEvent(Event event){
         int dayOfWeek = event.getDayOfWeek();
         days.get(dayOfWeek).addEvent(event);
@@ -39,7 +48,7 @@ public class Scheduler {
         for(FlexibleEvent flexibleEvent: flexibleEventList){
             for(Day day: days){
                 if(day.addFlexibleEvent(flexibleEvent)){
-                    return;
+                    break;
                 }
             }
             throw new RuntimeException("Not enough time for event "+ flexibleEvent.toString());

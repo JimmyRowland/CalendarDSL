@@ -6,15 +6,35 @@ public class FlexibleEvent implements Event, Comparable<Event> {
     int duration;
     Calendar start;
     Calendar end;
-    public FlexibleEvent(String name, String location, String description, int duration){
+    String name;
+    String location;
+    String description;
 
+    public FlexibleEvent(int duration, String name, String location, String description) {
+        this.duration = duration;
+        this.name = name;
+        this.location = location;
+        this.description = description;
     }
 
-    void setStart(){
-
+    @Override
+    public Calendar getEnd() {
+        return end;
     }
-    void setEnd(){
 
+    void setEnd(Calendar end){
+        this.end = end;
+    }
+
+    void setStart(Calendar start) {
+        this.start = start;
+    }
+
+    int getDuration(){
+        return duration;
+    }
+    int getDurationInMS(){
+        return duration*3600000;
     }
 
     public Calendar getStart(){
@@ -27,6 +47,19 @@ public class FlexibleEvent implements Event, Comparable<Event> {
 
     @Override
     public int compareTo(Event event) {
-        return 0;
+        return start.compareTo(event.getStart());
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

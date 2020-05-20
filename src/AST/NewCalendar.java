@@ -17,7 +17,9 @@ public class NewCalendar implements Calendar, ASTnode {
         title.parse();
         while (t.moreTokens()) {
             if (t.checkToken("new event")) {
-
+                Event e = new Event();
+                e.parse();
+                events.add(e);
             }else if (t.checkToken("end")) {
 
             } else {

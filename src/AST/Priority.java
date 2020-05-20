@@ -10,7 +10,7 @@ public class Priority implements Setting, ASTnode {
         Tokenizer t = Tokenizer.getTokenizer();
         t.getAndCheckNext("priority:");
         String token = t.getNext();
-        Validator.validateInt(token);
+//        Validator.validateInt(token);
         value = Validator.validatePriority(token);
         t.getAndCheckNext(";");
     }

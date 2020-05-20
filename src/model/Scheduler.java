@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class Scheduler {
+public class Scheduler implements FlexibleEventAllocatable {
     public List<Day> getDays() {
         return days;
     }
@@ -47,6 +47,9 @@ public class Scheduler {
 
     // Call this at the end of the driver
     public void allocateFlexibleEvents(){
+        for(Day day: days){
+            day.allocateFlexibleEvents();
+        }
         for(FlexibleEvent flexibleEvent: flexibleEventList){
             for(Day day: days){
                 if(day.addFlexibleEvent(flexibleEvent)){
@@ -56,6 +59,4 @@ public class Scheduler {
             throw new RuntimeException("Not enough time for event "+ flexibleEvent.toString());
         }
     }
-
-
 }

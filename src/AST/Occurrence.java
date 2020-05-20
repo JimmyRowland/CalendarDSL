@@ -1,16 +1,20 @@
 package AST;
 
-import java.util.Calendar;
+import model.io.Tokenizer;
+
 
 public class Occurrence implements ASTnode {
 
-    Calendar Day;
-    DayRange dayRange;
-    TimeRange timeRange;
+    ASTnode range; // todo range types will need to be parsed and get value into model
 
     @Override
     public void parse() {
-
+        Tokenizer t = Tokenizer.getTokenizer();
+        t.getAndCheckNext("<");
+        String token = t.getNext();
+        range = Validator.validateOccurrence(token);
+        range.parse();
+        t.getAndCheckNext(">");
     }
 
     @Override

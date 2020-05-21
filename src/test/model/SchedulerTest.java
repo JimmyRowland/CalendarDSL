@@ -1,6 +1,7 @@
 package test.model;
 
 import model.Day;
+import model.EventCreator;
 import model.IndividualEvent;
 import model.Scheduler;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,6 +36,18 @@ class SchedulerTest {
     }
 
     @Test
+    void addFlexibleEvent(){
+        try{
+            scheduler.addEvent(EventCreator.createEvent(null,null,"flexName1","loc","des",2,0,null));
+            scheduler.addEvent(EventCreator.createEvent(null,null,"flexName2","loc","des",2,0,null));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        assertEquals(2,scheduler.getFlexibleEventList().size());
+    }
+
+    @Test
     void allocateFlexibleEvents() {
+
     }
 }

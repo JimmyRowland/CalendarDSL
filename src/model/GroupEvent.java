@@ -29,7 +29,10 @@ public class GroupEvent implements Event, Comparable<Event>{
     void setStartAndEndDate(){
 
     }
-
+    @Override
+    public void addToScheduler(Scheduler scheduler) {
+        scheduler.addEvent( this);
+    }
 
     @Override
     public Calendar getStart() {

@@ -1,6 +1,5 @@
 package model;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Day implements FlexibleEventAllocatable {
@@ -71,13 +70,17 @@ public class Day implements FlexibleEventAllocatable {
 
     }
 
-    public boolean addFlexibleEvent(FlexibleEvent flexibleEvent) {
+    public boolean addEvent(FlexibleEvent flexibleEvent) {
         if (this.hasTimeSlot(flexibleEvent)) {
             events.add(flexibleEvent);
             sortEvent();
             return true;
         }
         return false;
+    }
+
+    public void addEvent(FlexibleEventWithDayField FlexibleEventWithDayField) {
+        this.flexibleEvents.add(FlexibleEventWithDayField);
     }
 
     public Event getEvent(int index) {
@@ -95,20 +98,27 @@ public class Day implements FlexibleEventAllocatable {
         }
     }
 
-    // Skip events with conflict without throwing exception
-    public void addEvent(ReoccuringEvent reoccuringEvent) {
-        for (Event event : reoccuringEvent.getEvents()) {
-            if (hasTimeSlot(event)) {
-                events.add(event);
-                sortEvent();
-            }
+    public void addEvent(IndividualEvent event) {
+        if (hasTimeSlot(event)) {
+            events.add(event);
+            sortEvent();
         }
     }
+
+//    // Skip events with conflict without throwing exception
+//    public void addEvent(RecurringEvent recurringEvent) {
+//        for (Event event : recurringEvent.getEvents()) {
+//            if (hasTimeSlot(event)) {
+//                events.add(event);
+//                sortEvent();
+//            }
+//        }
+//    }
 
     @Override
     public void allocateFlexibleEvents() {
         for (FlexibleEvent flexibleEvent : flexibleEvents) {
-            this.addFlexibleEvent(flexibleEvent);
+            this.addEvent(flexibleEvent);
         }
     }
 }

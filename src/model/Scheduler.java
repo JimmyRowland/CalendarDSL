@@ -19,18 +19,37 @@ public class Scheduler implements FlexibleEventAllocatable {
         days = new ArrayList<>();
         for(int i = 1;  i < 8; i++){
             Calendar startOfTheDay = Util.nextDayOfWeek(i);
+            Util.setTime(startOfTheDay,6);
             days.add(new Day(startOfTheDay));
         }
         flexibleEventList = new ArrayList<>();
     }
-    public void addFlexibleEvent(FlexibleEvent flexibleEvent){
-        flexibleEventList.add(flexibleEvent);
-    }
 
-    public void addEvent(Event event){
+    public void addEvent(IndividualEvent event){
         int dayOfWeek = event.getDayOfWeek();
         days.get(dayOfWeek).addEvent(event);
     }
+
+    public void addEvent(Event event){
+        event.addToScheduler(this);
+    }
+
+    public void addEvent(RecurringEvent recurringEvent){
+        List<Integer> days = recurringEvent.getDaysOfWeek();
+        for(int d: days){
+            addEvent(recurringEvent.getEvents().get(d));
+        }
+    }
+
+    public void addEvent(FlexibleEvent flexibleEvent){
+        flexibleEventList.add(flexibleEvent);
+    }
+
+    public void addEvent(FlexibleEventWithDayField flexibleEventWithDayField){
+        int dayOfWeek = flexibleEventWithDayField.getDayOfWeek();
+        days.get(dayOfWeek).addEvent(flexibleEventWithDayField);
+    }
+
 
     // Not specified in grammar
 //    public Scheduler getScheduler(int priority){
@@ -52,7 +71,7 @@ public class Scheduler implements FlexibleEventAllocatable {
         }
         for(FlexibleEvent flexibleEvent: flexibleEventList){
             for(Day day: days){
-                if(day.addFlexibleEvent(flexibleEvent)){
+                if(day.addEvent(flexibleEvent)){
                     break;
                 }
             }

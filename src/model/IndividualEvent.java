@@ -18,7 +18,10 @@ public class IndividualEvent implements Event, Comparable<Event>{
         this.description = description;
     }
 
-
+    @Override
+    public void addToScheduler(Scheduler scheduler) {
+        scheduler.addEvent(this);
+    }
     @Override
     public int compareTo(Event event) {
         return start.compareTo(event.getStart());

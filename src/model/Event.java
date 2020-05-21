@@ -8,4 +8,7 @@ public interface Event extends Comparable<Event> {
     public int getDayOfWeek();
     boolean hasConflict(Calendar start, Calendar end);
     void addToScheduler(Scheduler scheduler);
+    String getName();
+    String getDescription();
+    String getLocation();
 }

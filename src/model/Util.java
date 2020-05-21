@@ -15,8 +15,12 @@ public class Util {
     public static Calendar getNewNextWeekCalendar(int dayOfTheWeek, String time){
         Calendar calendar = Util.nextDayOfWeek(dayOfTheWeek);
         String[] timeList =  time.split(":");
-        calendar.set(Calendar.HOUR,Integer.parseInt(timeList[0]));
+        calendar.set(Calendar.HOUR_OF_DAY,Integer.parseInt(timeList[0]));
         calendar.set(Calendar.MINUTE,Integer.parseInt(timeList[1]));
+        System.out.println("---");
+        System.out.println(time);
+        System.out.println(calendar.getTime().toString());
+        System.out.println("---");
         return calendar;
     }
 
@@ -42,10 +46,14 @@ public class Util {
     }
 
     public static void setTime(Calendar calendar, int hour){
-        calendar.set(Calendar.HOUR,hour-1);
+        calendar.set(Calendar.HOUR_OF_DAY,hour-1);
         calendar.set(Calendar.MINUTE,59);
         calendar.set(Calendar.SECOND,59);
         calendar.set(Calendar.MILLISECOND,999);
+    }
+
+    public static void printCalendar(Calendar calendar){
+        System.out.println(calendar.getTime().toString());
     }
 
 }

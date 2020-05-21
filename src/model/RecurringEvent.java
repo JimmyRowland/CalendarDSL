@@ -80,4 +80,19 @@ public class RecurringEvent implements Event, Comparable<Event>{
     public List<Integer> getDaysOfWeek() {
         return daysOfWeek;
     }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String getLocation() {
+        return location;
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
 }

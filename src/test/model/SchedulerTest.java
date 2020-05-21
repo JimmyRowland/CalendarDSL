@@ -18,7 +18,6 @@ class SchedulerTest {
     }
     @Test
     void addEvent() {
-
         Calendar start0 = Calendar.getInstance();
         System.out.println(start0.get(Calendar.DAY_OF_WEEK));
         Calendar end0 = Calendar.getInstance();

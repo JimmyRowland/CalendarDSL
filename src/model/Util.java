@@ -35,8 +35,15 @@ public class Util {
             diff += 7;
         }
         date.add(Calendar.DAY_OF_MONTH, diff);
-        date.set(Calendar.HOUR,6);
+        Util.setTime(date,6);
         return date;
+    }
+
+    public static void setTime(Calendar calendar, int hour){
+        calendar.set(Calendar.HOUR,hour-1);
+        calendar.set(Calendar.MINUTE,59);
+        calendar.set(Calendar.SECOND,59);
+        calendar.set(Calendar.MILLISECOND,999);
     }
 
 }

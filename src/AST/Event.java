@@ -52,42 +52,52 @@ public class Event implements ASTnode {
         // todo build event into model here?
     }
 
-    public Map<String, Object> getEventInfo() {
-        Map<String, Object> eventMap = new HashMap<>();
-        eventMap.put("Title", this.title);
-        eventMap.put("Occurrence", this.occurrence);
-        eventMap.put("Location", this.location);
-        eventMap.put("Repetition", this.repeat);
-        eventMap.put("Description", this.description);
-        eventMap.put("Group", this.group);
-        return eventMap;
-    }
-
     public String getTitle() {
-        return title.getTitle();
+        if (title != null) {
+            return title.getTitle();
+        }
+        return null;
     }
 
-    public ASTnode getOccurrence() {
-        return this.occurrence.getRange();
+    public Object getOccurrence() {
+        if (occurrence != null) {
+            return this.occurrence.getRange();
+        }
+        return null;
     }
 
     public String getLocation() {
-        return location.getLocation();
+        if (location != null) {
+            return location.getLocation();
+        }
+        return null;
     }
 
     public String getRepeat() {
-        return repeat.value;
+        if (repeat != null) {
+            return repeat.value;
+        }
+        return null;
     }
 
     public String getDescription() {
-        return description.desc;
+        if (description != null) {
+            return description.desc;
+        }
+        return null;
     }
 
     public String getGroupTitle() {
-        return group.title.getTitle();
+        if (group != null) {
+            return group.title.getTitle();
+        }
+        return null;
     }
 
     public List<String> getGroupEvents() {
-        return group.events;
+        if (group != null) {
+            return group.events;
+        }
+        return null;
     }
 }

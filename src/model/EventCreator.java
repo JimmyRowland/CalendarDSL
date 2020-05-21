@@ -5,6 +5,25 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+
+//public static Event createEvent(String start, String end, String name, String location, String description, int duration, int dayOfWeek, List<Integer> daysOfWeek) throws Exception
+//        Use EventCreator.createEvent() to create events. You don't have to break down the recurring event. Just pass in List<Integer> daysOfWeek and it will create use this method to create recurring event
+//        white_check_markeyesraised_hands
+//
+//
+//
+//
+//        10:33
+//public static RecurringEvent createEvent(String start, String end, String name, String location, String description, List<Integer> daysOfWeek) {
+//        return new RecurringEvent(name, location, description, Util.getNewNextWeekCalendar(1, start), Util.getNewNextWeekCalendar(1, end), daysOfWeek);
+//        }
+//        10:34
+//        use scheduler.addEvent(Event event) to add any kind of event
+//        10:34
+//public void addEvent(Event event){
+//        event.addToScheduler(this);
+//        }
+
 public class EventCreator {
     public static Event createEvent(String start, String end, String name, String location, String description, int duration, int dayOfWeek, List<Integer> daysOfWeek) throws Exception {
         // start and end should both be in the format of 16:00 or null

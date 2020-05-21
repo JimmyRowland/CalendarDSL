@@ -8,7 +8,6 @@ public class Title implements ASTnode {
     @Override
     public void parse() {
         Tokenizer t = Tokenizer.getTokenizer();
-        t.getAndCheckNext("called:");
         title = Validator.validateString(t.getNext());
         t.getAndCheckNext(";");
     }

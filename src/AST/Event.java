@@ -11,7 +11,6 @@ public class Event implements ASTnode {
     List<Setting> settings;
     Group group;
 
-
     @Override
     public void parse() {
         Tokenizer t = Tokenizer.getTokenizer();

@@ -12,7 +12,6 @@ public class NewCalendar implements Calendar, ASTnode {
     public void parse() {
         Tokenizer t = Tokenizer.getTokenizer();
         t.getAndCheckNext("new calendar");
-        t.getAndCheckNext("called");
         title = new Title();
         title.parse();
         while (t.moreTokens()) {

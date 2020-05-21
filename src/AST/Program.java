@@ -4,7 +4,7 @@ import model.io.Tokenizer;
 
 public class Program implements ASTnode {
 
-    Calendar calendar;
+    NewCalendar calendar;
 
     @Override
     public void parse() {
@@ -21,5 +21,9 @@ public class Program implements ASTnode {
     @Override
     public void evaluate() {
 
+    }
+
+    public NewCalendar getCalendar() {
+        return calendar;
     }
 }

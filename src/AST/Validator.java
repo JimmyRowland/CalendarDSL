@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 public class Validator {
     final static String[] days = {"monday","tuesday","wednesday","thursday","friday","saturday","sunday"};
-    final static String[] settingkeys = {"location:", "repeat:", "priority:", "description:"};
+    final static String[] settingkeys = {"location:", "repeat:", "description:"};
 
     public static String validateDay(String token) {
         String value;
@@ -107,17 +107,18 @@ public class Validator {
     }
 
     // REQUIRES: Validated token by getValidSettingKeyword()
-    public static Setting getSettingType(String token) {
+    public static Setting getAndSettingType(String token, Event e) {
         // todo refactor this to something smarter
         switch (token) {
             case "location:":
-                return new Location();
+                e.location = new Location();
+                return e.location;
             case "repeat:":
-                return new Repetition();
-            case "priority:":
-                return new Priority();
+                e.repeat = new Repetition();
+                return e.repeat;
             case "description:":
-                return new Description();
+                e.description= new Description();
+                return e.description;
             default:
                 throw new RuntimeException("Not a valid setting type");
         }

@@ -2,20 +2,18 @@ package AST;
 
 import model.io.Tokenizer;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Event implements ASTnode {
     Title title;
     Occurrence occurrence;
-    List<Setting> settings;
     Group group;
+    Location location;
+    Repetition repeat;
+    Description description;
 
     @Override
     public void parse() {
         Tokenizer t = Tokenizer.getTokenizer();
         occurrence = null;
-        settings = new ArrayList<>();
         // todo add group functionality
         String token = t.getNext();
         if (token.equals("new event")) {
@@ -32,9 +30,8 @@ public class Event implements ASTnode {
                 if (!Validator.getValidSettingKeyword(token)) {
                     throw new RuntimeException("Invalid setting type");
                 }
-                Setting s = Validator.getSettingType(token);
+                Setting s = Validator.getAndSettingType(token, this);
                 s.parse();
-                settings.add(s);
                 token = t.getNext();
             }
         } else if (token.equals("group:")) {

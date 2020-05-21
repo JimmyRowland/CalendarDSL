@@ -25,7 +25,7 @@ public class Event implements ASTnode {
             if (token.equals("<")) {
                 occurrence = new Occurrence();
                 occurrence.parse();
-                // token = t.getNext();
+                token = t.checkNext();
             }
             // loop for settings
             while (!token.equals("event end")) {

@@ -63,7 +63,7 @@ public class Validator {
         String value = null;
         String[] repeatable = {"daily","MWF","TTH"};
 
-        String str = token.substring(0,4);
+        String str = token;
         if (str.contains("every")) {
             // validate the string starting from after the word every
             value = "every " + Validator.validateDay(token.substring(6));
@@ -92,7 +92,7 @@ public class Validator {
             return new DayRange();
         } else if (token.equals("on")) {
             return new TimeRange();
-        }else {
+        } else {
             throw new RuntimeException("Invalid Occurrence type");
         }
     }

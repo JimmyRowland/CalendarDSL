@@ -70,7 +70,7 @@ class parserTest {
     }
 
     @Test
-    void testRepeat() {
+    void testRepeatMWF() {
         String[] tokens = {"new calendar", "my calendar!!", ";",
                 "new event", "big day", ";",
                 "<", "monday", ">",
@@ -79,6 +79,51 @@ class parserTest {
                 "repeat:", "MWF", ";",
                 "event end",
                 "end"};
+        tokenizer = new Tokenizer(tokens);
+        prog.parse();
+        NewCalendar cal = prog.getCalendar();
+        getCalendarInfo(cal);
+    }
+    @Test
+    void testOccurenceDayRange() {
+        String[] tokens = {"new calendar", "my calendar!!", ";",
+                "new event", "big day", ";",
+                "<", "from", "monday", "to", "wednesday", ">",
+                "description:", "blah", ";",
+                "location:", "wherever", ";",
+                "event end",
+                "end"};
+        tokenizer = new Tokenizer(tokens);
+        prog.parse();
+        NewCalendar cal = prog.getCalendar();
+        getCalendarInfo(cal);
+    }
+
+    @Test
+    void testOccurenceTime() {
+            String[] tokens = {"new calendar", "my calendar!!", ";",
+                    "new event", "big day", ";",
+                    "<", "at", "12", ":", "30", ">",
+                    "description:", "blah", ";",
+                    "location:", "wherever", ";",
+                    "repeat:", "MWF", ";",
+                    "event end",
+                    "end"};
+            tokenizer = new Tokenizer(tokens);
+            prog.parse();
+            NewCalendar cal = prog.getCalendar();
+            getCalendarInfo(cal);
+    }
+
+    @Test
+    void testOccurenceTimeRange() {
+        String[] tokens = {"new calendar", "my calendar!!", ";",
+            "new event", "big day", ";",
+            "<", "on", "monday", "start", "at", "12", ":", "30", "finish", "at", "14", ":", "30", ">",
+            "description:", "blah", ";",
+            "location:", "wherever", ";",
+            "event end",
+            "end"};
         tokenizer = new Tokenizer(tokens);
         prog.parse();
         NewCalendar cal = prog.getCalendar();

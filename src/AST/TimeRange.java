@@ -4,16 +4,20 @@ import model.io.Tokenizer;
 
 
 public class TimeRange extends Occurrence implements ASTnode{
+    Day day;
     Time start;
     Time end;
 
     @Override
     public void parse() {
         Tokenizer t = Tokenizer.getTokenizer();
-        t.getAndCheckNext("at");
+        t.getAndCheckNext("on");
+        day = new Day();
+        day.parse();
+        t.getAndCheckNext("start");
         start = new Time();
         start.parse();
-        t.getAndCheckNext("to");
+        t.getAndCheckNext("finish");
         end = new Time();
         end.parse();
     }
@@ -22,11 +26,10 @@ public class TimeRange extends Occurrence implements ASTnode{
     public void evaluate() {
     }
 
-    public Time getStart() {
-        return start;
-    }
-
-    public Time getEnd() {
-        return end;
+    public String getTimeRange() {
+        String dayStr = day.getDay();
+        String startStr = String.valueOf(start.getTime());
+        String endStr = String.valueOf(end.getTime());
+        return dayStr + "," + startStr + "-" + endStr;
     }
 }

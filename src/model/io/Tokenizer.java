@@ -80,7 +80,7 @@ public class Tokenizer {
 
     public boolean checkToken(String regexp){
         String s = checkNext();
-        System.out.println("comparing: |"+s+"|  to  |"+regexp+"|");
+        // System.out.println("comparing: |"+s+"|  to  |"+regexp+"|");
         return (s.matches(regexp));
     }
 
@@ -90,7 +90,7 @@ public class Tokenizer {
         if (!s.matches(regexp)) {
             throw new RuntimeException("Unexpected next token for Parsing! Expected something matching: " + regexp + " but got: " + s);
         }
-        System.out.println("matched: "+s+"  to  "+regexp);
+        // System.out.println("matched: "+s+"  to  "+regexp);
         return s;
     }
 

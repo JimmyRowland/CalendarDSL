@@ -22,7 +22,7 @@ public class FlexibleEvent implements Event, Comparable<Event> {
         return end;
     }
 
-    void setEnd(Calendar end){
+    void setEnd(Calendar end) {
         this.end = end;
     }
 
@@ -30,35 +30,39 @@ public class FlexibleEvent implements Event, Comparable<Event> {
         this.start = start;
     }
 
-    int getDuration(){
+    int getDuration() {
         return duration;
     }
-    int getDurationInMS(){
-        return duration*3600000;
+
+    int getDurationInMS() {
+        return duration * 3600000;
     }
 
-    public Calendar getStart(){
+    public Calendar getStart() {
         return this.start;
     }
+
     @Override
     public int getDayOfWeek() {
         return start.get(Calendar.DAY_OF_WEEK);
     }
-
+    // TODO might need to switch to LocalDateTime
     @Override
     public boolean hasConflict(Calendar start, Calendar end) {
-        int space = start.compareTo(end);
-        if(this.getDurationInMS()>space){
-                this.setStart((Calendar) start.clone());
-                this.setEnd((Calendar) end.clone());
-                return false;
-            }
+        long space = end.getTimeInMillis() - start.getTimeInMillis();
+        Util.printCalendar(start);
+        Util.printCalendar(end);
+        if (this.getDurationInMS() < space) {
+            this.setStart((Calendar) start.clone());
+            this.setEnd((Calendar) end.clone());
+            return false;
+        }
         return true;
     }
 
     @Override
     public void addToScheduler(Scheduler scheduler) {
-        scheduler.addEvent( this);
+        scheduler.addEvent(this);
     }
 
     @Override

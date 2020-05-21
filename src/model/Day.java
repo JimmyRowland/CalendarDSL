@@ -1,5 +1,6 @@
 package model;
 
+import javax.sound.midi.Soundbank;
 import java.util.*;
 
 public class Day implements FlexibleEventAllocatable {
@@ -20,44 +21,16 @@ public class Day implements FlexibleEventAllocatable {
         timeStamps.add(endOfTheDay);
     }
 
-//    // modifies flexible event
-//    public boolean hasTimeSlot(FlexibleEvent flexibleEvent){
-//        for(int i = 0; i<this.events.size(); i++){
-//            Calendar start = this.events.get(i).getEnd();
-//            Calendar end;
-//            if(i != this.events.size()-1){
-//                end = this.events.get(i+1).getStart();
-//            }else{
-//                end = (Calendar) start.clone();
-//                end.set(Calendar.HOUR,24);
-//            }
-//            int space = start.compareTo(end);
-//            if(flexibleEvent.getDurationInMS()>space){
-//                flexibleEvent.setStart(start);
-//                flexibleEvent.setEnd(end);
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
+
 
     public boolean hasTimeSlot(Event event) {
-        if (events.size() == 0) {
-            return true;
-        }
-
-        if (timeStamps.size() < events.size() * 2 + 2) {
-            for (Event e : events) {
-                timeStamps.add(e.getStart());
-                timeStamps.add(e.getEnd());
-            }
-            Collections.sort(timeStamps);
-        }
-
         for (int i = 0; i < this.timeStamps.size(); i += 2) {
             Calendar start = timeStamps.get(i);
             Calendar end = timeStamps.get(i + 1);
             if (!event.hasConflict(start, end)) {
+                timeStamps.add(event.getStart());
+                timeStamps.add(event.getEnd());
+                Collections.sort(timeStamps);
                 return true;
             }
         }

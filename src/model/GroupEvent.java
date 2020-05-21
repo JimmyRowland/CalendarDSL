@@ -61,4 +61,19 @@ public class GroupEvent implements Event, Comparable<Event>{
     public Calendar getEnd() {
         return end;
     }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String getLocation() {
+        return location;
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
 }

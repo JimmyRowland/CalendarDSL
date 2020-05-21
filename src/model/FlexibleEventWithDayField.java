@@ -17,6 +17,10 @@ public class FlexibleEventWithDayField extends FlexibleEvent{
         this.start = Calendar.getInstance();
         start.set(Calendar.DAY_OF_WEEK, dayOfWeek);
     }
+    @Override
+    public int getDayOfWeek() {
+        return dayOfWeek;
+    }
 
     @Override
     public void addToScheduler(Scheduler scheduler) {

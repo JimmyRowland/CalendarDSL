@@ -44,8 +44,12 @@ public class EventCreator {
         throw new Exception("Incorrect input");
     }
 
-    public static RecurringEvent createEvent(String start, String end, String name, String location, String description, List<Integer> daysOfWeek) {
-        return new RecurringEvent(name, location, description, Util.getNewNextWeekCalendar(1, start), Util.getNewNextWeekCalendar(1, end), daysOfWeek);
+    public static RecurringEvent createEvent(String start, String end, String name, String location, String description, List<Integer> daysOfWeek) throws Exception {
+        Calendar newStart = Util.getNewNextWeekCalendar(1, start);
+        Calendar newEnd = Util.getNewNextWeekCalendar(1, end);
+        EventCreator.isEndAfterStart(newStart, newEnd);
+        EventCreator.isEventOnDifferentDay(newStart, newEnd);
+        return new RecurringEvent(name, location, description, newStart, newEnd , daysOfWeek);
     }
 
     public static IndividualEvent createEvent(Calendar start, Calendar end, String name, String location, String description) throws Exception {
@@ -67,7 +71,7 @@ public class EventCreator {
     }
 
     public static boolean isEndAfterStart(Calendar start, Calendar end) throws Exception {
-        if (start.before(end)) {
+        if (start.after(end)) {
             throw new Exception("Event ends before it starts");
         }
         return true;

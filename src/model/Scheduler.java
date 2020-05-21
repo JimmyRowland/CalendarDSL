@@ -27,7 +27,7 @@ public class Scheduler implements FlexibleEventAllocatable {
 
     public void addEvent(IndividualEvent event){
         int dayOfWeek = event.getDayOfWeek();
-        days.get(dayOfWeek).addEvent(event);
+        days.get(dayOfWeek-1).addEvent(event);
     }
 
     public void addEvent(Event event){
@@ -35,9 +35,10 @@ public class Scheduler implements FlexibleEventAllocatable {
     }
 
     public void addEvent(RecurringEvent recurringEvent){
-        List<Integer> days = recurringEvent.getDaysOfWeek();
-        for(int d: days){
-            addEvent(recurringEvent.getEvents().get(d));
+//        List<Integer> days = recurringEvent.getDaysOfWeek();
+        List<Event> recurringEventList = recurringEvent.getEvents();
+        for(int i = 0; i<recurringEventList.size(); i++){
+            addEvent(recurringEventList.get(i));
         }
     }
 
@@ -47,7 +48,7 @@ public class Scheduler implements FlexibleEventAllocatable {
 
     public void addEvent(FlexibleEventWithDayField flexibleEventWithDayField){
         int dayOfWeek = flexibleEventWithDayField.getDayOfWeek();
-        days.get(dayOfWeek).addEvent(flexibleEventWithDayField);
+        days.get(dayOfWeek-1).addEvent(flexibleEventWithDayField);
     }
 
 

@@ -20,6 +20,13 @@ public class TimeRange extends Occurrence implements ASTnode{
 
     @Override
     public void evaluate() {
+    }
 
+    public Time getStart() {
+        return start;
+    }
+
+    public Time getEnd() {
+        return end;
     }
 }

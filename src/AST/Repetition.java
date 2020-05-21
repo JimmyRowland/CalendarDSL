@@ -23,4 +23,7 @@ public class Repetition implements Setting, ASTnode {
 
     }
 
+    public String getRepetitionVal() {
+        return value;
+    }
 }

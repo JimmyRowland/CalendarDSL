@@ -33,4 +33,12 @@ public class NewCalendar implements Calendar, ASTnode {
     public void evaluate() {
 
     }
+
+    public Title getTitle() {
+        return title;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
 }

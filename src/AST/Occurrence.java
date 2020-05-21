@@ -21,4 +21,8 @@ public class Occurrence implements ASTnode {
     public void evaluate() {
 
     }
+
+    public ASTnode getRange() {
+        return range;
+    }
 }

@@ -17,4 +17,8 @@ public class Location implements Setting, ASTnode {
     public void evaluate() {
 
     }
+
+    public String getLocation() {
+        return name;
+    }
 }

@@ -16,4 +16,8 @@ public class Day implements ASTnode {
     public void evaluate() {
 
     }
+
+    public String getDay() {
+        return day;
+    }
 }

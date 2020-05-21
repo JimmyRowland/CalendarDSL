@@ -21,4 +21,12 @@ public class DayRange extends Occurrence implements ASTnode{
     public void evaluate() {
 
     }
+
+    public Day getFrom() {
+        return from;
+    }
+
+    public Day getTo() {
+        return to;
+    }
 }

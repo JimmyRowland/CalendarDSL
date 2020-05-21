@@ -2,6 +2,10 @@ package AST;
 
 import model.io.Tokenizer;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class Event implements ASTnode {
     Title title;
     Occurrence occurrence;
@@ -46,5 +50,44 @@ public class Event implements ASTnode {
     @Override
     public void evaluate() {
         // todo build event into model here?
+    }
+
+    public Map<String, Object> getEventInfo() {
+        Map<String, Object> eventMap = new HashMap<>();
+        eventMap.put("Title", this.title);
+        eventMap.put("Occurrence", this.occurrence);
+        eventMap.put("Location", this.location);
+        eventMap.put("Repetition", this.repeat);
+        eventMap.put("Description", this.description);
+        eventMap.put("Group", this.group);
+        return eventMap;
+    }
+
+    public String getTitle() {
+        return title.getTitle();
+    }
+
+    public ASTnode getOccurrence() {
+        return this.occurrence.getRange();
+    }
+
+    public String getLocation() {
+        return location.getLocation();
+    }
+
+    public String getRepeat() {
+        return repeat.value;
+    }
+
+    public String getDescription() {
+        return description.desc;
+    }
+
+    public String getGroupTitle() {
+        return group.title.getTitle();
+    }
+
+    public List<String> getGroupEvents() {
+        return group.events;
     }
 }

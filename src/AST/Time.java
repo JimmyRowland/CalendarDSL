@@ -21,4 +21,8 @@ public class Time implements ASTnode{
     public void evaluate() {
 
     }
+
+    public int getTime() {
+        return time;
+    }
 }

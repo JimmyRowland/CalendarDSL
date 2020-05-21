@@ -39,4 +39,9 @@ public class Group implements ASTnode {
     public void evaluate() {
 
     }
+
+    public String getTitle() {
+        return title.getTitle();
+    }
+
 }

@@ -92,6 +92,8 @@ public class Validator {
             return new DayRange();
         } else if (token.equals("on")) {
             return new TimeRange();
+        } else if (token.equals("start")) {
+            return new TimeRange();
         } else {
             throw new RuntimeException("Invalid Occurrence type");
         }

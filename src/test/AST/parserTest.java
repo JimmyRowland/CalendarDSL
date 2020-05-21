@@ -116,7 +116,7 @@ class parserTest {
     }
 
     @Test
-    void testOccurenceTimeRange() {
+    void testOccurenceTimeRangeWithDay() {
         String[] tokens = {"new calendar", "my calendar!!", ";",
             "new event", "big day", ";",
             "<", "on", "monday", "start", "at", "12", ":", "30", "finish", "at", "14", ":", "30", ">",
@@ -124,6 +124,37 @@ class parserTest {
             "location:", "wherever", ";",
             "event end",
             "end"};
+        tokenizer = new Tokenizer(tokens);
+        prog.parse();
+        NewCalendar cal = prog.getCalendar();
+        getCalendarInfo(cal);
+    }
+
+    @Test
+    void testOccurenceTimeRangeWithoutDay() {
+        String[] tokens = {"new calendar", "my calendar!!", ";",
+                "new event", "big day", ";",
+                "<", "start", "at", "12", ":", "30", "finish", "at", "14", ":", "30", ">",
+                "description:", "blah", ";",
+                "location:", "wherever", ";",
+                "event end",
+                "end"};
+        tokenizer = new Tokenizer(tokens);
+        prog.parse();
+        NewCalendar cal = prog.getCalendar();
+        getCalendarInfo(cal);
+    }
+
+    @Test
+    void testAllFieldsExceptGroup() {
+        String[] tokens = {"new calendar", "my calendar!!", ";",
+                "new event", "big day", ";",
+                "<", "on", "saturday", "start", "at", "10", ":", "30", "finish", "at", "12", ":", "00", ">",
+                "description:", "blah blah blah", ";",
+                "location:", "wherever", ";",
+                "repeat:", "daily", ";",
+                "event end",
+                "end"};
         tokenizer = new Tokenizer(tokens);
         prog.parse();
         NewCalendar cal = prog.getCalendar();

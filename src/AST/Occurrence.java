@@ -11,7 +11,7 @@ public class Occurrence implements ASTnode {
     public void parse() {
         Tokenizer t = Tokenizer.getTokenizer();
         t.getAndCheckNext("<");
-        String token = t.getNext();
+        String token = t.checkNext();
         range = Validator.validateOccurrence(token);
         range.parse();
         t.getAndCheckNext(">");

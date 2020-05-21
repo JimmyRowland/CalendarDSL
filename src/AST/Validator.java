@@ -8,6 +8,7 @@ import java.util.Arrays;
 public class Validator {
     final static String[] days = {"monday","tuesday","wednesday","thursday","friday","saturday","sunday"};
     final static String[] settingkeys = {"location:", "repeat:", "priority:", "description:"};
+
     public static String validateDay(String token) {
         String value;
 

@@ -18,13 +18,14 @@ public class Event implements ASTnode {
         settings = new ArrayList<>();
         // todo add group functionality
         String token = t.getNext();
-        if (token.equals("new calendar")) {
+        if (token.equals("new event")) {
             title = new Title();
             title.parse();
-            token = t.getNext();
+            token = t.checkNext();
             if (token.equals("<")) {
                 occurrence = new Occurrence();
-                token = t.getNext();
+                occurrence.parse();
+                // token = t.getNext();
             }
             // loop for settings
             while (!token.equals("event end")) {

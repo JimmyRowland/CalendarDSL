@@ -8,7 +8,7 @@ public class Day implements ASTnode {
     @Override
     public void parse() {
         Tokenizer t = Tokenizer.getTokenizer();
-        String token = t.checkNext();
+        String token = t.getNext();
         day = Validator.validateDay(token);
     }
 

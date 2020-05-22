@@ -17,4 +17,8 @@ public class Description implements Setting, ASTnode {
     public void evaluate() {
 
     }
+
+    public String getDesc() {
+        return desc;
+    }
 }

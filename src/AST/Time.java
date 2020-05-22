@@ -5,7 +5,6 @@ import model.io.Tokenizer;
 public class Time implements ASTnode{
     int time;
 
-
     @Override
     public void parse() {
         Tokenizer t = Tokenizer.getTokenizer();
@@ -20,5 +19,9 @@ public class Time implements ASTnode{
     @Override
     public void evaluate() {
 
+    }
+
+    public int getTime() {
+        return time;
     }
 }

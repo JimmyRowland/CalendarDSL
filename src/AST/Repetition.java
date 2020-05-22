@@ -13,8 +13,9 @@ public class Repetition implements Setting, ASTnode {
     @Override
     public void parse() {
         Tokenizer t = Tokenizer.getTokenizer();
-        t.getAndCheckNext("repeat:");
+        t.checkToken("repeat:");
         value = Validator.validateRepetition(t.getNext());
+        t.getAndCheckNext(";");
         // todo the repetition values need to be turned into some range of time
     }
 
@@ -23,4 +24,7 @@ public class Repetition implements Setting, ASTnode {
 
     }
 
+    public String getRepetitionVal() {
+        return value;
+    }
 }

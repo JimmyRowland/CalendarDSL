@@ -1,9 +1,6 @@
 package test.model;
 
-import model.Day;
-import model.EventCreator;
-import model.IndividualEvent;
-import model.Scheduler;
+import model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,24 +17,35 @@ class SchedulerTest {
     }
     @Test
     void addEvent() {
-        Calendar start0 = Calendar.getInstance();
-        System.out.println(start0.get(Calendar.DAY_OF_WEEK));
-        Calendar end0 = Calendar.getInstance();
+        Calendar start0 = Util.nextDayOfWeek(Calendar.FRIDAY);
+//        System.out.println(start0.get(Calendar.DAY_OF_WEEK));
+        Calendar end0 = Util.nextDayOfWeek(Calendar.FRIDAY);
         end0.add(Calendar.HOUR,2);
-        Calendar start1 = Calendar.getInstance();
+        Calendar start1 = Util.nextDayOfWeek(Calendar.FRIDAY);
         start1.add(Calendar.HOUR,1);
-        Calendar end1 = Calendar.getInstance();
+        Calendar end1 = Util.nextDayOfWeek(Calendar.FRIDAY);
         end1.add(Calendar.HOUR,1);
-        System.out.println(start0.getTime().toString());
-        System.out.println(end0.getTime().toString());
-        System.out.println(start1.getTime().toString());
-        System.out.println(end1.getTime().toString());
-        IndividualEvent event0 = new IndividualEvent(start0,end0,"event0","location","description");
-        IndividualEvent event1 = new IndividualEvent(start0,end0,"event1","location","description");
-        scheduler.addEvent(event0);
-        scheduler.addEvent(event1);
-        assertEquals(start0.get(Calendar.DAY_OF_WEEK),4);
-        assertEquals(scheduler.getDays().get(start0.get(Calendar.DAY_OF_WEEK)).getEvents().size(), 1);
+//        System.out.println(start0.getTime().toString());
+//        System.out.println(end0.getTime().toString());
+//        System.out.println(start1.getTime().toString());
+//        System.out.println(end1.getTime().toString());
+        IndividualEvent event0;
+        IndividualEvent event1;
+        try{
+            event0 = EventCreator.createEvent(start0,end0,"event0","location","description");
+            event1 = EventCreator.createEvent(start1,end1,"event1","location","description");
+            scheduler.addEvent(event0);
+            scheduler.addEvent(event1);
+        }catch (Exception e){
+            e.printStackTrace();
+            fail();
+        }
+
+        for(Day day: scheduler.getDays()){
+            System.out.println(day.getEvents().size());
+        }
+        assertEquals(scheduler.getDays().get(start0.get(Calendar.DAY_OF_WEEK)-1).getEvents().size(), 1);
+
     }
 
     @Test

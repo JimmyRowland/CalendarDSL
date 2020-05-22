@@ -20,9 +20,9 @@ public class NewCalendar implements Calendar, ASTnode {
                 Event e = new Event();
                 e.parse();
                 events.add(e);
-                t.getNext();
+                // t.getNext();
             } else if (t.checkToken("end")) {
-
+                break;
             } else {
                 throw new RuntimeException("Invalid Syntax, expected new event or END");
             }

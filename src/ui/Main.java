@@ -10,11 +10,15 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
-        List<String> literals = Arrays.asList("new calendar", "end", "called:", ";", "new event", "event end",
-                    "group:", "<", ">", "(", ",", ")", "at", "|", ":", "start", "finish", "location:", "repeat:",
-                    "daily", "every", "priority", "description");
+        //make me a square called Biff please
+        //connect Fido to Biff
+//        List<String> literals = Arrays.asList("Hello!", "make me a", "called", "please", "connect", "to", "Thanks!");
 
-        Tokenizer.makeTokenizer("input.thtml",literals);
+        List<String> literals = Arrays.asList(";", "done", "new calendar", "called:", "new event", "event end",
+                "group:", "<", ">", "(", ",", ")", "|", "start", "finish", "location:", "repeat:",
+                "daily", "every", "priority", "description:", "only at");
+        Tokenizer.makeTokenizer("input.tdot",literals);
+
     }
 
 }

@@ -8,35 +8,18 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Tokenizer {
-//    Program::= Newcalendar | Delcalendar | Editcalendar
-//    NEWCALENDAR ::= “new calendar” TITLE EVENT+ “end”
-//    TITLE ::= “called:” STRING “;”
-//    EVENT ::= “new event” TITLE OCCURRENCE? SETTING?+ “event end”  | GROUP
-//    GROUP::= “group:” TITLE “>” “(“ (STRING  “,”)+ ”)”
-//    OCCURRENCE ::= “<”[ DAY? [“at” TIME]? | DAYRANGE | TIMERANGE ] “>”
-//    DAY ::= “Monday” | “Tuesday” | “Wednesday” | “Thursday” | “Friday” | “Saturday” | “Sunday”
-//    TIME ::=  [0-23] “:” [0-59]
-//    DAYRANGE ::= “from” DAY “to” Day
-//    TIMERANGE ::= [ “on” DAY ]? “start” TIME “finish” TIME
-//    SETTING ::= LOCATION | REPETITION | PRIORITY | DESCRIPTION | NEST
-//    LOCATION ::= “location: ” STRING “;”
-//    REPETITION ::= “repeat:“ [ “daily” | “MWF” | “TTH” | “every” DAY+ ]  “;”
-//    PRIORITY ::= “priority:” [1-2] “;”
-//    DESCRIPTION ::= “description: “ STRING “;”
-//    NEST ::=  not sure about this part // only make if time allows but you could have sub events contained within an overarching parent event
-//
-//    Reserved characters = ; < > :
+
 
     private static String program;
     private static List<String> literals;
     private String[] tokens;
-    private int currentToken = 0;
+    private int currentToken;
     private static Tokenizer theTokenizer;
 
     private Tokenizer(String filename, List<String> literalsList){
         literals = literalsList;
         try {
-            program = Files.readString(Paths.get(filename));
+            program = new String(Files.readAllBytes(Paths.get(filename)), StandardCharsets.UTF_8);
         } catch (IOException e) {
             System.out.println("Didn't find file");
             System.exit(0);
@@ -46,7 +29,7 @@ public class Tokenizer {
 
     //modifies: this.tokens
     //effects: will result in a list of tokens (sitting at this.tokens) that has no spaces around tokens.
-    private void tokenize () {
+    private void tokenize (){
         //0. Pick some RESERVEDWORD (string which never occurs in your input) : we'll use _
         //1. Read the whole program into a single string; kill the newlines
         String tokenizedProgram = program.replace("\n", "");
@@ -71,9 +54,6 @@ public class Tokenizer {
         }
         System.out.println(Arrays.asList(tokens));
     }
-
-
-
 
 
     private String checkNext(){
@@ -128,6 +108,4 @@ public class Tokenizer {
         return theTokenizer;
     }
 
-
 }
-

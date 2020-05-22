@@ -1,7 +1,5 @@
 package AST;
 
-import model.io.Tokenizer;
-
 
 public class TimeRange extends Occurrence implements ASTnode{
     Day day;

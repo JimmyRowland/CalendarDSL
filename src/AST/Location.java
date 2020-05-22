@@ -1,7 +1,5 @@
 package AST;
 
-import model.io.Tokenizer;
-
 public class Location implements Setting, ASTnode {
     String name;
 

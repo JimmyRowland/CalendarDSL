@@ -1,7 +1,6 @@
 package test.AST;
 
 import AST.*;
-import model.io.Tokenizer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,7 +1,5 @@
 package AST;
 
-import model.io.Tokenizer;
-
 public class Day implements ASTnode {
     String day;
 

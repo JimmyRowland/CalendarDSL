@@ -1,8 +1,11 @@
 package AST;
 
+<<<<<<< HEAD
 import model.Scheduler;
 import model.io.Tokenizer;
 
+=======
+>>>>>>> origin/dev
 public class Day implements ASTnode {
     String day;
 

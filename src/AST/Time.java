@@ -1,8 +1,11 @@
 package AST;
 
+<<<<<<< HEAD
 import model.Scheduler;
 import model.io.Tokenizer;
 
+=======
+>>>>>>> origin/dev
 public class Time implements ASTnode{
     int time;
 
@@ -20,6 +23,10 @@ public class Time implements ASTnode{
     @Override
     public Scheduler evaluate() {
 
+    }
+
+    public int getTime() {
+        return time;
     }
 
     public int getTime() {

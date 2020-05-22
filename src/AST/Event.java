@@ -1,8 +1,11 @@
 package AST;
 
+<<<<<<< HEAD
 import model.Scheduler;
 import model.io.Tokenizer;
 
+=======
+>>>>>>> origin/dev
 import java.util.List;
 
 public class Event implements ASTnode {

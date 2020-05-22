@@ -1,8 +1,5 @@
 package AST;
 
-import model.io.Tokenizer;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Validator {

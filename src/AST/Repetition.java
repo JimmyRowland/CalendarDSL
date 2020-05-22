@@ -1,8 +1,11 @@
 package AST;
 
+<<<<<<< HEAD
 import model.Scheduler;
 import model.io.Tokenizer;
 
+=======
+>>>>>>> origin/dev
 import java.util.Arrays;
 import java.util.List;
 

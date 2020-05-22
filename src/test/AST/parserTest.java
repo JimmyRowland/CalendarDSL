@@ -1,7 +1,6 @@
 package test.AST;
 
 import AST.*;
-import model.io.Tokenizer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,6 +21,7 @@ class parserTest {
         Object calTitle = cal.getTitle().getTitle();
         System.out.println("calendar title: " + calTitle);
         for (Event event: events) {
+            System.out.println("New event: " + event.hashCode());
             String eventTitle = event.getTitle();
             Object eventOccurrence = event.getOccurrence();
             String eventDescrip = event.getDescription();
@@ -29,13 +29,13 @@ class parserTest {
             String eventRepeat = event.getRepeat();
             String eventGroupTitle = event.getGroupTitle();
             List<String> eventGroupEvents = event.getGroupEvents();
-            System.out.println("event title: " + eventTitle);
-            System.out.println("event occurence: " + eventOccurrence);
-            System.out.println("event description: " + eventDescrip);
-            System.out.println("event location: " + eventLocation);
-            System.out.println("event repeat: " + eventRepeat);
-            System.out.println("event group title: " + eventGroupTitle);
-            System.out.println("event group events: " + eventGroupEvents);
+            System.out.println("title: " + eventTitle);
+            System.out.println("occurence: " + eventOccurrence);
+            System.out.println("description: " + eventDescrip);
+            System.out.println("location: " + eventLocation);
+            System.out.println("repeat: " + eventRepeat);
+            System.out.println("group title: " + eventGroupTitle);
+            System.out.println("group events: " + eventGroupEvents);
         }
     }
 
@@ -154,6 +154,24 @@ class parserTest {
                 "repeat:", "daily", ";",
                 "event end",
                 "end"};
+        tokenizer = new Tokenizer(tokens);
+        prog.parse();
+        NewCalendar cal = prog.getCalendar();
+        getCalendarInfo(cal);
+    }
+
+    @Test
+    void testMultipleEvents() {
+        String[] tokens = {"new calendar", "my calendar!!", ";",
+                "new event", "big day", ";",
+                "<", "monday", ">",
+                "description:", "blah", ";",
+                "event end",
+                "new event", "big day", ";",
+                "<", "on", "monday", "start", "at", "12", ":", "30", "finish", "at", "14", ":", "30", ">",
+                "description:", "blah", ";",
+                "location:", "wherever", ";",
+                "event end", "end" };
         tokenizer = new Tokenizer(tokens);
         prog.parse();
         NewCalendar cal = prog.getCalendar();

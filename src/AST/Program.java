@@ -1,4 +1,5 @@
 package AST;
+<<<<<<< HEAD
 import model.io.Tokenizer;
 import model.Event;
 import model.Scheduler;
@@ -8,6 +9,8 @@ import java.text.ParseException;
 import java.util.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+=======
+>>>>>>> origin/dev
 
 public class Program implements ASTnode {
 
@@ -84,6 +87,10 @@ public class Program implements ASTnode {
         calendar.setTime(date);
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
         return dayOfWeek;
+    }
+
+    public NewCalendar getCalendar() {
+        return calendar;
     }
 
     public NewCalendar getCalendar() {

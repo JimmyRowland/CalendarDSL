@@ -1,5 +1,11 @@
 package AST;
 
+<<<<<<< HEAD
+import model.Scheduler;
+import model.io.Tokenizer;
+
+=======
+>>>>>>> origin/dev
 public class DayRange extends Occurrence implements ASTnode{
     Day from;
     Day to;
@@ -16,7 +22,7 @@ public class DayRange extends Occurrence implements ASTnode{
     }
 
     @Override
-    public void evaluate() {
+    public Scheduler evaluate() {
 
     }
 

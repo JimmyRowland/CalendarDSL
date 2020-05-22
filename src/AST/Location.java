@@ -1,5 +1,11 @@
 package AST;
 
+<<<<<<< HEAD
+import model.Scheduler;
+import model.io.Tokenizer;
+
+=======
+>>>>>>> origin/dev
 public class Location implements Setting, ASTnode {
     String name;
 
@@ -12,7 +18,7 @@ public class Location implements Setting, ASTnode {
     }
 
     @Override
-    public void evaluate() {
+    public Scheduler evaluate() {
 
     }
 

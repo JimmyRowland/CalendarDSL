@@ -1,5 +1,11 @@
 package AST;
 
+<<<<<<< HEAD
+import model.Scheduler;
+import model.io.Tokenizer;
+
+=======
+>>>>>>> origin/dev
 public class Day implements ASTnode {
     String day;
 
@@ -11,7 +17,7 @@ public class Day implements ASTnode {
     }
 
     @Override
-    public void evaluate() {
+    public Scheduler evaluate() {
 
     }
 

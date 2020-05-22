@@ -1,5 +1,6 @@
 package AST;
 
+import model.Scheduler;
 import model.io.Tokenizer;
 
 
@@ -17,9 +18,10 @@ public class Occurrence implements ASTnode {
         t.getAndCheckNext(">");
     }
 
+    // method is never used
     @Override
-    public void evaluate() {
-
+    public Scheduler evaluate() {
+        return null;
     }
 
     public Object getRange() {

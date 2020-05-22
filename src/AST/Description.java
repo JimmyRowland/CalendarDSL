@@ -1,5 +1,6 @@
 package AST;
 
+import model.Scheduler;
 import model.io.Tokenizer;
 
 public class Description implements Setting, ASTnode {
@@ -14,7 +15,7 @@ public class Description implements Setting, ASTnode {
     }
 
     @Override
-    public void evaluate() {
+    public Scheduler evaluate() {
 
     }
 

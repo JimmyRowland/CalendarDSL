@@ -1,5 +1,6 @@
 package AST;
 
+import model.Scheduler;
 import model.io.Tokenizer;
 
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class NewCalendar implements Calendar, ASTnode {
     }
 
     @Override
-    public void evaluate() {
+    public Scheduler evaluate() {
 
     }
 

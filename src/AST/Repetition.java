@@ -1,8 +1,8 @@
 package AST;
 
+import model.Scheduler;
 import model.io.Tokenizer;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class Repetition implements Setting, ASTnode {
     }
 
     @Override
-    public void evaluate() {
+    public Scheduler evaluate() {
 
     }
 

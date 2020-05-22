@@ -1,5 +1,6 @@
 package AST;
 
+import model.Scheduler;
 import model.io.Tokenizer;
 
 
@@ -25,7 +26,7 @@ public class TimeRange extends Occurrence implements ASTnode{
         }
 
     @Override
-    public void evaluate() {
+    public Scheduler evaluate() {
     }
 
     public String getTimeRange() {

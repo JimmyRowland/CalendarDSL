@@ -47,7 +47,7 @@ public class CVS {
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         String ampm = "";
         String hourString = "";
-        if(hour>12){
+        if(hour>11){
             hourString = ""+(hour-12);
             ampm = "PM";
         }else{

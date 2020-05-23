@@ -16,7 +16,7 @@ public class Tokenizer {
     private int currentToken;
     private static Tokenizer theTokenizer;
 
-    private Tokenizer(String filename, List<String> literalsList){
+    private Tokenizer(String filename, List<String> literalsList) {
         literals = literalsList;
         try {
             program = new String(Files.readAllBytes(Paths.get(filename)), StandardCharsets.UTF_8);

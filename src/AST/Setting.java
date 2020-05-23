@@ -1,8 +1,4 @@
 package AST;
 
-public interface Setting extends ASTnode{
-<<<<<<< HEAD
+public interface Setting extends ASTnode {
 }
-=======
-}
->>>>>>> origin/dev

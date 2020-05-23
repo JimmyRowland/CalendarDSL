@@ -10,8 +10,5 @@ public class Duration extends Occurrence implements ASTnode {
 
     }
 
-    @Override
-    public Scheduler evaluate() {
 
-    }
 }

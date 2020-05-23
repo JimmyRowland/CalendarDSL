@@ -1,11 +1,10 @@
 package AST;
 
-<<<<<<< HEAD
-import model.Scheduler;
-import model.io.Tokenizer;
 
-=======
->>>>>>> origin/dev
+import model.Scheduler;
+import libs.Tokenizer;
+
+
 
 public class TimeRange extends Occurrence implements ASTnode{
     Day day;
@@ -28,13 +27,7 @@ public class TimeRange extends Occurrence implements ASTnode{
             end.parse();
         }
 
-    @Override
-<<<<<<< HEAD
-    public Scheduler evaluate() {
-=======
-    public void evaluate() {
->>>>>>> origin/dev
-    }
+
 
     public String getTimeRange() {
         String dayStr = "";

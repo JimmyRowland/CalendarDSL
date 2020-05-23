@@ -1,6 +1,6 @@
 package AST;
-<<<<<<< HEAD
-import model.io.Tokenizer;
+
+import libs.Tokenizer;
 import model.Event;
 import model.Scheduler;
 import model.EventCreator;
@@ -9,8 +9,7 @@ import java.text.ParseException;
 import java.util.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-=======
->>>>>>> origin/dev
+
 
 public class Program implements ASTnode {
 
@@ -28,7 +27,7 @@ public class Program implements ASTnode {
         }
     }
 
-    @Override
+
     public Scheduler evaluate() {
         EventCreator ec = new EventCreator();
         Scheduler scheduler = new Scheduler();
@@ -89,9 +88,7 @@ public class Program implements ASTnode {
         return dayOfWeek;
     }
 
-    public NewCalendar getCalendar() {
-        return calendar;
-    }
+
 
     public NewCalendar getCalendar() {
         return calendar;

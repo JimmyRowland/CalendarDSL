@@ -1,11 +1,10 @@
 package AST;
 
-<<<<<<< HEAD
-import model.Scheduler;
-import model.io.Tokenizer;
 
-=======
->>>>>>> origin/dev
+import model.Scheduler;
+import libs.Tokenizer;
+
+
 public class Time implements ASTnode{
     int time;
 
@@ -20,16 +19,11 @@ public class Time implements ASTnode{
         time += Validator.validateTime(timeStr, 0, 59);
     }
 
-    @Override
-    public Scheduler evaluate() {
 
-    }
 
     public int getTime() {
         return time;
     }
 
-    public int getTime() {
-        return time;
-    }
+
 }

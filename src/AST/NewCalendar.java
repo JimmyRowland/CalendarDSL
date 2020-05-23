@@ -1,11 +1,8 @@
 package AST;
 
-<<<<<<< HEAD
-import model.Scheduler;
-import model.io.Tokenizer;
 
-=======
->>>>>>> origin/dev
+import model.Scheduler;
+import libs.Tokenizer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,25 +21,22 @@ public class NewCalendar implements Calendar, ASTnode {
                 Event e = new Event();
                 e.parse();
                 events.add(e);
-<<<<<<< HEAD
+
                 t.getNext();
             } else if (t.checkToken("end")) {
 
-=======
+
                 // t.getNext();
             } else if (t.checkToken("end")) {
                 break;
->>>>>>> origin/dev
+
             } else {
                 throw new RuntimeException("Invalid Syntax, expected new event or END");
             }
         }
     }
 
-    @Override
-    public Scheduler evaluate() {
 
-    }
 
     public Title getTitle() {
         return title;
@@ -51,15 +45,5 @@ public class NewCalendar implements Calendar, ASTnode {
     public List<Event> getEvents() {
         return events;
     }
-<<<<<<< HEAD
-=======
 
-    public Title getTitle() {
-        return title;
-    }
-
-    public List<Event> getEvents() {
-        return events;
-    }
->>>>>>> origin/dev
 }

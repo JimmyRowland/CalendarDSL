@@ -1,11 +1,9 @@
 package AST;
 
-<<<<<<< HEAD
-import model.Scheduler;
-import model.io.Tokenizer;
 
-=======
->>>>>>> origin/dev
+import model.Scheduler;
+import libs.Tokenizer;
+
 import java.util.List;
 
 public class Event implements ASTnode {
@@ -49,10 +47,7 @@ public class Event implements ASTnode {
         }
     }
 
-    @Override
-    public Scheduler evaluate() {
-        // todo build event into model here?
-    }
+
 
     public String getTitle() {
         if (title != null) {

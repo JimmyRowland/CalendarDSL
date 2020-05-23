@@ -1,11 +1,10 @@
 package AST;
 
-<<<<<<< HEAD
-import model.Scheduler;
-import model.io.Tokenizer;
 
-=======
->>>>>>> origin/dev
+import model.Scheduler;
+import libs.Tokenizer;
+
+
 public class Location implements Setting, ASTnode {
     String name;
 
@@ -17,10 +16,7 @@ public class Location implements Setting, ASTnode {
         t.getAndCheckNext(";");
     }
 
-    @Override
-    public Scheduler evaluate() {
 
-    }
 
     public String getLocation() {
         return name;

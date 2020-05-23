@@ -3,6 +3,7 @@ package test.AST;
 import AST.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import libs.Tokenizer;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ class parserTest {
     @BeforeEach
     void init() {
         prog = new Program();
-        tokenizer = new Tokenizer(new String[]{""});
+        tokenizer = new Tokenizer(null,null);
     }
 
     void getCalendarInfo(NewCalendar cal) {

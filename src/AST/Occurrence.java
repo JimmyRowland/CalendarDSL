@@ -1,11 +1,9 @@
 package AST;
 
-<<<<<<< HEAD
-import model.Scheduler;
-import model.io.Tokenizer;
 
-=======
->>>>>>> origin/dev
+import model.Scheduler;
+import libs.Tokenizer;
+
 
 public class Occurrence implements ASTnode {
 
@@ -22,30 +20,11 @@ public class Occurrence implements ASTnode {
     }
 
     // method is never used
-    @Override
+
     public Scheduler evaluate() {
         return null;
     }
 
-    public Object getRange() {
-        if (range.getClass().equals(AST.Day.class)) {
-            Day day = (Day) range;
-            return day.getDay();
-        }
-        if (range.getClass().equals(AST.DayRange.class)) {
-            DayRange dayRange = (DayRange) range;
-            return dayRange.getDayRange();
-        }
-        if (range.getClass().equals(AST.Time.class)) {
-            Time time = (Time) range;
-            return time.getTime();
-        }
-        if (range.getClass().equals(AST.TimeRange.class)) {
-            TimeRange timeRange = (TimeRange) range;
-            return timeRange.getTimeRange();
-        }
-        return range;
-    }
 
     public Object getRange() {
         if (range.getClass().equals(AST.Day.class)) {

@@ -1,11 +1,8 @@
 package AST;
 
-<<<<<<< HEAD
-import model.Scheduler;
-import model.io.Tokenizer;
 
-=======
->>>>>>> origin/dev
+import model.Scheduler;
+import libs.Tokenizer;
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,10 +19,7 @@ public class Repetition implements Setting, ASTnode {
         // todo the repetition values need to be turned into some range of time
     }
 
-    @Override
-    public Scheduler evaluate() {
 
-    }
 
     public String getRepetitionVal() {
         return value;

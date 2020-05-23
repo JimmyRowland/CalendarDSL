@@ -1,6 +1,7 @@
 package test.model;
 
 import model.*;
+import model.io.Writer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -44,6 +45,7 @@ class SchedulerTest {
         for(Day day: scheduler.getDays()){
             System.out.println(day.getEvents().size());
         }
+        Writer.write("individual.cvs",scheduler);
         assertEquals(scheduler.getDays().get(start0.get(Calendar.DAY_OF_WEEK)-1).getEvents().size(), 1);
 
     }
@@ -56,6 +58,7 @@ class SchedulerTest {
         }catch (Exception e){
             e.printStackTrace();
         }
+        Writer.write("flexible.cvs",scheduler);
         assertEquals(2,scheduler.getFlexibleEventList().size());
     }
 
@@ -83,6 +86,7 @@ class SchedulerTest {
         }catch (Exception e){
             e.printStackTrace();
         }
+        Writer.write("recurring.cvs",scheduler);
         assertEquals(3,scheduler.getDays().get(0).size());
         assertEquals(2,scheduler.getDays().get(2).size());
     }

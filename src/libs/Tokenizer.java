@@ -16,7 +16,8 @@ public class Tokenizer {
     private int currentToken;
     private static Tokenizer theTokenizer;
 
-    private Tokenizer(String filename, List<String> literalsList) {
+
+    public Tokenizer(String filename, List<String> literalsList){
         literals = literalsList;
         try {
             program = new String(Files.readAllBytes(Paths.get(filename)), StandardCharsets.UTF_8);
@@ -56,7 +57,7 @@ public class Tokenizer {
     }
 
 
-    private String checkNext(){
+    public String checkNext(){
         String token="";
         if (currentToken<tokens.length){
             token = tokens[currentToken];

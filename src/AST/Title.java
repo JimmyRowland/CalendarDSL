@@ -1,5 +1,9 @@
 package AST;
 
+
+import model.Scheduler;
+import libs.Tokenizer;
+
 public class Title implements ASTnode {
     String title;
 
@@ -10,10 +14,7 @@ public class Title implements ASTnode {
         t.getAndCheckNext(";");
     }
 
-    @Override
-    public void evaluate() {
 
-    }
 
     public String getTitle() {
         return title;

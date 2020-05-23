@@ -1,4 +1,9 @@
 package AST;
 
-public interface Calendar {
+
+import java.util.List;
+
+public interface Calendar extends ASTnode {
+    // Calendar statements such as create / delete/ modify
+
 }

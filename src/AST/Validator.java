@@ -1,6 +1,7 @@
 package AST;
 
 import java.util.Arrays;
+import libs.Tokenizer;
 
 public class Validator {
     final static String[] days = {"monday","tuesday","wednesday","thursday","friday","saturday","sunday"};

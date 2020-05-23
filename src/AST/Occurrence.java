@@ -1,6 +1,10 @@
 package AST;
 
 
+import model.Scheduler;
+import libs.Tokenizer;
+
+
 public class Occurrence implements ASTnode {
 
     ASTnode range; // todo range types will need to be parsed and get value into model
@@ -15,10 +19,12 @@ public class Occurrence implements ASTnode {
         t.getAndCheckNext(">");
     }
 
-    @Override
-    public void evaluate() {
+    // method is never used
 
+    public Scheduler evaluate() {
+        return null;
     }
+
 
     public Object getRange() {
         if (range.getClass().equals(AST.Day.class)) {

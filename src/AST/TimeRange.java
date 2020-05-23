@@ -1,6 +1,11 @@
 package AST;
 
 
+import model.Scheduler;
+import libs.Tokenizer;
+
+
+
 public class TimeRange extends Occurrence implements ASTnode{
     Day day;
     Time start;
@@ -22,9 +27,7 @@ public class TimeRange extends Occurrence implements ASTnode{
             end.parse();
         }
 
-    @Override
-    public void evaluate() {
-    }
+
 
     public String getTimeRange() {
         String dayStr = "";

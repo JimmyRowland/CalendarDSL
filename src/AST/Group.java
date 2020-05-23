@@ -1,5 +1,8 @@
 package AST;
 
+
+import model.Scheduler;
+import libs.Tokenizer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,10 +36,7 @@ public class Group implements ASTnode {
 
     }
 
-    @Override
-    public void evaluate() {
 
-    }
 
     public String getTitle() {
         return title.getTitle();

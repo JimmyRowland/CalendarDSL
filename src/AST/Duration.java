@@ -1,5 +1,7 @@
 package AST;
 
+import model.Scheduler;
+
 public class Duration extends Occurrence implements ASTnode {
 
 
@@ -8,8 +10,5 @@ public class Duration extends Occurrence implements ASTnode {
 
     }
 
-    @Override
-    public void evaluate() {
 
-    }
 }

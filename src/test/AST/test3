@@ -1,0 +1,8 @@
+new calendar my calendar!!;
+new event big day;
+< at 12:30 >
+description: blah;
+location: wherever;
+repeat: MWF;
+event end
+done

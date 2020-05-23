@@ -1,7 +1,7 @@
 package AST;
 
 
-import model.Scheduler;
+import libs.Keyword;
 import libs.Tokenizer;
 
 
@@ -11,9 +11,9 @@ public class Description implements Setting, ASTnode {
     @Override
     public void parse() {
         Tokenizer t = Tokenizer.getTokenizer();
-        t.getAndCheckNext("description:");
+        t.getAndCheckNext(Keyword.keywords.get("description:"));
         desc = Validator.validateString(t.getNext());
-        t.getAndCheckNext(";");
+        t.getAndCheckNext(Keyword.keywords.get(";"));
     }
 
 

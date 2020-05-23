@@ -1,5 +1,5 @@
-package model;
-
-public class Course implements Event{
-
-}
+//package model;
+//
+//public class Course implements Event{
+//
+//}

@@ -1,0 +1,5 @@
+new calendar newCal!;
+new event newEvent!;
+< at 1400 >
+end event
+done

@@ -52,6 +52,7 @@ public class Tokenizer {
         for (int i = 0; i < tokens.length; i++) {
             tokens[i] = tokens[i].trim();
         }
+        theTokenizer = this;
         System.out.println(Arrays.asList(tokens));
     }
 

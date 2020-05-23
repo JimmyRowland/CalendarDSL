@@ -1,0 +1,13 @@
+new calendar my calendar!!;
+new event long event;
+< from monday to wednesday >
+description: blah;
+location: whatever;
+event end
+new event another day;
+< on tuesday start 4 finish 7 >
+description: blahblah;
+location: wherever;
+repeat: MWF
+event end
+done

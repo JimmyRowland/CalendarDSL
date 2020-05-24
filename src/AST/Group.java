@@ -3,12 +3,13 @@ package AST;
 
 import libs.Keyword;
 import libs.Tokenizer;
+import AST.Event;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Group implements ASTnode {
+public class Group extends Event {
     Title title;
     List<String> events;
     HashMap<String, String> keys = Keyword.keywords;
@@ -23,8 +24,8 @@ public class Group implements ASTnode {
         t.getAndCheckNext(keys.get(">"));
         t.getAndCheckNext(keys.get("("));
         String token = t.getNext();
-        while(!token.equals(keys.get(")"))){ // todo this needs testing
-            events.add(Validator.validateExistingEvent(t.getNext()));
+        while(!token.equals(keys.get(")"))){
+            events.add(Validator.validateExistingEvent(t.checkNext()));
             token = t.getNext();
             if (!(token.equals(keys.get(")")) || token.equals(keys.get(",")))) {
                 throw new RuntimeException("invalid grouping");

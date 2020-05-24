@@ -75,18 +75,23 @@ public class Validator {
 
     public static ASTnode validateOccurrence(String token) {
         Tokenizer t = Tokenizer.getTokenizer();
-        if (Arrays.asList(days).contains(token)) {
-            return new Day();
-        } else if (token.equals(keys.get("at"))) {
-            return new Time();
-        } else if (token.equals(keys.get("from"))) {
-            return new DayRange();
-        } else if (token.equals(keys.get("on"))) {
-            return new TimeRange();
-        } else if (token.equals(keys.get("start"))) {
-            return new TimeRange();
-        } else {
-            throw new RuntimeException("Invalid Occurrence type: " + token);
+        try {
+            int val = Integer.parseInt(token);
+            return new Duration();
+        } catch (NumberFormatException e) {
+            if (Arrays.asList(days).contains(token)) {
+                return new Day();
+            } else if (token.equals(keys.get("at"))) {
+                return new Time();
+            } else if (token.equals(keys.get("from"))) {
+                return new DayRange();
+            } else if (token.equals(keys.get("on"))) {
+                return new TimeRange();
+            } else if (token.equals(keys.get("start"))) {
+                return new TimeRange();
+            } else {
+                throw new RuntimeException("Invalid Occurrence type: " + token);
+            }
         }
     }
 
@@ -116,7 +121,7 @@ public class Validator {
 //                // throw new RuntimeException("Not a valid setting type");
 //        }
 //
-        if (token.equals(keys.get("location"))) {
+        if (token.equals(keys.get("location:"))) {
             e.location = new Location();
             return e.location;
         }
@@ -124,7 +129,7 @@ public class Validator {
             e.repeat = new Repetition();
             return e.repeat;
         }
-        if (token.equals(keys.get("description"))) {
+        if (token.equals(keys.get("description:"))) {
             e.description= new Description();
             return e.description;
         } else {

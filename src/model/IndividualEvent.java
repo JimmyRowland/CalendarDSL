@@ -40,7 +40,7 @@ public class IndividualEvent implements Event, Comparable<Event>{
     public boolean hasConflict(Calendar start, Calendar end) {
 //        Util.printCalendar(start);
 //        Util.printCalendar(end);
-        if(this.start.after(start)&& this.end.before(end)){
+        if(!this.start.before(start)&& !this.end.after(end)){
             return false;
         }
         return true;

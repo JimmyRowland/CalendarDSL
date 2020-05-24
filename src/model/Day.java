@@ -19,6 +19,8 @@ public class Day implements FlexibleEventAllocatable {
         Calendar endOfTheDay = ((Calendar) startOfTheDay.clone());
         Util.setTime(endOfTheDay,24);
         timeStamps.add(endOfTheDay);
+//        Util.printCalendar(startOfTheDay);
+//        Util.printCalendar(endOfTheDay);
     }
 
 

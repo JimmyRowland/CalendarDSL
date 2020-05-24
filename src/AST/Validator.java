@@ -61,7 +61,7 @@ public class Validator {
             dayList.add(token);
             while (!t.checkNext().equals(";")) {
                 t.getAndCheckNext(",");
-                dayList.add(token);
+                dayList.add(t.getNext());
             }
             return dayList;
         }

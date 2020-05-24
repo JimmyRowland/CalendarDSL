@@ -9,8 +9,8 @@ public class Keyword {
     public static HashMap<String, String> keywords = new HashMap<>();
     // don't change this list - this is the literals that we had when implementing parser
     public static List<String> literals = Arrays.asList("new calendar", "done", "end", "called:", ";", "new event",
-            "event end", "group", ">", "(", ",", ")", "<", "at", ">", "from", "to", "start",
-            "finish", "location:", "repeat:","|", "description:" );
+            "event end", ">", "(", ",", ")", "<", "at", ">", "from", "to", "start",
+            "finish", "location:", "repeat:","|", "description:", "group:" );
     public static String[] days = {"monday","tuesday","wednesday","thursday","friday","saturday","sunday"};
     public static String[] settingkeys = {"location:", "repeat:", "description:"};
     public static String[] reservedWords = { ";", "<", ">", ":" };

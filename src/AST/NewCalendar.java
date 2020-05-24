@@ -24,11 +24,16 @@ public class NewCalendar implements Calendar, ASTnode {
                 Event e = new Event();
                 e.parse();
                 events.add(e);
-                t.getNext();
-            } else if (t.checkToken(keys.get("end"))) {
-                return;
+//                t.getNext();
+            } else if (t.checkToken(keys.get("group:"))) {
+                Event g = new Group();
+                g.parse();
+                events.add(g);
+//                t.getNext();
+            }else if (t.checkToken((keys.get("done")))) {
+                break;
             } else {
-                throw new RuntimeException("Invalid Syntax, expected new event or END: " + t.checkNext());
+                throw new RuntimeException("Invalid Syntax, expected new event, group, or ;");
             }
         }
     }

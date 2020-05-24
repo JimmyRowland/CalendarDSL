@@ -28,5 +28,6 @@ public class Keyword {
         keywords.replace("done", ";");
         keywords.replace("end", ";");
         keywords.replace("at", "@");
+        keywords.replace("(", "\\(");
     }
 }

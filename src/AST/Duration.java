@@ -1,13 +1,24 @@
 package AST;
 
-import model.Scheduler;
+
+import libs.Tokenizer;
+
 
 public class Duration extends Occurrence implements ASTnode {
 
+    int hours;
+//    Day day;
 
     @Override
     public void parse() {
-
+        try {
+            hours = Integer.parseInt(Tokenizer.getTokenizer().getNext());
+            if (hours > 23 || hours < 1 ) {
+                throw new RuntimeException("Duration out of range");
+            }
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("Duration not a number");
+        }
     }
 
 

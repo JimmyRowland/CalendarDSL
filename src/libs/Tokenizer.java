@@ -56,7 +56,6 @@ public class Tokenizer {
         System.out.println(Arrays.asList(tokens));
     }
 
-
     public String checkNext(){
         String token="";
         if (currentToken<tokens.length){

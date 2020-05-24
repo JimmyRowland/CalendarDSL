@@ -38,4 +38,16 @@ public class TimeRange extends Occurrence implements ASTnode{
         String endStr = String.valueOf(end.getTime());
         return dayStr + startStr + "-" + endStr;
     }
+
+    public void setDay(Day day) {
+        this.day = day;
+    }
+
+    public void setStart(Time start) {
+        this.start = start;
+    }
+
+    public void setEnd(Time end) {
+        this.end = end;
+    }
 }

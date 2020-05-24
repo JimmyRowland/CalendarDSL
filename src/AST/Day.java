@@ -23,4 +23,8 @@ public class Day implements ASTnode {
     public String getDay() {
         return day;
     }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
 }

@@ -36,7 +36,13 @@ public class Group implements ASTnode {
 
     }
 
+    public void setTitle(Title title) {
+        this.title = title;
+    }
 
+    public void setEvents(List<String> events) {
+        this.events = events;
+    }
 
     public String getTitle() {
         return title.getTitle();

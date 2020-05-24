@@ -25,5 +25,7 @@ public class Time implements ASTnode{
         return time;
     }
 
-
+    public void setTime(int time) {
+        this.time = time;
+    }
 }

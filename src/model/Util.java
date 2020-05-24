@@ -40,9 +40,9 @@ public class Util {
     public static Calendar nextDayOfWeek(int dayOfWeek) {
         Calendar date = Util.getNewCalendar();
         if(date.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY){
-            date.set(Calendar.DAY_OF_WEEK,dayOfWeek);
             date.add(Calendar.DAY_OF_MONTH, 7);
         }
+        date.set(Calendar.DAY_OF_WEEK,dayOfWeek);
         return date;
     }
 

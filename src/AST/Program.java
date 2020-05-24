@@ -107,7 +107,7 @@ public class Program implements ASTnode {
     public String convertTime(int time) {
         String ret = Integer.toString(time);
         if (time < 10){
-            ret = ret + "0:00";
+            ret = "0" + ret + ":00";
         } else {
             ret = ret + ":00";
         }

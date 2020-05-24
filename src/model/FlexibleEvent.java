@@ -54,7 +54,8 @@ public class FlexibleEvent implements Event, Comparable<Event> {
         Util.printCalendar(end);
         if (this.getDurationInMS() < space) {
             this.setStart((Calendar) start.clone());
-            this.setEnd((Calendar) end.clone());
+            this.setEnd((Calendar) start.clone());
+            this.end.add(Calendar.HOUR_OF_DAY, this.getDuration());
             return false;
         }
         return true;

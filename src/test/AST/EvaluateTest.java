@@ -30,10 +30,10 @@ public class EvaluateTest {
     Occurrence time;
     Occurrence timeRange;
 
-    ASTnode dayNode;
-    ASTnode dayRangeNode;
-    ASTnode timeNode;
-    ASTnode timeRangeNode;
+    Day dayNode;
+    DayRange dayRangeNode;
+    Time timeNode;
+    TimeRange timeRangeNode;
 
     Location l1;
     Location l2;
@@ -102,8 +102,8 @@ public class EvaluateTest {
         e3.setLocation(l3);
     }
     @Test
-    void basicOneEvent(){
-        ((Day) dayNode).setDay("Monday");
+    void basicOneFlexEvent(){
+        dayNode.setDay("Monday");
         e1.setOccurrence(day);
 
         events.add(e1);
@@ -114,6 +114,97 @@ public class EvaluateTest {
         assertEquals(1, scheduler.getDays().get(1).getEvents().size());
         System.out.println(scheduler.getDays().get(1).getEvents());
 
+    }
+
+    @Test
+    void OneFlexOneIndEventDifferentDays(){
+        (dayNode).setDay("Monday");
+        e1.setOccurrence(day);
+
+        events.add(e1);
+        calendar.setEvents(events);
+        program.setCalendar(calendar);
+
+        Time tstart = new Time();
+        Time tend = new Time();
+
+        Day day2 = new Day();
+        day2.setDay("Wednesday");
+        tstart.setTime(9);
+        tend.setTime(23);
+
+        timeRangeNode.setDay(day2);
+        timeRangeNode.setStart(tstart);
+        timeRangeNode.setEnd(tend);
+        timeRange.setRange(timeRangeNode);
+        e2.setOccurrence(timeRange);
+
+        events.add(e2);
+        calendar.setEvents(events);
+        program.setCalendar(calendar);
+
+        scheduler = program.evaluate();
+        assertEquals(1, scheduler.getDays().get(1).getEvents().size());
+        assertEquals(1, scheduler.getDays().get(3).getEvents().size());
+
+    }
+
+    @Test
+    void OneFlexOneIndEventSameDay(){
+        (dayNode).setDay("Saturday");
+        e1.setOccurrence(day);
+
+        events.add(e1);
+
+        Time tStart = new Time();
+        Time tEnd = new Time();
+        tStart.setTime(9);
+        tEnd.setTime(23);
+
+        timeRangeNode.setDay(dayNode);
+        timeRangeNode.setStart(tStart);
+        timeRangeNode.setEnd(tEnd);
+        timeRange.setRange(timeRangeNode);
+        e2.setOccurrence(timeRange);
+
+        events.add(e2);
+        calendar.setEvents(events);
+        program.setCalendar(calendar);
+
+        scheduler = program.evaluate();
+        assertEquals(2, scheduler.getDays().get(6).getEvents().size());
+    }
+
+    @Test
+    void RandomMultipleEvents(){
+        dayNode.setDay("Tuesday");
+        e1.setOccurrence(day);
+        e3.setOccurrence(day);
+
+        events.add(e1);
+        events.add(e3);
+
+        Time tStart = new Time();
+        Time tEnd = new Time();
+        Day day2 = new Day();
+
+        day2.setDay("Friday");
+        tStart.setTime(15);
+        tEnd.setTime(17);
+
+        timeRangeNode.setDay(day2);
+        timeRangeNode.setStart(tStart);
+        timeRangeNode.setEnd(tEnd);
+        timeRange.setRange(timeRangeNode);
+        e2.setOccurrence(timeRange);
+
+        events.add(e2);
+        calendar.setEvents(events);
+        program.setCalendar(calendar);
+
+        scheduler = program.evaluate();
+        assertEquals(2, scheduler.getDays().get(2).getEvents().size());
+        assertEquals(1, scheduler.getDays().get(5).getEvents().size());
     }
 
 }

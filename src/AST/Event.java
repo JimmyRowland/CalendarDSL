@@ -34,7 +34,7 @@ public class Event implements ASTnode {
             // loop for settings
             while (!token.equals(keys.get("event end"))) {
                 if (!Validator.getValidSettingKeyword(token)) {
-                    throw new RuntimeException("Invalid setting type");
+                    throw new RuntimeException("Invalid setting type: " + token);
                 }
                 Setting s = Validator.getAndSettingType(token, this);
                 s.parse();

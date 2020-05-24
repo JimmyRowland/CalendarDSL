@@ -5,8 +5,8 @@ description: blah;
 location: whatever;
 event end
 new event another day;
-< on tuesday start 4 finish 7 >
+< on tuesday start 14:00 finish 17:00 >
 description: blahblah;
 location: wherever;
-repeat: MWF
+repeat: MWF;
 event end;

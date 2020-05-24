@@ -30,6 +30,12 @@ public class Occurrence implements ASTnode {
     public Object getRange() {
         if (range.getClass().equals(AST.Day.class)) {
             Day day = (Day) range;
+            if (day.timeRange != null) {
+                return day.getDay() + day.getTimeRange();
+            }
+            if (day.time != null) {
+                return day.getDay() + day.getTime();
+            }
             return day.getDay();
         }
         if (range.getClass().equals(AST.DayRange.class)) {

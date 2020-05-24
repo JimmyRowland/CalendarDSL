@@ -28,7 +28,6 @@ public class Program implements ASTnode {
         }
     }
 
-
     public Scheduler evaluate() {
         EventCreator ec = new EventCreator();
         Scheduler scheduler = new Scheduler();

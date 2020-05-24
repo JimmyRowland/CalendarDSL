@@ -27,6 +27,11 @@ public class Day implements FlexibleEventAllocatable {
         for (int i = 0; i < this.timeStamps.size(); i += 2) {
             Calendar start = timeStamps.get(i);
             Calendar end = timeStamps.get(i + 1);
+//                    System.out.println("Individual");
+//        Util.printCalendar(event.getStart());
+//        Util.printCalendar(event.getEnd());
+//            Util.printCalendar(start);
+//            Util.printCalendar(end);
             if (!event.hasConflict(start, end)) {
                 timeStamps.add(event.getStart());
                 timeStamps.add(event.getEnd());
@@ -72,6 +77,9 @@ public class Day implements FlexibleEventAllocatable {
     }
 
     public void addEvent(IndividualEvent event) {
+//                System.out.println("Individual");
+//        Util.printCalendar(event.getStart());
+//        Util.printCalendar(event.getEnd());
         if (hasTimeSlot(event)) {
             events.add(event);
             sortEvent();

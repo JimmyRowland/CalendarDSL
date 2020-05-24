@@ -18,10 +18,10 @@ public class Util {
         String[] timeList =  time.split(":");
         calendar.set(Calendar.HOUR_OF_DAY,Integer.parseInt(timeList[0]));
         calendar.set(Calendar.MINUTE,Integer.parseInt(timeList[1]));
-        System.out.println("---");
-        System.out.println(time);
-        System.out.println(calendar.getTime().toString());
-        System.out.println("---");
+//        System.out.println("---");
+//        System.out.println(time);
+//        System.out.println(calendar.getTime().toString());
+//        System.out.println("---");
         return calendar;
     }
 
@@ -42,6 +42,8 @@ public class Util {
         if(date.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY){
             date.set(Calendar.DAY_OF_WEEK,dayOfWeek);
             date.add(Calendar.DAY_OF_MONTH, 7);
+        }else{
+            date.add(Calendar.DAY_OF_MONTH, dayOfWeek-1);
         }
         return date;
     }

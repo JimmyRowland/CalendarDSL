@@ -20,6 +20,7 @@ public class Scheduler implements FlexibleEventAllocatable {
         for(int i = 1;  i < 8; i++){
             Calendar startOfTheDay = Util.nextDayOfWeek(i);
             Util.setTime(startOfTheDay,6);
+//            Util.printCalendar(startOfTheDay);
             days.add(new Day(startOfTheDay));
         }
         flexibleEventList = new ArrayList<>();
@@ -27,6 +28,7 @@ public class Scheduler implements FlexibleEventAllocatable {
 
     public void addEvent(IndividualEvent event){
         int dayOfWeek = event.getDayOfWeek();
+//        System.out.println("Individual");
 //        Util.printCalendar(event.getStart());
 //        Util.printCalendar(event.getEnd());
         days.get(dayOfWeek-1).addEvent(event);

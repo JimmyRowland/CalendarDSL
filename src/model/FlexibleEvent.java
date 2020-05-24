@@ -30,11 +30,11 @@ public class FlexibleEvent implements Event, Comparable<Event> {
         this.start = start;
     }
 
-    int getDuration() {
+    float getDuration() {
         return duration;
     }
 
-    int getDurationInMS() {
+    float getDurationInMS() {
         return duration * 3600000;
     }
 
@@ -50,11 +50,13 @@ public class FlexibleEvent implements Event, Comparable<Event> {
     @Override
     public boolean hasConflict(Calendar start, Calendar end) {
         long space = end.getTimeInMillis() - start.getTimeInMillis();
-        Util.printCalendar(start);
-        Util.printCalendar(end);
+//        Util.printCalendar(start);
+//        Util.printCalendar(end);
         if (this.getDurationInMS() < space) {
             this.setStart((Calendar) start.clone());
-            this.setEnd((Calendar) end.clone());
+            Calendar newEnd = (Calendar) start.clone();
+            newEnd.add(Calendar.MINUTE,this.duration*60);
+            this.setEnd(newEnd);
             return false;
         }
         return true;

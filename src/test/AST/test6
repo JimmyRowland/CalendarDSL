@@ -1,0 +1,7 @@
+new calendar my calendar!!;
+new event big day;
+< from monday to wednesday >
+description: blah;
+location: whatever;
+repeat: TTH
+event end;

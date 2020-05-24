@@ -1,5 +1,6 @@
 package AST;
 
+import libs.Keyword;
 import libs.Tokenizer;
 import model.Event;
 import model.Scheduler;
@@ -18,7 +19,7 @@ public class Program implements ASTnode {
     @Override
     public void parse() {
         Tokenizer t = Tokenizer.getTokenizer();
-        if(t.checkToken("new calendar")) {
+        if(t.checkToken(Keyword.keywords.get("new calendar"))) {
             calendar = new NewCalendar();
             calendar.parse();
             // unique program terminator would allow for more than one cal

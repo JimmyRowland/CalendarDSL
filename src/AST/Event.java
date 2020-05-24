@@ -1,9 +1,10 @@
 package AST;
 
 
-import model.Scheduler;
+import libs.Keyword;
 import libs.Tokenizer;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class Event implements ASTnode {
@@ -13,6 +14,7 @@ public class Event implements ASTnode {
     Location location;
     Repetition repeat;
     Description description;
+    HashMap<String, String> keys = Keyword.keywords;
 
     @Override
     public void parse() {
@@ -20,7 +22,7 @@ public class Event implements ASTnode {
         occurrence = null;
         // todo add group functionality
         String token = t.getNext();
-        if (token.equals("new event")) {
+        if (token.equals(keys.get("new event"))) {
             title = new Title();
             title.parse();
             token = t.checkNext();
@@ -30,7 +32,7 @@ public class Event implements ASTnode {
                 token = t.checkNext();
             }
             // loop for settings
-            while (!token.equals("event end")) {
+            while (!token.equals(keys.get("event end"))) {
                 if (!Validator.getValidSettingKeyword(token)) {
                     throw new RuntimeException("Invalid setting type");
                 }
@@ -38,7 +40,7 @@ public class Event implements ASTnode {
                 s.parse();
                 token = t.getNext();
             }
-        } else if (token.equals("group:")) {
+        } else if (token.equals(keys.get("group:"))) {
             group = new Group();
             group.parse();
             title = group.title;
@@ -46,8 +48,6 @@ public class Event implements ASTnode {
             throw new RuntimeException("Expected event declaration");
         }
     }
-
-
 
     public String getTitle() {
         if (title != null) {

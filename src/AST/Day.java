@@ -1,7 +1,6 @@
 package AST;
 
 
-import model.Scheduler;
 import libs.Tokenizer;
 
 
@@ -14,11 +13,6 @@ public class Day implements ASTnode {
         String token = t.getNext();
         day = Validator.validateDay(token);
     }
-
-//    @Override
-//    public Scheduler evaluate() {
-//
-//    }
 
     public String getDay() {
         return day;

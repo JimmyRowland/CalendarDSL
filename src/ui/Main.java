@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
-     List<String> literals = Arrays.asList(";", "done", "new calendar", "new event", "event end",
+     List<String> literals = Arrays.asList(";", "new calendar", "new event", "event end",
                 "group:", "<", ">", "(", ",", ")", "|", "start", "finish", "location:", "repeat:",
                 "daily", "every", "priority", "description:", "done","only at");
 

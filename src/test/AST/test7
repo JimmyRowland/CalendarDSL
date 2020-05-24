@@ -9,5 +9,4 @@ new event another day;
 description: blahblah;
 location: wherever;
 repeat: MWF
-event end
-done
+event end;

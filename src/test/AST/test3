@@ -4,5 +4,4 @@ new event big day;
 description: blah;
 location: wherever;
 repeat: MWF;
-event end
-done
+event end;

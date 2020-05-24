@@ -110,4 +110,12 @@ class parserTest {
         NewCalendar cal = prog.getCalendar();
         getCalendarInfo(cal);
     }
+
+    @Test
+    void testKeywordMap() {
+        String changedWord1 = Keyword.keywords.get("at");
+        String changedWord2 = Keyword.keywords.get("done");
+        System.out.println(changedWord1);
+        System.out.println(changedWord2);
+    }
 }

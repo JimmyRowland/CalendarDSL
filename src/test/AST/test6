@@ -4,5 +4,4 @@ new event big day;
 description: blah;
 location: whatever;
 repeat: TTH
-event end
-done
+event end;

@@ -26,6 +26,6 @@ public class Keyword {
     // any changes to literals can be added here
     public void updateKeywords() {
         keywords.replace("at", "only at");
-
+        keywords.replace("done", ";");
     }
 }

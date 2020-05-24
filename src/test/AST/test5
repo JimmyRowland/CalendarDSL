@@ -3,5 +3,4 @@ new event big day;
 < start at 12:30 finish at 14:30 >
 description: blah;
 location: wherever;
-event end
-done
+event end;

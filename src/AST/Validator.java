@@ -86,7 +86,7 @@ public class Validator {
         } else if (token.equals(keys.get("start"))) {
             return new TimeRange();
         } else {
-            throw new RuntimeException("Invalid Occurrence type");
+            throw new RuntimeException("Invalid Occurrence type: " + token);
         }
     }
 
@@ -128,7 +128,7 @@ public class Validator {
             e.description= new Description();
             return e.description;
         } else {
-            throw new RuntimeException("Not a valid setting type");
+            throw new RuntimeException("Not a valid setting type: " + token);
         }
     }
 }

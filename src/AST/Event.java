@@ -47,7 +47,29 @@ public class Event implements ASTnode {
         }
     }
 
+    public void setTitle(Title title) {
+        this.title = title;
+    }
 
+    public void setOccurrence(Occurrence occurrence) {
+        this.occurrence = occurrence;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public void setRepeat(Repetition repeat) {
+        this.repeat = repeat;
+    }
+
+    public void setDescription(Description description) {
+        this.description = description;
+    }
 
     public String getTitle() {
         if (title != null) {

@@ -1,20 +1,28 @@
 package test.AST;
 
-import AST.*;
+import AST.Event;
+import AST.NewCalendar;
+import AST.Program;
+import libs.Keyword;
+import libs.Tokenizer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import libs.Tokenizer;
 
+import java.util.Arrays;
 import java.util.List;
 
 class parserTest {
     Program prog = new Program();
     Tokenizer tokenizer;
+    Keyword initKeys = new Keyword();
+    List<String> literals = Arrays.asList(";", "done", "new calendar", "new event", "event end",
+            "group:", "<", ">", "(", ",", ")", "|", "start", "finish", "location:", "repeat:",
+            "daily", "every", "priority", "description:", "done","only at");
 
     @BeforeEach
     void init() {
         prog = new Program();
-        tokenizer = new Tokenizer(null,null);
+        initKeys = new Keyword();
     }
 
     void getCalendarInfo(NewCalendar cal) {
@@ -42,58 +50,17 @@ class parserTest {
 
     @Test
     void simpleTest() {
-        String[] tokens = {"new calendar", "my calendar!!", ";",
-                "new event", "big day", ";",
-                "<", "monday", ">",
-                "description:", "blah", ";",
-                "event end",
-                "end"};
-        tokenizer = new Tokenizer(tokens);
+        tokenizer = new Tokenizer("src/test/AST/test1", literals);
+        tokenizer = Tokenizer.getTokenizer();
         prog.parse();
         NewCalendar cal = prog.getCalendar();
         getCalendarInfo(cal);
     }
 
     @Test
-    void testLocation() {
-        String[] tokens = {"new calendar", "my calendar!!", ";",
-                "new event", "big day", ";",
-                "<", "monday", ">",
-                "description:", "blah", ";",
-                "location:", "wherever", ";",
-                "event end",
-                "end"};
-        tokenizer = new Tokenizer(tokens);
-        prog.parse();
-        NewCalendar cal = prog.getCalendar();
-        getCalendarInfo(cal);
-    }
-
-    @Test
-    void testRepeatMWF() {
-        String[] tokens = {"new calendar", "my calendar!!", ";",
-                "new event", "big day", ";",
-                "<", "monday", ">",
-                "description:", "blah", ";",
-                "location:", "wherever", ";",
-                "repeat:", "MWF", ";",
-                "event end",
-                "end"};
-        tokenizer = new Tokenizer(tokens);
-        prog.parse();
-        NewCalendar cal = prog.getCalendar();
-        getCalendarInfo(cal);
-    }
-    @Test
-    void testOccurenceDayRange() {
-        String[] tokens = {"new calendar", "my calendar!!", ";",
-                "new event", "big day", ";",
-                "<", "from", "monday", "to", "wednesday", ">",
-                "description:", "blah", ";",
-                "location:", "wherever", ";",
-                "event end",
-                "end"};
-        tokenizer = new Tokenizer(tokens);
+    void testLocationAndRepeatMWF() {
+        tokenizer = new Tokenizer("src/test/AST/test2", literals);
+        tokenizer = Tokenizer.getTokenizer();
         prog.parse();
         NewCalendar cal = prog.getCalendar();
         getCalendarInfo(cal);
@@ -101,15 +68,8 @@ class parserTest {
 
     @Test
     void testOccurenceTime() {
-            String[] tokens = {"new calendar", "my calendar!!", ";",
-                    "new event", "big day", ";",
-                    "<", "at", "12", ":", "30", ">",
-                    "description:", "blah", ";",
-                    "location:", "wherever", ";",
-                    "repeat:", "MWF", ";",
-                    "event end",
-                    "end"};
-            tokenizer = new Tokenizer(tokens);
+        tokenizer = new Tokenizer("src/test/AST/test3", literals);
+        tokenizer = Tokenizer.getTokenizer();
             prog.parse();
             NewCalendar cal = prog.getCalendar();
             getCalendarInfo(cal);
@@ -117,14 +77,8 @@ class parserTest {
 
     @Test
     void testOccurenceTimeRangeWithDay() {
-        String[] tokens = {"new calendar", "my calendar!!", ";",
-            "new event", "big day", ";",
-            "<", "on", "monday", "start", "at", "12", ":", "30", "finish", "at", "14", ":", "30", ">",
-            "description:", "blah", ";",
-            "location:", "wherever", ";",
-            "event end",
-            "end"};
-        tokenizer = new Tokenizer(tokens);
+        tokenizer = new Tokenizer("src/test/AST/test4", literals);
+        tokenizer = Tokenizer.getTokenizer();
         prog.parse();
         NewCalendar cal = prog.getCalendar();
         getCalendarInfo(cal);
@@ -132,30 +86,17 @@ class parserTest {
 
     @Test
     void testOccurenceTimeRangeWithoutDay() {
-        String[] tokens = {"new calendar", "my calendar!!", ";",
-                "new event", "big day", ";",
-                "<", "start", "at", "12", ":", "30", "finish", "at", "14", ":", "30", ">",
-                "description:", "blah", ";",
-                "location:", "wherever", ";",
-                "event end",
-                "end"};
-        tokenizer = new Tokenizer(tokens);
+        tokenizer = new Tokenizer("src/test/AST/test5", literals);
+        tokenizer = Tokenizer.getTokenizer();
         prog.parse();
         NewCalendar cal = prog.getCalendar();
         getCalendarInfo(cal);
     }
 
     @Test
-    void testAllFieldsExceptGroup() {
-        String[] tokens = {"new calendar", "my calendar!!", ";",
-                "new event", "big day", ";",
-                "<", "on", "saturday", "start", "at", "10", ":", "30", "finish", "at", "12", ":", "00", ">",
-                "description:", "blah blah blah", ";",
-                "location:", "wherever", ";",
-                "repeat:", "daily", ";",
-                "event end",
-                "end"};
-        tokenizer = new Tokenizer(tokens);
+    void testDayRangeAllFields() {
+        tokenizer = new Tokenizer("src/test/AST/test6", literals);
+        tokenizer = Tokenizer.getTokenizer();
         prog.parse();
         NewCalendar cal = prog.getCalendar();
         getCalendarInfo(cal);
@@ -163,19 +104,18 @@ class parserTest {
 
     @Test
     void testMultipleEvents() {
-        String[] tokens = {"new calendar", "my calendar!!", ";",
-                "new event", "big day", ";",
-                "<", "monday", ">",
-                "description:", "blah", ";",
-                "event end",
-                "new event", "big day", ";",
-                "<", "on", "monday", "start", "at", "12", ":", "30", "finish", "at", "14", ":", "30", ">",
-                "description:", "blah", ";",
-                "location:", "wherever", ";",
-                "event end", "end" };
-        tokenizer = new Tokenizer(tokens);
+        tokenizer = new Tokenizer("src/test/AST/test7", literals);
+        tokenizer = Tokenizer.getTokenizer();
         prog.parse();
         NewCalendar cal = prog.getCalendar();
         getCalendarInfo(cal);
+    }
+
+    @Test
+    void testKeywordMap() {
+        String changedWord1 = Keyword.keywords.get("at");
+        String changedWord2 = Keyword.keywords.get("done");
+        System.out.println(changedWord1);
+        System.out.println(changedWord2);
     }
 }

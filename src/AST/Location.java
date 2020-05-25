@@ -1,7 +1,7 @@
 package AST;
 
 
-import model.Scheduler;
+import libs.Keyword;
 import libs.Tokenizer;
 
 
@@ -11,7 +11,7 @@ public class Location implements Setting, ASTnode {
     @Override
     public void parse() {
         Tokenizer t = Tokenizer.getTokenizer();
-        t.checkToken("location:");
+        t.checkToken(Keyword.keywords.get("location:"));
         name = Validator.validateString(t.getNext());
         t.getAndCheckNext(";");
     }

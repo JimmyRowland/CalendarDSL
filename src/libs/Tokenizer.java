@@ -34,6 +34,7 @@ public class Tokenizer {
         //0. Pick some RESERVEDWORD (string which never occurs in your input) : we'll use _
         //1. Read the whole program into a single string; kill the newlines
         String tokenizedProgram = program.replace("\n", "");
+        tokenizedProgram = tokenizedProgram.replaceAll("\\r", "");
         System.out.println(tokenizedProgram);
         //2. Replace all constant literals with “RESERVEDWORD”<the literal>“RESERVEDWORD”
         for(String s : literals) {
@@ -53,9 +54,9 @@ public class Tokenizer {
         for (int i = 0; i < tokens.length; i++) {
             tokens[i] = tokens[i].trim();
         }
+        theTokenizer = this;
         System.out.println(Arrays.asList(tokens));
     }
-
 
     public String checkNext(){
         String token="";

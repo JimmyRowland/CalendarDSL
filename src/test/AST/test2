@@ -1,6 +1,6 @@
 new calendar my calendar!!;
 new event big day;
-< monday >
+< monday @ 12:30 >
 description: blah;
 location: wherever;
 repeat: MWF;

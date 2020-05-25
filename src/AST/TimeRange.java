@@ -16,11 +16,7 @@ public class TimeRange extends Occurrence implements ASTnode{
     @Override
     public void parse() {
         Tokenizer t = Tokenizer.getTokenizer();
-        if (t.checkToken(keys.get("on"))) {
-            t.getAndCheckNext(keys.get("on"));
-            day = new Day();
-            day.parse();
-        }
+        if (t.checkNext().equals("start")) {
             t.getAndCheckNext(keys.get("start"));
             start = new Time();
             start.parse();
@@ -28,7 +24,7 @@ public class TimeRange extends Occurrence implements ASTnode{
             end = new Time();
             end.parse();
         }
-
+    }
 
 
     public String getTimeRange() {

@@ -3,5 +3,5 @@ new event big day;
 < from monday to wednesday >
 description: blah;
 location: whatever;
-repeat: TTH
+repeat: sunday;
 event end;

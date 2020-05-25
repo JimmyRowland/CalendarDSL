@@ -15,9 +15,9 @@ class parserTest {
     Program prog = new Program();
     Tokenizer tokenizer;
     Keyword initKeys = new Keyword();
-    List<String> literals = Arrays.asList(";", "done", "new calendar", "new event", "event end",
+    List<String> literals = Arrays.asList(";", "new calendar", "new event", "event end",
             "group:", "<", ">", "(", ",", ")", "|", "start", "finish", "location:", "repeat:",
-            "daily", "every", "priority", "description:", "done","only at");
+            "daily", "every", "priority", "description:", "@", "from", "to");
 
     @BeforeEach
     void init() {
@@ -85,7 +85,7 @@ class parserTest {
     }
 
     @Test
-    void testOccurenceTimeRangeWithoutDay() {
+    void testOccurenceTimeRangeWithoutDayRepeatDayList() {
         tokenizer = new Tokenizer("src/test/AST/test5", literals);
         tokenizer = Tokenizer.getTokenizer();
         prog.parse();
@@ -118,4 +118,15 @@ class parserTest {
         System.out.println(changedWord1);
         System.out.println(changedWord2);
     }
+
+    @Test
+    void testGroupingOnTwoEvents() {
+        tokenizer = new Tokenizer("src/test/AST/groupTest1", literals);
+        tokenizer = Tokenizer.getTokenizer();
+        prog.parse();
+        NewCalendar cal = prog.getCalendar();
+        getCalendarInfo(cal);
+    }
+
+
 }

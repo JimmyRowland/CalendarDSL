@@ -1,4 +1,4 @@
 new calendar newCal!;
 new event newEvent!;
-< at 1400 >
+< @ 14:00 >
 end event;

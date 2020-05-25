@@ -27,8 +27,6 @@ public class Scheduler implements FlexibleEventAllocatable {
 
     public void addEvent(IndividualEvent event){
         int dayOfWeek = event.getDayOfWeek();
-//        Util.printCalendar(event.getStart());
-//        Util.printCalendar(event.getEnd());
         days.get(dayOfWeek-1).addEvent(event);
     }
 

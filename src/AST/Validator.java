@@ -1,19 +1,13 @@
 package AST;
 
-import libs.Keyword;
-import libs.Tokenizer;
+import model.io.Tokenizer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 
 public class Validator {
-    final static String[] days = Keyword.days;
-    // final static String[] days = {"monday","tuesday","wednesday","thursday","friday","saturday","sunday"};
-    // final static String[] settingkeys = {"location:", "repeat:", "description:"};
-    final static String[] settingkeys = Keyword.settingkeys;
-    final static HashMap<String, String> keys = Keyword.keywords;
+    final static String[] days = {"monday","tuesday","wednesday","thursday","friday","saturday","sunday"};
+    final static String[] settingkeys = {"location:", "repeat:", "description:"};
 
     public static String validateDay(String token) {
         String value;
@@ -25,7 +19,7 @@ public class Validator {
             }
         }
         // will only reach this line if token does not match a valid day string
-        throw new RuntimeException("Invalid day: " + token);
+        throw new RuntimeException("Invalid day");
     }
 
     // Checks token for numeric integer value and within given range (inclusive)
@@ -33,71 +27,75 @@ public class Validator {
         try {
             int value = Integer.parseInt(token);
             if(value > end || value < start){
-                throw new RuntimeException("Value out of range:" + token);
+                throw new RuntimeException("Value out of range");
             }
             return value;
         } catch (NumberFormatException e) {
-            throw new RuntimeException("Invalid time: " + token);
+            throw new RuntimeException("Invalid time");
         }
     }
 
     public static String validateString(String token) {
-        String[] reservedWords = Keyword.reservedWords;
+        String[] reservedWords = { ";", "<", ">", ":" };
         for (String s: reservedWords) {
             if (token.contains(s)) {
-                throw new RuntimeException("String contains reserved word: " + token);
+                throw new RuntimeException("String contains reserved word");
             }
         }
         return token;
     }
 
-    public static List<String> validateRepetition(String token) {
-        Tokenizer t = Tokenizer.getTokenizer();
-        List<String> dayList = new ArrayList<String>();
-        String[] repeatable = Keyword.repeatable;
-        String days = Arrays.toString(Keyword.days);
-
-        if (days.contains(token)) {
-            dayList.add(token);
-            while (!t.checkNext().equals(";")) {
-                t.getAndCheckNext(",");
-                dayList.add(t.getNext());
+    public static int validatePriority(String token) {
+        int value;
+        try {
+            value = Integer.parseInt(token);
+            if (value < 1 || value > 2) {
+                throw new RuntimeException("Priority value out of range");
             }
-            return dayList;
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("Invalid priority value");
         }
+        return value;
+    }
 
+    public static String validateRepetition(String token) {
+        Tokenizer t = Tokenizer.getTokenizer();
+        String value = null;
+        String[] repeatable = {"daily","MWF","TTH"};
+
+        String str = token;
+        if (str.contains("every")) {
+            // validate the string starting from after the word every
+            value = "every " + Validator.validateDay(token.substring(6));
+            return value;
+        }
         for (String s: repeatable) {
             if (token.equalsIgnoreCase(s)) {
-                dayList.add(token);;
-                return dayList;
+                value = token;
+                return value;
             }
         }
-        if (dayList.size() == 0) {
-            throw new RuntimeException("Not a valid repetition: " + token);
+        if (value == null) {
+            throw new RuntimeException("Invalid repetition");
         }
-        return dayList;
+        return value;
     }
 
 
     public static ASTnode validateOccurrence(String token) {
         Tokenizer t = Tokenizer.getTokenizer();
-        try {
-            int val = Integer.parseInt(token);
-            return new Duration();
-        } catch (NumberFormatException e) {
-            if (Arrays.asList(days).contains(token)) {
-                return new Day();
-            } else if (token.equals(keys.get("at"))) {
-                return new Time();
-            } else if (token.equals(keys.get("from"))) {
-                return new DayRange();
-            } else if (token.equals(keys.get("on"))) {
-                return new TimeRange();
-            } else if (token.equals(keys.get("start"))) {
-                return new TimeRange();
-            } else {
-                throw new RuntimeException("Invalid Occurrence type: " + token);
-            }
+        if (Arrays.asList(days).contains(token)) {
+            return new Day();
+        } else if (token.equals("at")) {
+            return new Time();
+        } else if (token.equals("from")) {
+            return new DayRange();
+        } else if (token.equals("on")) {
+            return new TimeRange();
+        } else if (token.equals("start")) {
+            return new TimeRange();
+        } else {
+            throw new RuntimeException("Invalid Occurrence type");
         }
     }
 
@@ -112,19 +110,19 @@ public class Validator {
 
     // REQUIRES: Validated token by getValidSettingKeyword()
     public static Setting getAndSettingType(String token, Event e) {
-        if (token.equals(keys.get("location:"))) {
-            e.location = new Location();
-            return e.location;
-        }
-        if (token.equals(keys.get("repeat:"))) {
-            e.repeat = new Repetition();
-            return e.repeat;
-        }
-        if (token.equals(keys.get("description:"))) {
-            e.description= new Description();
-            return e.description;
-        } else {
-            throw new RuntimeException("Not a valid setting type: " + token);
+        // todo refactor this to something smarter
+        switch (token) {
+            case "location:":
+                e.location = new Location();
+                return e.location;
+            case "repeat:":
+                e.repeat = new Repetition();
+                return e.repeat;
+            case "description:":
+                e.description= new Description();
+                return e.description;
+            default:
+                throw new RuntimeException("Not a valid setting type");
         }
     }
 }

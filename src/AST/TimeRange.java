@@ -1,31 +1,33 @@
 package AST;
 
-
-import libs.Keyword;
-import libs.Tokenizer;
-
-import java.util.HashMap;
+import model.Scheduler;
+import model.io.Tokenizer;
 
 
 public class TimeRange extends Occurrence implements ASTnode{
     Day day;
     Time start;
     Time end;
-    HashMap<String, String> keys = Keyword.keywords;
 
     @Override
     public void parse() {
         Tokenizer t = Tokenizer.getTokenizer();
-        if (t.checkNext().equals("start")) {
-            t.getAndCheckNext(keys.get("start"));
+        if (t.checkToken("on")) {
+            t.getAndCheckNext("on");
+            day = new Day();
+            day.parse();
+        }
+            t.getAndCheckNext("start");
             start = new Time();
             start.parse();
-            t.getAndCheckNext(keys.get("finish"));
+            t.getAndCheckNext("finish");
             end = new Time();
             end.parse();
         }
-    }
 
+    @Override
+    public Scheduler evaluate() {
+    }
 
     public String getTimeRange() {
         String dayStr = "";
@@ -35,17 +37,5 @@ public class TimeRange extends Occurrence implements ASTnode{
         String startStr = String.valueOf(start.getTime());
         String endStr = String.valueOf(end.getTime());
         return dayStr + startStr + "-" + endStr;
-    }
-
-    public void setDay(Day day) {
-        this.day = day;
-    }
-
-    public void setStart(Time start) {
-        this.start = start;
-    }
-
-    public void setEnd(Time end) {
-        this.end = end;
     }
 }

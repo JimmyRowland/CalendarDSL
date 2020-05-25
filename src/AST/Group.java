@@ -1,37 +1,34 @@
 package AST;
 
-
-import libs.Keyword;
-import libs.Tokenizer;
+import model.Scheduler;
+import model.io.Tokenizer;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-public class Group extends Event {
+public class Group implements ASTnode {
     Title title;
     List<String> events;
-    HashMap<String, String> keys = Keyword.keywords;
 
     @Override
     public void parse() {
         events = new ArrayList<>();
         Tokenizer t = Tokenizer.getTokenizer();
-        t.getAndCheckNext(keys.get("group:"));
+        t.getAndCheckNext("group:");
         title = new Title();
         title.parse();
-        t.getAndCheckNext(keys.get(">"));
-        t.getAndCheckNext(keys.get("("));
+        t.getAndCheckNext(">");
+        t.getAndCheckNext("(");
         String token = t.getNext();
-        while(!token.equals(keys.get(")"))){
-            events.add(Validator.validateExistingEvent(token));
+        while(!token.equals(")")){ // todo this needs testing
+            events.add(Validator.validateExistingEvent(t.getNext()));
             token = t.getNext();
-            if (!(token.equals(keys.get(")")) || token.equals(keys.get(",")))) {
+            if (!(token.equals(")") || token.equals(","))) {
                 throw new RuntimeException("invalid grouping");
             }
-            if(token.equals(keys.get(","))) {
+            if(token.equals(",")) {
                 token = t.getNext();
-                if(token.equals(keys.get(")"))) {
+                if(token.equals(")")) {
                     throw new RuntimeException("unexpected token recieved after comma");
                 }
             }
@@ -39,15 +36,9 @@ public class Group extends Event {
 
     }
 
-    public void setTitle(Title title) {
-        this.title = title;
-    }
-    public List<String> getEvents() {
-        return this.events;
-    }
+    @Override
+    public Scheduler evaluate() {
 
-    public void setEvents(List<String> events) {
-        this.events = events;
     }
 
     public String getTitle() {

@@ -44,8 +44,4 @@ public class Occurrence implements ASTnode {
         }
         return range;
     }
-
-    public void setRange(ASTnode range) {
-        this.range = range;
-    }
 }

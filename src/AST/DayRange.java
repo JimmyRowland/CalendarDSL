@@ -20,14 +20,6 @@ public class DayRange extends Occurrence implements ASTnode{
         to.parse();
     }
 
-    public void setFrom(Day from) {
-        this.from = from;
-    }
-
-    public void setTo(Day to) {
-        this.to = to;
-    }
-
 
     public Day getFrom() {
         return from;

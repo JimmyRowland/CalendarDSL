@@ -39,16 +39,11 @@ public class Group extends Event {
 
     }
 
-    public void setTitle(Title title) {
-        this.title = title;
-    }
     public List<String> getEvents() {
         return this.events;
     }
 
-    public void setEvents(List<String> events) {
-        this.events = events;
-    }
+
 
     public String getTitle() {
         return title.getTitle();

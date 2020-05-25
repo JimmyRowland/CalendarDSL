@@ -8,6 +8,10 @@ public interface ASTnode {
 
     public void parse();
 
-    public Scheduler evaluate();
+
+//    public Scheduler evaluate();
+
+//    public void evaluate();
+
 
 }

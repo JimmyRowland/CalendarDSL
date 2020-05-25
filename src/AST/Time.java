@@ -1,7 +1,9 @@
 package AST;
 
-import model.Scheduler;
-import model.io.Tokenizer;
+
+import libs.Keyword;
+import libs.Tokenizer;
+
 
 public class Time implements ASTnode{
     int time;
@@ -9,20 +11,22 @@ public class Time implements ASTnode{
     @Override
     public void parse() {
         Tokenizer t = Tokenizer.getTokenizer();
-        t.getAndCheckNext("at");
+        if (t.checkToken(Keyword.keywords.get("at"))) {
+            t.getNext();
+        }
         String timeStr = t.getNext();
-        time = Validator.validateTime(timeStr, 0,23) * 100;
-        t.getAndCheckNext(":");
-        timeStr = t.getNext();
-        time += Validator.validateTime(timeStr, 0, 59);
+        String[] times = timeStr.split(":");
+        time = Validator.validateTime(times[0], 0,23) * 100;
+        time += Validator.validateTime(times[1], 0, 59);
     }
 
-    @Override
-    public Scheduler evaluate() {
 
-    }
 
     public int getTime() {
         return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
     }
 }

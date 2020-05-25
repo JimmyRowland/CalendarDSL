@@ -1,7 +1,8 @@
 package AST;
 
-import model.Scheduler;
-import model.io.Tokenizer;
+
+import libs.Keyword;
+import libs.Tokenizer;
 
 public class Title implements ASTnode {
     String title;
@@ -10,15 +11,16 @@ public class Title implements ASTnode {
     public void parse() {
         Tokenizer t = Tokenizer.getTokenizer();
         title = Validator.validateString(t.getNext());
-        t.getAndCheckNext(";");
+        t.getAndCheckNext(Keyword.keywords.get(";"));
     }
 
-    @Override
-    public Scheduler evaluate() {
 
-    }
 
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

@@ -1,7 +1,9 @@
 package AST;
 
-import model.Scheduler;
-import model.io.Tokenizer;
+
+import libs.Keyword;
+import libs.Tokenizer;
+
 
 public class Location implements Setting, ASTnode {
     String name;
@@ -9,14 +11,14 @@ public class Location implements Setting, ASTnode {
     @Override
     public void parse() {
         Tokenizer t = Tokenizer.getTokenizer();
-        t.checkToken("location:");
+        t.getAndCheckNext(Keyword.keywords.get("location:"));
+        // t.getAndCheckNext(Keyword.keywords.get("location:"));
         name = Validator.validateString(t.getNext());
         t.getAndCheckNext(";");
     }
 
-    @Override
-    public Scheduler evaluate() {
-
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getLocation() {

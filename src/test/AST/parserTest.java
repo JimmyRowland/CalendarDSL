@@ -1,6 +1,7 @@
 package test.AST;
 
 import AST.Event;
+import AST.Group;
 import AST.NewCalendar;
 import AST.Program;
 import libs.Keyword;
@@ -8,8 +9,11 @@ import libs.Tokenizer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class parserTest {
     Program prog = new Program();
@@ -125,8 +129,10 @@ class parserTest {
         tokenizer = Tokenizer.getTokenizer();
         prog.parse();
         NewCalendar cal = prog.getCalendar();
-        getCalendarInfo(cal);
+        List<String> groupEvents = new ArrayList<>();
+        groupEvents.add("big day");
+        groupEvents.add("stuff");
+        Group g = (Group) cal.getEvents().get(2);
+        assertEquals(g.getEvents(), groupEvents);
     }
-
-
 }

@@ -3,7 +3,6 @@ package AST;
 
 import libs.Keyword;
 import libs.Tokenizer;
-import AST.Event;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,7 +24,7 @@ public class Group extends Event {
         t.getAndCheckNext(keys.get("("));
         String token = t.getNext();
         while(!token.equals(keys.get(")"))){
-            events.add(Validator.validateExistingEvent(t.checkNext()));
+            events.add(Validator.validateExistingEvent(token));
             token = t.getNext();
             if (!(token.equals(keys.get(")")) || token.equals(keys.get(",")))) {
                 throw new RuntimeException("invalid grouping");
@@ -38,6 +37,10 @@ public class Group extends Event {
             }
         }
 
+    }
+
+    public List<String> getEvents() {
+        return this.events;
     }
 
 

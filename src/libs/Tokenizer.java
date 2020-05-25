@@ -117,4 +117,7 @@ public class Tokenizer {
         return theTokenizer;
     }
 
+    public String[] getTokenArray(){
+        return tokens;
+    }
 }

@@ -71,9 +71,9 @@ public class Event implements ASTnode {
         return null;
     }
 
-    public String getRepeat() {
+    public List<String> getRepeat() {
         if (repeat != null) {
-            return repeat.value;
+            return repeat.dayList;
         }
         return null;
     }

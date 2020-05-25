@@ -3,8 +3,6 @@ package libs;
 import AST.Event;
 import AST.NewCalendar;
 import AST.Program;
-import libs.Keyword;
-import libs.Tokenizer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -37,7 +35,7 @@ class TokenizerTest {
             Object eventOccurrence = event.getOccurrence();
             String eventDescrip = event.getDescription();
             String eventLocation = event.getLocation();
-            String eventRepeat = event.getRepeat();
+            List<String> eventRepeat = event.getRepeat();
             String eventGroupTitle = event.getGroupTitle();
             List<String> eventGroupEvents = event.getGroupEvents();
             System.out.println("title: " + eventTitle);

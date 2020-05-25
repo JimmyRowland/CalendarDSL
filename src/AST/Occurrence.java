@@ -1,7 +1,7 @@
 package AST;
 
 
-import model.Scheduler;
+import libs.Keyword;
 import libs.Tokenizer;
 
 
@@ -12,23 +12,22 @@ public class Occurrence implements ASTnode {
     @Override
     public void parse() {
         Tokenizer t = Tokenizer.getTokenizer();
-        t.getAndCheckNext("<");
+        t.getAndCheckNext(Keyword.keywords.get("<"));
         String token = t.checkNext();
         range = Validator.validateOccurrence(token);
         range.parse();
-        t.getAndCheckNext(">");
+        t.getAndCheckNext(Keyword.keywords.get(">"));
     }
-
-    // method is never used
-
-    public Scheduler evaluate() {
-        return null;
-    }
-
 
     public Object getRange() {
         if (range.getClass().equals(AST.Day.class)) {
             Day day = (Day) range;
+            if (day.timeRange != null) {
+                return day.getDay() + day.getTimeRange();
+            }
+            if (day.time != null) {
+                return day.getDay() + day.getTime();
+            }
             return day.getDay();
         }
         if (range.getClass().equals(AST.DayRange.class)) {

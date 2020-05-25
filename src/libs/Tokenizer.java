@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Tokenizer {
 
@@ -33,6 +34,7 @@ public class Tokenizer {
         //0. Pick some RESERVEDWORD (string which never occurs in your input) : we'll use _
         //1. Read the whole program into a single string; kill the newlines
         String tokenizedProgram = program.replace("\n", "");
+        tokenizedProgram = tokenizedProgram.replaceAll("\\r", "");
         System.out.println(tokenizedProgram);
         //2. Replace all constant literals with “RESERVEDWORD”<the literal>“RESERVEDWORD”
         for(String s : literals) {
@@ -52,9 +54,10 @@ public class Tokenizer {
         for (int i = 0; i < tokens.length; i++) {
             tokens[i] = tokens[i].trim();
         }
+        removeEmptyTokens();
+        theTokenizer = this;
         System.out.println(Arrays.asList(tokens));
     }
-
 
     public String checkNext(){
         String token="";
@@ -64,6 +67,12 @@ public class Tokenizer {
         else
             token="NO_MORE_TOKENS";
         return token;
+    }
+
+    private void removeEmptyTokens() {
+        List<String> temp = Arrays.asList(tokens);
+        temp = temp.stream().filter(str-> !str.isEmpty()).collect(Collectors.toList());
+        tokens = temp.toArray(new String[]{});
     }
 
     public String getNext(){
@@ -108,4 +117,7 @@ public class Tokenizer {
         return theTokenizer;
     }
 
+    public String[] getTokenArray(){
+        return tokens;
+    }
 }

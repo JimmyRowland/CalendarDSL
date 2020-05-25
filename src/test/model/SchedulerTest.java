@@ -8,7 +8,8 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.Calendar;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 //dev
 class SchedulerTest {
     Scheduler scheduler;
@@ -92,7 +93,7 @@ class SchedulerTest {
     }
 
     @Test
-    void test(){
+    void test() {
         Calendar test1 = Calendar.getInstance();
         test1.set(Calendar.SECOND,0);
         Calendar test2 = Calendar.getInstance();

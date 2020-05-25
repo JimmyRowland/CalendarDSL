@@ -1,7 +1,7 @@
 package AST;
 
 
-import model.Scheduler;
+import libs.Keyword;
 import libs.Tokenizer;
 
 
@@ -12,10 +12,10 @@ public class DayRange extends Occurrence implements ASTnode{
     @Override
     public void parse() {
         Tokenizer t = Tokenizer.getTokenizer();
-        t.getAndCheckNext("from");
+        t.getAndCheckNext(Keyword.keywords.get("from"));
         from = new Day();
         from.parse();
-        t.getAndCheckNext("to");
+        t.getAndCheckNext(Keyword.keywords.get("to"));
         to = new Day();
         to.parse();
     }

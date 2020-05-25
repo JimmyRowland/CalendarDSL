@@ -1,15 +1,16 @@
 package test.model;
 
-import model.*;
-import model.io.Writer;
+import model.Day;
+import model.EventCreator;
+import model.IndividualEvent;
+import model.Scheduler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Calendar;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 //dev
 class SchedulerTest {
     Scheduler scheduler;
@@ -19,36 +20,24 @@ class SchedulerTest {
     }
     @Test
     void addEvent() {
-        Calendar start0 = Util.nextDayOfWeek(Calendar.FRIDAY);
-//        System.out.println(start0.get(Calendar.DAY_OF_WEEK));
-        Calendar end0 = Util.nextDayOfWeek(Calendar.FRIDAY);
+        Calendar start0 = Calendar.getInstance();
+        System.out.println(start0.get(Calendar.DAY_OF_WEEK));
+        Calendar end0 = Calendar.getInstance();
         end0.add(Calendar.HOUR,2);
-        Calendar start1 = Util.nextDayOfWeek(Calendar.FRIDAY);
+        Calendar start1 = Calendar.getInstance();
         start1.add(Calendar.HOUR,1);
-        Calendar end1 = Util.nextDayOfWeek(Calendar.FRIDAY);
+        Calendar end1 = Calendar.getInstance();
         end1.add(Calendar.HOUR,1);
-//        System.out.println(start0.getTime().toString());
-//        System.out.println(end0.getTime().toString());
-//        System.out.println(start1.getTime().toString());
-//        System.out.println(end1.getTime().toString());
-        IndividualEvent event0;
-        IndividualEvent event1;
-        try{
-            event0 = EventCreator.createEvent(start0,end0,"event0","location","description");
-            event1 = EventCreator.createEvent(start1,end1,"event1","location","description");
-            scheduler.addEvent(event0);
-            scheduler.addEvent(event1);
-        }catch (Exception e){
-            e.printStackTrace();
-            fail();
-        }
-
-        for(Day day: scheduler.getDays()){
-            System.out.println(day.getEvents().size());
-        }
-        Writer.write("individual.cvs",scheduler);
-        assertEquals(scheduler.getDays().get(start0.get(Calendar.DAY_OF_WEEK)-1).getEvents().size(), 1);
-
+        System.out.println(start0.getTime().toString());
+        System.out.println(end0.getTime().toString());
+        System.out.println(start1.getTime().toString());
+        System.out.println(end1.getTime().toString());
+        IndividualEvent event0 = new IndividualEvent(start0,end0,"event0","location","description");
+        IndividualEvent event1 = new IndividualEvent(start0,end0,"event1","location","description");
+        scheduler.addEvent(event0);
+        scheduler.addEvent(event1);
+        assertEquals(start0.get(Calendar.DAY_OF_WEEK),4);
+        assertEquals(scheduler.getDays().get(start0.get(Calendar.DAY_OF_WEEK)).getEvents().size(), 1);
     }
 
     @Test
@@ -59,7 +48,6 @@ class SchedulerTest {
         }catch (Exception e){
             e.printStackTrace();
         }
-        Writer.write("flexible.cvs",scheduler);
         assertEquals(2,scheduler.getFlexibleEventList().size());
     }
 
@@ -87,13 +75,12 @@ class SchedulerTest {
         }catch (Exception e){
             e.printStackTrace();
         }
-        Writer.write("recurring.cvs",scheduler);
         assertEquals(3,scheduler.getDays().get(0).size());
         assertEquals(2,scheduler.getDays().get(2).size());
     }
 
     @Test
-    void test() {
+    void test(){
         Calendar test1 = Calendar.getInstance();
         test1.set(Calendar.SECOND,0);
         Calendar test2 = Calendar.getInstance();

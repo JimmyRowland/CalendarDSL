@@ -1,9 +1,7 @@
 package AST;
 
-
-import libs.Keyword;
-import libs.Tokenizer;
-
+import model.Scheduler;
+import model.io.Tokenizer;
 
 public class Description implements Setting, ASTnode {
     String desc;
@@ -11,14 +9,14 @@ public class Description implements Setting, ASTnode {
     @Override
     public void parse() {
         Tokenizer t = Tokenizer.getTokenizer();
-        t.getAndCheckNext(Keyword.keywords.get("description:"));
+        t.getAndCheckNext("description:");
         desc = Validator.validateString(t.getNext());
-        t.getAndCheckNext(Keyword.keywords.get(";"));
+        t.getAndCheckNext(";");
     }
 
+    @Override
+    public Scheduler evaluate() {
 
-    public void setDesc(String desc) {
-        this.desc = desc;
     }
 
     public String getDesc() {

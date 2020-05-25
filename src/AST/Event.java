@@ -1,10 +1,8 @@
 package AST;
 
+import model.Scheduler;
+import model.io.Tokenizer;
 
-import libs.Keyword;
-import libs.Tokenizer;
-
-import java.util.HashMap;
 import java.util.List;
 
 public class Event implements ASTnode {
@@ -14,7 +12,6 @@ public class Event implements ASTnode {
     Location location;
     Repetition repeat;
     Description description;
-    HashMap<String, String> keys = Keyword.keywords;
 
     @Override
     public void parse() {
@@ -22,7 +19,7 @@ public class Event implements ASTnode {
         occurrence = null;
         // todo add group functionality
         String token = t.getNext();
-        if (token.equals(keys.get("new event"))) {
+        if (token.equals("new event")) {
             title = new Title();
             title.parse();
             token = t.checkNext();
@@ -32,16 +29,15 @@ public class Event implements ASTnode {
                 token = t.checkNext();
             }
             // loop for settings
-            while (!token.equals(keys.get("event end"))) {
+            while (!token.equals("event end")) {
                 if (!Validator.getValidSettingKeyword(token)) {
-                    throw new RuntimeException("Invalid setting type: " + token);
+                    throw new RuntimeException("Invalid setting type");
                 }
                 Setting s = Validator.getAndSettingType(token, this);
                 s.parse();
-                token = t.checkNext();
+                token = t.getNext();
             }
-            t.getNext();
-        } else if (token.equals(keys.get("group:"))) {
+        } else if (token.equals("group:")) {
             group = new Group();
             group.parse();
             title = group.title;
@@ -50,28 +46,9 @@ public class Event implements ASTnode {
         }
     }
 
-    public void setTitle(Title title) {
-        this.title = title;
-    }
-
-    public void setOccurrence(Occurrence occurrence) {
-        this.occurrence = occurrence;
-    }
-
-    public void setGroup(Group group) {
-        this.group = group;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-    public void setRepeat(Repetition repeat) {
-        this.repeat = repeat;
-    }
-
-    public void setDescription(Description description) {
-        this.description = description;
+    @Override
+    public Scheduler evaluate() {
+        // todo build event into model here?
     }
 
     public String getTitle() {
@@ -95,9 +72,9 @@ public class Event implements ASTnode {
         return null;
     }
 
-    public List<String> getRepeat() {
+    public String getRepeat() {
         if (repeat != null) {
-            return repeat.dayList;
+            return repeat.value;
         }
         return null;
     }

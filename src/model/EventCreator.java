@@ -1,6 +1,8 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -26,7 +28,7 @@ public class EventCreator {
     public static Event createEvent(String start, String end, String name, String location, String description, int duration, int dayOfWeek, List<Integer> daysOfWeek) throws Exception {
         // start and end should both be in the format of 16:00 or null
         // dayOfWeek should be integers 1: Sunday, 2: Monday: 3 Tuesday;
-
+        // TODO recurring event
         if (start == null && end == null) {
             if (dayOfWeek > 0 && dayOfWeek < 8) {
                 return EventCreator.createEvent(duration, name, location, description, dayOfWeek);

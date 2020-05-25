@@ -9,6 +9,7 @@ public class IndividualEvent implements Event, Comparable<Event>{
     String name;
     String location;
     String description;
+    //TODO replace Calendar.after with Calendar.compare<60000
     public IndividualEvent(Calendar start, Calendar end, String name, String location, String description) {
         this.start = start;
         this.end = end;
@@ -38,8 +39,6 @@ public class IndividualEvent implements Event, Comparable<Event>{
 
     @Override
     public boolean hasConflict(Calendar start, Calendar end) {
-//        Util.printCalendar(start);
-//        Util.printCalendar(end);
         if(this.start.after(start)&& this.end.before(end)){
             return false;
         }

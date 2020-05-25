@@ -39,7 +39,7 @@ class parserTest {
             Object eventOccurrence = event.getOccurrence();
             String eventDescrip = event.getDescription();
             String eventLocation = event.getLocation();
-            String eventRepeat = event.getRepeat();
+            List<String> eventRepeat = event.getRepeat();
             String eventGroupTitle = event.getGroupTitle();
             List<String> eventGroupEvents = event.getGroupEvents();
             System.out.println("title: " + eventTitle);

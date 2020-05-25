@@ -13,7 +13,7 @@ public class Repetition implements Setting, ASTnode {
     @Override
     public void parse() {
         Tokenizer t = Tokenizer.getTokenizer();
-        t.checkToken(Keyword.keywords.get("repeat:"));
+        t.getAndCheckNext(Keyword.keywords.get("repeat:"));
         dayList = Validator.validateRepetition(t.getNext());
         t.getAndCheckNext(Keyword.keywords.get(";"));
         // todo the repetition values need to be turned into some range of time

@@ -38,8 +38,9 @@ public class Event implements ASTnode {
                 }
                 Setting s = Validator.getAndSettingType(token, this);
                 s.parse();
-                token = t.getNext();
+                token = t.checkNext();
             }
+            t.getNext();
         } else if (token.equals(keys.get("group:"))) {
             group = new Group();
             group.parse();

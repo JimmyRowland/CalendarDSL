@@ -2,7 +2,6 @@ package AST;
 
 import libs.Keyword;
 import libs.Tokenizer;
-import model.Event;
 import model.Scheduler;
 import model.EventCreator;
 
@@ -31,8 +30,11 @@ public class Program implements ASTnode {
     public Scheduler evaluate() {
         EventCreator ec = new EventCreator();
         Scheduler scheduler = new Scheduler();
-        for (AST.Event e:calendar.events
+        for (Event e:calendar.events
              ) {
+            String location = "";
+            String title = "";
+            String desc = "";
             String dayStart = null;
             String dayEnd = null;
             int start = 0;
@@ -43,17 +45,17 @@ public class Program implements ASTnode {
             int startdow = 0;
             int enddow = 0;
             List<Integer> repetition = null;
-            if (e.occurrence.range.getClass().equals(AST.Day.class)) {
+            if (e.occurrence.range.getClass().equals(Day.class)) {
                 dayStart = ((Day) e.occurrence.range).day;
             }
-            else if (e.occurrence.range.getClass().equals(AST.DayRange.class)) {
+            else if (e.occurrence.range.getClass().equals(DayRange.class)) {
                 dayStart = ((DayRange) e.occurrence.range).from.day;
                 dayEnd = ((DayRange) e.occurrence.range).to.day;
             }
-            else if (e.occurrence.range.getClass().equals(AST.Time.class)) {
+            else if (e.occurrence.range.getClass().equals(Time.class)) {
                 start = ((Time) e.occurrence.range).time;
             }
-            else if (e.occurrence.range.getClass().equals(AST.TimeRange.class)) {
+            else if (e.occurrence.range.getClass().equals(TimeRange.class)) {
                 dayStart = ((TimeRange) e.occurrence.range).day.day;
                 start = ((TimeRange) e.occurrence.range).start.time;
                 end = ((TimeRange) e.occurrence.range).end.time;
@@ -65,11 +67,14 @@ public class Program implements ASTnode {
                 if (dayEnd != null) {
                     enddow = parseDayOfWeek(dayStart);
                 }
+                if (e.repeat != null && e.repeat.dayList.size() > 0) {
+                    repetition = new ArrayList<Integer>();
+                    for (String day: e.repeat.dayList) {
+                        repetition.add(parseDayOfWeek(day));
+                    };
+                }
             } catch (ParseException parseException) {
                 System.out.println("invalid day");
-            }
-            if (e.repeat != null) {
-                repetition = e.repeat.evaluate();
             }
             if (start != 0) {
                 startString = convertTime(start);
@@ -77,8 +82,17 @@ public class Program implements ASTnode {
             if (end != 0) {
                 endString = convertTime(end);
             }
+            if (e.location != null) {
+                location = e.location.name;
+            }
+            if (e.title != null) {
+                title = e.title.title;
+            }
+            if (e.description != null) {
+                desc = e.description.desc;
+            }
             try {
-                scheduler.addEvent(ec.createEvent(startString, endString, e.title.title, e.location.name, e.description.desc, dur, startdow, repetition));
+                scheduler.addEvent(ec.createEvent(startString, endString, title, e.location.name, e.description.desc, dur, startdow, repetition));
             } catch (Exception exception) {
                 System.out.println("Could not convert to event");
                 exception.printStackTrace();

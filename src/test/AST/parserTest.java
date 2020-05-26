@@ -57,6 +57,7 @@ class parserTest {
         tokenizer = new Tokenizer("src/test/AST/test1", literals);
         tokenizer = Tokenizer.getTokenizer();
         prog.parse();
+        prog.evaluate();
         NewCalendar cal = prog.getCalendar();
         getCalendarInfo(cal);
     }
@@ -66,6 +67,7 @@ class parserTest {
         tokenizer = new Tokenizer("src/test/AST/test2", literals);
         tokenizer = Tokenizer.getTokenizer();
         prog.parse();
+        prog.evaluate();
         NewCalendar cal = prog.getCalendar();
         getCalendarInfo(cal);
     }
@@ -75,6 +77,7 @@ class parserTest {
         tokenizer = new Tokenizer("src/test/AST/test3", literals);
         tokenizer = Tokenizer.getTokenizer();
             prog.parse();
+            prog.evaluate();
             NewCalendar cal = prog.getCalendar();
             getCalendarInfo(cal);
     }

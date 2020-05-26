@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Group extends Event {
     Title title;
-    List<String> events;
+    List<Event> events;
     HashMap<String, String> keys = Keyword.keywords;
 
     @Override
@@ -42,11 +42,11 @@ public class Group extends Event {
     public void setTitle(Title title) {
         this.title = title;
     }
-    public List<String> getEvents() {
+    public List<Event> getEvents() {
         return this.events;
     }
 
-    public void setEvents(List<String> events) {
+    public void setEvents(List<Event> events) {
         this.events = events;
     }
 

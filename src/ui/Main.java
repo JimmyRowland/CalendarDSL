@@ -14,7 +14,6 @@ public class Main {
      List<String> literals = Arrays.asList(";", "new calendar", "new event", "event end",
                 "group:", "<", ">", "(", ",", ")", "|", "start", "finish", "location:", "repeat:",
                 "daily", "every", "priority", "description:", "@", "from", "to");
-
     Tokenizer.makeTokenizer("src/test/AST/test1",literals);
     }
 

@@ -3,6 +3,7 @@ package AST;
 import libs.Keyword;
 import libs.Tokenizer;
 
+import javax.management.relation.RoleUnresolved;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -101,9 +102,14 @@ public class Validator {
         }
     }
 
-    public static String validateExistingEvent(String next) {
+    public static Event validateExistingEvent(String next) {
+        for (Event e:NewCalendar.getSelf().events.toArray(new Event[]{})) {
+            if(e.title.title.equals(next)) {
+                return e;
+            }
+        }
         // todo check for events already in model so grouping knows if exists and add
-        return next;
+        throw new RuntimeException("no valid event to group");
     }
 
     public static boolean getValidSettingKeyword(String token) {

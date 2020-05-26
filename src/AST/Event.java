@@ -116,7 +116,7 @@ public class Event implements ASTnode {
         return null;
     }
 
-    public List<String> getGroupEvents() {
+    public List<Event> getGroupEvents() {
         if (group != null) {
             return group.events;
         }

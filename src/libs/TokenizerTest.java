@@ -37,7 +37,7 @@ class TokenizerTest {
             String eventLocation = event.getLocation();
             List<String> eventRepeat = event.getRepeat();
             String eventGroupTitle = event.getGroupTitle();
-            List<String> eventGroupEvents = event.getGroupEvents();
+            List<Event> eventGroupEvents = event.getGroupEvents();
             System.out.println("title: " + eventTitle);
             System.out.println("occurence: " + eventOccurrence);
             System.out.println("description: " + eventDescrip);

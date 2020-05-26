@@ -12,6 +12,15 @@ public class NewCalendar implements Calendar, ASTnode {
     Title title;
     List<Event> events = new ArrayList<>();
     HashMap<String, String> keys = Keyword.keywords;
+    static NewCalendar self;
+
+    public NewCalendar() {
+        self = this;
+    }
+
+    public static NewCalendar getSelf() {
+        return self;
+    }
 
     @Override
     public void parse() {

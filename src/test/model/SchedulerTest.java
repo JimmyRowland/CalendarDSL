@@ -59,8 +59,9 @@ class SchedulerTest {
         }catch (Exception e){
             e.printStackTrace();
         }
+        scheduler.allocateFlexibleEvents();
         Writer.write("flexible.cvs",scheduler);
-        assertEquals(2,scheduler.getFlexibleEventList().size());
+        assertEquals(2,scheduler.getDays().get(0).size());
     }
 
     @Test

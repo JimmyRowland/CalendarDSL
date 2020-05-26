@@ -80,7 +80,7 @@ public class Scheduler implements FlexibleEventAllocatable {
                     break;
                 }
             }
-            throw new RuntimeException("Not enough time for event "+ flexibleEvent.toString());
+//            throw new RuntimeException("Not enough time for event "+ flexibleEvent.toString());
         }
     }
 }

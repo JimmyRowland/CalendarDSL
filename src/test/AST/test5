@@ -1,0 +1,7 @@
+new calendar my calendar!!;
+new event big day;
+< start 12:30 finish 14:30 >
+description: blah;
+location: wherever;
+repeat: monday, tuesday, friday;
+event end;

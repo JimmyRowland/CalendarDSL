@@ -56,6 +56,29 @@ class integrationTest {
 
     }
 
+    @Test
+    void recurringEvent() {
+
+        parse = new Parser("src/test/model/recurringEvents");
+        try{
+            scheduler = parse.calendar();
+            assertEquals(scheduler.getFlexibleEventList().size(),2);
+            assertEquals(scheduler.getDays().get(4).getFlexibleEvents().size(),8);
+            assertEquals(scheduler.getDays().get(1).getEvents().size(),1);
+            assertEquals(scheduler.getDays().get(2).getEvents().size(),2);
+            assertEquals(scheduler.getDays().get(3).getEvents().size(),0);
+            assertEquals(scheduler.getDays().get(4).getEvents().size(),1);
+            assertEquals(scheduler.getDays().get(5).getEvents().size(),0);
+            assertEquals(scheduler.getDays().get(6).getEvents().size(),2);
+            assertEquals(scheduler.getDays().get(0).getEvents().size(),1);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            fail();
+        }
+
+    }
+
 
 
 }

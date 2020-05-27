@@ -1,5 +1,7 @@
 package model;
 
+import model.io.CVS;
+
 import javax.sound.midi.Soundbank;
 import java.util.*;
 
@@ -55,8 +57,10 @@ public class Day implements FlexibleEventAllocatable {
             events.add(flexibleEvent);
             sortEvent();
             return true;
+        }else{
+            System.out.println("Not enough time to schedule " + flexibleEvent.getName() + " duration:" + flexibleEvent.getDuration());
+            return false;
         }
-        return false;
     }
 
     public void addEvent(FlexibleEventWithDayField FlexibleEventWithDayField) {
@@ -85,6 +89,8 @@ public class Day implements FlexibleEventAllocatable {
         if (hasTimeSlot(event)) {
             events.add(event);
             sortEvent();
+        }else{
+            System.out.println("Not enough time to schedule " + CVS.eventToString(event));
         }
     }
 

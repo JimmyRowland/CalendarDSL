@@ -71,7 +71,7 @@ public class Parser {
         if(t.checkToken(Const.DURATION)){
             t.getNext();
             duration = Integer.parseInt(t.getNext());
-        }else{
+        }else if(t.checkToken(Const.FROM)){
             t.getAndCheckNext(Const.FROM);
             startTime = t.getNext();
             t.getAndCheckNext(Const.TO);

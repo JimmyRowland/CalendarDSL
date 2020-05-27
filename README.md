@@ -5,7 +5,7 @@
 ### Table of contents
 
 - [EBNF](#ebnf)
-- [Sample input](#sample)
+- [Sample input](#sample-input)
 
 ## EBNF
 ```

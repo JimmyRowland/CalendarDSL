@@ -138,4 +138,4 @@ CALL sche(big day25|big day26)
 Reference-style: 
 ![alt text][logo]
 
-[logo]: (/img/sampleOutput.png) "Logo Title Text 2"
+[logo]: /img/sampleOutput.png "Logo Title Text 2"

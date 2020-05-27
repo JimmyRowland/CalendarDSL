@@ -4,20 +4,20 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Tokenizer {
 
 
-    private static String program;
+    private String program;
     private static List<String> literals;
-    private String[] tokens;
-    private int currentToken;
+    private List<String> tokens = new ArrayList<>();
+    private int currentToken = 0;
     private static Tokenizer theTokenizer;
 
-    public Tokenizer(String filename, List<String> literalsList){
+    private Tokenizer(String filename, List<String> literalsList){
         literals = literalsList;
         try {
             program = new String(Files.readAllBytes(Paths.get(filename)), StandardCharsets.UTF_8);
@@ -32,9 +32,8 @@ public class Tokenizer {
     //effects: will result in a list of tokens (sitting at this.tokens) that has no spaces around tokens.
     private void tokenize (){
         //0. Pick some RESERVEDWORD (string which never occurs in your input) : we'll use _
-        //1. Read the whole program into a single string; kill the newlines
+        //1. Read the whole program into a single string; kill the newlines and tabs
         String tokenizedProgram = program.replace("\n", "");
-        tokenizedProgram = tokenizedProgram.replaceAll("\\r", "");
         System.out.println(tokenizedProgram);
         //2. Replace all constant literals with “RESERVEDWORD”<the literal>“RESERVEDWORD”
         for(String s : literals) {
@@ -48,37 +47,66 @@ public class Tokenizer {
         if(tokenizedProgram.length() > 0 && tokenizedProgram.charAt(0) == '_') {
             tokenizedProgram = tokenizedProgram.substring(1); // without first character
         }
-        tokens = tokenizedProgram.split("_");
-        System.out.println(Arrays.asList(tokens));
+        List<String> rawTokens = Arrays.asList(tokenizedProgram.split("_"));
+        System.out.println(rawTokens);
         //5. Trim whitespace around tokens (unless you want it)
-        for (int i = 0; i < tokens.length; i++) {
-            tokens[i] = tokens[i].trim();
+        for (String token : rawTokens) {
+            String trimmedToken = token.trim();
+            if (trimmedToken.length() > 0) {
+                tokens.add(trimmedToken);
+            }
         }
-        removeEmptyTokens();
-        theTokenizer = this;
-        System.out.println(Arrays.asList(tokens));
+        System.out.println(tokens);
     }
 
-    public String checkNext(){
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private String checkNext(){
         String token="";
-        if (currentToken<tokens.length){
-            token = tokens[currentToken];
+        if (currentToken<tokens.size()){
+            token = tokens.get(currentToken);
         }
         else
             token="NO_MORE_TOKENS";
         return token;
     }
 
-    private void removeEmptyTokens() {
-        List<String> temp = Arrays.asList(tokens);
-        temp = temp.stream().filter(str-> !str.isEmpty()).collect(Collectors.toList());
-        tokens = temp.toArray(new String[]{});
+    private String checkNext(int i){
+        String token="";
+        if (currentToken+i<tokens.size()){
+            token = tokens.get(currentToken+i);
+        }
+        else
+            token="NO_MORE_TOKENS";
+        return token;
     }
 
     public String getNext(){
         String token="";
-        if (currentToken<tokens.length){
-            token = tokens[currentToken];
+        if (currentToken<tokens.size()){
+            token = tokens.get(currentToken);
             currentToken++;
         }
         else
@@ -89,6 +117,12 @@ public class Tokenizer {
 
     public boolean checkToken(String regexp){
         String s = checkNext();
+        System.out.println("comparing: |"+s+"|  to  |"+regexp+"|");
+        return (s.matches(regexp));
+    }
+
+    public boolean checkToken(String regexp, int i){
+        String s = checkNext(i);
         System.out.println("comparing: |"+s+"|  to  |"+regexp+"|");
         return (s.matches(regexp));
     }
@@ -104,7 +138,7 @@ public class Tokenizer {
     }
 
     public boolean moreTokens(){
-        return currentToken<tokens.length;
+        return currentToken<tokens.size();
     }
 
     public static void makeTokenizer(String filename, List<String> literals){
@@ -117,7 +151,4 @@ public class Tokenizer {
         return theTokenizer;
     }
 
-    public String[] getTokenArray(){
-        return tokens;
-    }
 }

@@ -1,4 +1,4 @@
-package test.AST;
+package test.model;
 
 import libs.Const;
 import model.Scheduler;
@@ -22,7 +22,7 @@ class integrationTest {
     @Test
     void simpleTestDaysOfWeek() {
 
-        parse = new Parser("src/test/AST/2flexEventsWithEmptyFields");
+        parse = new Parser("src/test/model/2flexEventsWithEmptyFields");
         try{
             scheduler = parse.calendar();
             assertEquals(scheduler.getFlexibleEventList().size(),1);
@@ -37,14 +37,14 @@ class integrationTest {
 
     @Test
     void invalidDaysOfWeek() {
-        parse = new Parser("src/test/AST/InvalidDaysOfweek");
+        parse = new Parser("src/test/model/InvalidDaysOfweek");
         assertThrows(Exception.class, ()-> parse.calendar());
     }
 
     @Test
     void flexDayRangeAndDayList() {
 
-        parse = new Parser("src/test/AST/2flexEventsDayRangeAndDayList");
+        parse = new Parser("src/test/model/2flexEventsDayRangeAndDayList");
         try{
             scheduler = parse.calendar();
             assertEquals(scheduler.getFlexibleEventList().size(),1);

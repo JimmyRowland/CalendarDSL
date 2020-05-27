@@ -69,16 +69,21 @@ public class Scheduler implements FlexibleEventAllocatable {
 
     // Call this at the end of the driver
     public void allocateFlexibleEvents(){
+        boolean allocated;
         for(Day day: days){
             day.allocateFlexibleEvents();
         }
         for(FlexibleEvent flexibleEvent: flexibleEventList){
+            allocated = false;
             for(Day day: days){
                 if(day.addEvent(flexibleEvent)){
+                    allocated = true;
                     break;
                 }
             }
-            throw new RuntimeException("Not enough time for event "+ flexibleEvent.toString());
+            if (!allocated) {
+                throw new RuntimeException("Not enough time for event "+ flexibleEvent.toString());
+            }
         }
     }
 }

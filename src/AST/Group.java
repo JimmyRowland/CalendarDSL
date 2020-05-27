@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Group extends Event {
-    Title title;
     List<Event> events;
     HashMap<String, String> keys = Keyword.keywords;
 
@@ -32,7 +31,7 @@ public class Group extends Event {
             if(token.equals(keys.get(","))) {
                 token = t.getNext();
                 if(token.equals(keys.get(")"))) {
-                    throw new RuntimeException("unexpected token recieved after comma");
+                    throw new RuntimeException("unexpected token received after comma");
                 }
             }
         }
@@ -48,10 +47,6 @@ public class Group extends Event {
 
     public void setEvents(List<Event> events) {
         this.events = events;
-    }
-
-    public String getTitle() {
-        return title.getTitle();
     }
 
 }

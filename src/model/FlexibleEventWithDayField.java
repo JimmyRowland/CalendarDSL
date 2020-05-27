@@ -3,12 +3,8 @@ package model;
 import java.util.Calendar;
 
 public class FlexibleEventWithDayField extends FlexibleEvent{
-    int duration;
     Calendar start;
     Calendar end;
-    String name;
-    String location;
-    String description;
     int dayOfWeek;
 
     public FlexibleEventWithDayField(int duration, String name, String location, String description, int dayOfWeek) {

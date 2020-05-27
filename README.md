@@ -10,11 +10,11 @@
 ## EBNF
 ```
 PROFEAM ::= NEWCALENDAR
-NEWCALENDAR ::= “newCalendar:” TITLE? EVENT+ (EVENT GROUP+)?
+NEWCALENDAR ::= “newCalendar:” TITLE? EVENT+ (EVENT GROUP+)? "endOfCalendar"
 TITLE ::= STRING
-EVENT ::= (“newEvent:” TITLE OCCURRENCE? SETTING?+ “endOfEvent”)
-OCCURRENCE ::= “<” DATES ( TIMERANGE? | DURATION) “>”
-DATES ::= DAY | DAYLIST | DAYRANGE
+EVENT ::= (“newEvent:” TITLE SETTING? OCCURRENCE? “endOfEvent”)
+OCCURRENCE ::= “<” (DATES ( TIMERANGE? | DURATION)) | DURATION “>”
+DATES ::= DAY | DAYLIST | DAYRANGE | REPETITION
 DURATION ::= "duration:" {1...18}
 TIME ::= {6...23} “:” {0...59}
 TIMERANGE ::=  "from:" TIME "to:" TIME
@@ -22,8 +22,8 @@ DAY ::= “Monday” | “Tuesday” | “Wednesday” | “Thursday” | “Fri
 DAYRANGE ::= “from:” DAY “to:” DAY
 DAYLIST ::= "[" DAY ("|" DAY){2,6} "]"
 GROUP ::=
-SETTING ::= LOCATION | DESCRIPTION
+SETTING ::= LOCATION? DESCRIPTION?
 LOCATION ::= “location: ” STRING
 DESCRIPTION ::= “description: “ STRING
-REPETITION ::= “daysOfWeek:“ “daily” | "S?M?T?W?Th?F?S?"
+REPETITION ::= “daysOfWeek:“ “daily” | "S?M?T?W?(Th)?F?s?"
 ```

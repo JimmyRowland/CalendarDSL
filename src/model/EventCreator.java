@@ -28,10 +28,14 @@ public class EventCreator {
         // dayOfWeek should be integers 1: Sunday, 2: Monday: 3 Tuesday;
 
         if (start == null && end == null) {
-            if (dayOfWeek > 0 && dayOfWeek < 8) {
-                return EventCreator.createEvent(duration, name, location, description, dayOfWeek);
-            } else if (duration > 0) {
-                return EventCreator.createEvent(duration, name, location, description);
+            if(duration > 0){
+                if (dayOfWeek > 0 && dayOfWeek < 8) {
+                    return EventCreator.createEvent(duration, name, location, description, dayOfWeek);
+                } else if(daysOfWeek != null){
+                    return EventCreator.createEvent(duration,name,location,description,daysOfWeek);
+                } else {
+                    return EventCreator.createEvent(duration, name, location, description);
+                }
             }
         } else if (start != null && end != null) {
             if (daysOfWeek == null) {
@@ -40,6 +44,10 @@ public class EventCreator {
             return EventCreator.createEvent(start, end, name, location, description, daysOfWeek);
         }
         throw new Exception("Incorrect input");
+    }
+
+    public static FlexibleEventMultiDay createEvent(int duration, String name, String location, String description, List<Integer> daysOfWeek){
+        return new FlexibleEventMultiDay(duration,name,location,description,daysOfWeek);
     }
 
     public static RecurringEvent createEvent(String start, String end, String name, String location, String description, List<Integer> daysOfWeek) throws Exception {

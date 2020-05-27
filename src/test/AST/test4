@@ -1,7 +1,0 @@
-new calendar my calendar!!;
-new event big day;
-< monday start 12:30 finish 14:30 >
-description: blah;
-location: wherever;
-repeat: TTH;
-event end;

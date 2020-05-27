@@ -1,0 +1,30 @@
+newCalendar:
+newEvent:big day
+description:
+<duration:1>
+endOfEvent
+newEvent:big day2
+<Monday duration:1>
+endOfEvent
+newEvent:big day3
+<[Monday|Thursday|Sunday] duration:1>
+endOfEvent
+newEvent:big day3
+<from:Monday to:Friday duration:1>
+endOfEvent
+newEvent:big day4
+<daysOfWeek: Ss duration:1>
+endOfEvent
+newEvent:big day5
+<daysOfWeek: daily duration:1>
+endOfEvent
+newEvent:big day6
+<daysOfWeek: MTTh duration:1>
+endOfEvent
+newEvent:big day7
+<daysOfWeek: MT duration:1>
+endOfEvent
+newEvent:big day8
+<daysOfWeek: Ss duration:1>
+endOfEvent
+endOfCalendar

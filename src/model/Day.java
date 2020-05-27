@@ -104,4 +104,8 @@ public class Day implements FlexibleEventAllocatable {
             this.addEvent(flexibleEvent);
         }
     }
+
+    public ArrayList<FlexibleEvent> getFlexibleEvents() {
+        return flexibleEvents;
+    }
 }

@@ -46,6 +46,15 @@ public class Scheduler implements FlexibleEventAllocatable {
         }
     }
 
+    public void addEvent(FlexibleEventMultiDay flexibleEventMultiDay){
+//        List<Integer> days = recurringEvent.getDaysOfWeek();
+        List<Integer> daysOfWeek = flexibleEventMultiDay.getDaysOfWeek();
+        for(int i = 0; i<daysOfWeek.size(); i++){
+            FlexibleEventWithDayField flexibleEventWithDayField = flexibleEventMultiDay.getFlexibleEventWithDayField(i);
+            addEvent(flexibleEventWithDayField);
+        }
+    }
+
     public void addEvent(FlexibleEvent flexibleEvent){
         flexibleEventList.add(flexibleEvent);
     }

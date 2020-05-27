@@ -4,11 +4,11 @@ import libs.Tokenizer;
 import model.Event;
 import model.EventCreator;
 import model.Scheduler;
+import model.io.ast.EXP;
+import model.io.ast.PROGRAM;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Parser {
     JSONObject jsonObject;
@@ -16,14 +16,25 @@ public class Parser {
     Scheduler scheduler;
     List<String> literals = Arrays.asList(Const.ENDOFEVENT, Const.DAYSOFWEEK, Const.DESCRIPTION, Const.NEWCALENDAR,
             Const.NEWEVENT, Const.OCCURRENCELESSTHAN, Const.OCCURRENCEGREATERTHAN, Const.DURATION, Const.FROM, Const.TO, Const.LEFTBRACKET,
-            Const.RIGHTBRACKET, Const.I, Const.LOCATION, Const.ENDOFCALENDAR);
-    List<Event> event;
+            Const.RIGHTBRACKET, Const.I, Const.LOCATION, Const.ENDOFCALENDAR, Const.SCHEDULE, Const.CURLYBRACKETLEFT, Const.CURLYBRACKETRIGHT,
+            Const.DEF, Const.CALL, Const.SMALLBRACKETLEFT, Const.SMALLBRACKETRIGHT);
+    Map<String,List<Event>> events;
+    public Map<String, EXP> exp;
     public Parser(String path){
         this.t = new Tokenizer(path, literals);
         this.jsonObject = new JSONObject();
 //        this.t = Tokenizer.getTokenizer();
         this.scheduler = new Scheduler();
-        this.event = new ArrayList<>();
+        this.events = new HashMap<>();
+        exp = new HashMap<>();
+    }
+
+    public void scheduleEvents(List<Event> events){
+        for(Event event:events){
+            scheduler.addEvent(event);
+        }
+        scheduler.allocateFlexibleEvents();
+        events.clear();
     }
 
     public Scheduler calendar() throws Exception{
@@ -33,10 +44,27 @@ public class Parser {
             name = t.getNext();
         }
         while(t.checkToken(Const.NEWEVENT)){
-            this.event.add(event());
+            Event event = event();
         }
-        String token = t.getNext();
+        String token = t.getAndCheckNext(Const.ENDOFCALENDAR);
+//        token = t.getNext();
+        PROGRAM program = new PROGRAM();
+        program.parse(t);
+        program.evaluate(exp,events,this);
+
+        events.forEach((k,v)->{
+            for(Event event:v){
+                scheduler.addEvent(event);
+            }
+        });
         return this.scheduler;
+    }
+
+    private void addFlexEventToMap(Event event){
+        if(!this.events.containsKey(event.getName())){
+            events.put(event.getName(),new ArrayList<>());
+        }
+        events.get(event.getName()).add(event);
     }
 
 
@@ -55,9 +83,10 @@ public class Parser {
             t.getNext();
             duration = Integer.parseInt(t.getNext());
             Event flexibleEvent = EventCreator.createEvent(duration,name,location,description);
-            scheduler.addEvent(EventCreator.createEvent(duration,name,location,description));
+//            scheduler.addEvent(flexibleEvent);
             t.getAndCheckNext(Const.OCCURRENCEGREATERTHAN);
             t.getAndCheckNext(Const.ENDOFEVENT);
+            addFlexEventToMap(flexibleEvent);
             return flexibleEvent;
         }else if(t.checkToken(Const.LEFTBRACKETREG)){
             daysOfWeek = dayList();
@@ -71,6 +100,11 @@ public class Parser {
         if(t.checkToken(Const.DURATION)){
             t.getNext();
             duration = Integer.parseInt(t.getNext());
+            Event event = EventCreator.createEvent(null,null,name,location,description,duration,dayOfWeek,daysOfWeek);
+            addFlexEventToMap(event);
+            t.getAndCheckNext(Const.OCCURRENCEGREATERTHAN);
+            t.getAndCheckNext(Const.ENDOFEVENT);
+            return event;
         }else if(t.checkToken(Const.FROM)){
             t.getAndCheckNext(Const.FROM);
             startTime = t.getNext();
@@ -157,5 +191,11 @@ public class Parser {
         return location;
     }
 
+    public Scheduler getScheduler() {
+        return scheduler;
+    }
 
+    public Map<String, List<Event>> getEvents() {
+        return events;
+    }
 }

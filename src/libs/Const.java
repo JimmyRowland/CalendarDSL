@@ -22,6 +22,17 @@ public class Const {
     public static String DESCRIPTION = "description:";
     public static String DAYSOFWEEK = "daysOfWeek:";
     public static String ENDOFCALENDAR = "endOfCalendar";
+    public static String SCHEDULE = "schedule:";
+    public static String DEF = "DEF";
+    public static String CALL = "CALL";
+    public static String CURLYBRACKETLEFT = "{";
+    public static String CURLYBRACKETLEFTREG = "\\{";
+    public static String CURLYBRACKETRIGHT = "}";
+    public static String CURLYBRACKETRIGHTREG = "\\}";
+    public static String SMALLBRACKETLEFT = "(";
+    public static String SMALLBRACKETLEFTREG = "\\(";
+    public static String SMALLBRACKETRIGHT = ")";
+    public static String SMALLBRACKETRIGHTREG = "\\)";
     public static Map<String, Integer> dayOfWeek;
     static {
         dayOfWeek = new HashMap<>();

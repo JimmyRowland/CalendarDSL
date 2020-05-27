@@ -2,6 +2,7 @@ package model.io;
 
 import model.Day;
 import model.Event;
+import model.FlexibleEvent;
 import model.Scheduler;
 
 import javax.security.auth.Subject;

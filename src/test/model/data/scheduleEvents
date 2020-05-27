@@ -1,40 +1,3 @@
-# CalendarDSL
-
-**CalendarDSL** is a domain specific language that helps users to optimize their schedules. You can choose to generate a CVS file and import the output file into your Google Calendar. 
-
-### Table of contents
-
-- [EBNF](#ebnf)
-- [Sample input](#sample)
-
-## EBNF
-```
-PROFEAM ::= NEWCALENDAR
-NEWCALENDAR ::= “newCalendar:” TITLE? EVENT+ (EVENT GROUP+)? "endOfCalendar" PROCEDURE*
-TITLE ::= STRING
-EVENT ::= “newEvent:” TITLE SETTING? OCCURRENCE “endOfEvent”
-OCCURRENCE ::= “<” (DATES ( TIMERANGE? | DURATION)) | DURATION “>”
-DATES ::= DAY | DAYLIST | DAYRANGE | REPETITION
-DURATION ::= "duration:" {1...18}
-TIME ::= {6...23} “:” {0...59}
-TIMERANGE ::=  "from:" TIME "to:" TIME
-DAY ::= “Monday” | “Tuesday” | “Wednesday” | “Thursday” | “Friday” | “Saturday” | “Sunday”
-DAYRANGE ::= “from:” DAY “to:” DAY
-DAYLIST ::= "[" DAY ("|" DAY){2,6} "]"
-SETTING ::= LOCATION? DESCRIPTION?
-LOCATION ::= “location: ” STRING
-DESCRIPTION ::= “description: “ STRING
-REPETITION ::= “daysOfWeek:“ “daily” | "S?M?T?W?(Th)?F?s?"
-PROCEDURE ::= SCHEDULE | DEF | CALL
-SCHEDULE ::= "schedule:" STRING
-DEF ::= "DEF" STRING "(" STRING ("|" STRING)* ")" BODY
-BODY ::= "{" (SCHEDULE|CALL)+ "}"
-CALL ::= "CALL" STRING
-STRING ::= \S[0-9a-zA-Z ]*
-```
-## Sample input
-
-```$xslt
 newCalendar:
 newEvent:big day0
 description:
@@ -133,9 +96,3 @@ schedule: x
 schedule: y
 }
 CALL sche(big day25|big day26)
-
-```
-Reference-style: 
-![alt text][logo]
-
-[logo]: (/img/sampleOutput.png) "Logo Title Text 2"

@@ -1,5 +1,7 @@
 package model;
 
+import model.io.CVS;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -90,6 +92,20 @@ public class Scheduler implements FlexibleEventAllocatable {
                 }
             }
 //            throw new RuntimeException("Not enough time for event "+ flexibleEvent.toString());
+        }
+        flexibleEventList.clear();
+    }
+
+    public void scheduleEvent(FlexibleEvent flexibleEvent){
+        boolean scheduled = false;
+        for(Day day: days){
+            if(day.addEvent(flexibleEvent)){
+                scheduled = true;
+                break;
+            }
+        }
+        if(!scheduled){
+            flexibleEvent.throwNotEnoughTimeException();
         }
     }
 }

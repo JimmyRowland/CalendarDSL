@@ -14,6 +14,10 @@ public class Title implements ASTnode {
         t.getAndCheckNext(Keyword.keywords.get(";"));
     }
 
+    @Override
+    public void evaluate(Program.EvalObject evalObject) {
+        evalObject.setTitle(title);
+    }
 
 
     public String getTitle() {

@@ -20,6 +20,10 @@ public class Time implements ASTnode{
         time += Validator.validateTime(times[1], 0, 59);
     }
 
+    @Override
+    public void evaluate(Program.EvalObject evalObject) {
+        evalObject.setStart(time);
+    }
 
 
     public int getTime() {

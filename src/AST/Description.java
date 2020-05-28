@@ -16,6 +16,11 @@ public class Description implements Setting, ASTnode {
         t.getAndCheckNext(Keyword.keywords.get(";"));
     }
 
+    @Override
+    public void evaluate(Program.EvalObject evalObject) {
+        evalObject.setDesc(desc);
+    }
+
 
     public void setDesc(String desc) {
         this.desc = desc;

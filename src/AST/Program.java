@@ -27,24 +27,137 @@ public class Program implements ASTnode {
         }
     }
 
+    @Override
+    public void evaluate(EvalObject evalObject) {
+    }
+
+    public class EvalObject {
+        String location = "";
+        String title = "";
+        String desc = "";
+        String dayStart = null;
+        String dayEnd = null;
+        int start = 0;
+        int end = 0;
+        String startString = null;
+        String endString = null;
+        int dur = 0;
+        int startdow = 0;
+        int enddow = 0;
+        List<Integer> repetition = null;
+
+        public String getLocation() {
+            return location;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public String getDesc() {
+            return desc;
+        }
+
+        public String getDayStart() {
+            return dayStart;
+        }
+
+        public String getDayEnd() {
+            return dayEnd;
+        }
+
+        public int getStart() {
+            return start;
+        }
+
+        public int getEnd() {
+            return end;
+        }
+
+        public String getStartString() {
+            return startString;
+        }
+
+        public String getEndString() {
+            return endString;
+        }
+
+        public int getDur() {
+            return dur;
+        }
+
+        public int getStartdow() {
+            return startdow;
+        }
+
+        public int getEnddow() {
+            return enddow;
+        }
+
+        public List<Integer> getRepetition() {
+            return repetition;
+        }
+
+        public void setLocation(String location) {
+            this.location = location;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public void setDesc(String desc) {
+            this.desc = desc;
+        }
+
+        public void setDayStart(String dayStart) {
+            this.dayStart = dayStart;
+        }
+
+        public void setDayEnd(String dayEnd) {
+            this.dayEnd = dayEnd;
+        }
+
+        public void setStart(int start) {
+            this.start = start;
+        }
+
+        public void setEnd(int end) {
+            this.end = end;
+        }
+
+        public void setStartString(String startString) {
+            this.startString = startString;
+        }
+
+        public void setEndString(String endString) {
+            this.endString = endString;
+        }
+
+        public void setDur(int dur) {
+            this.dur = dur;
+        }
+
+        public void setStartdow(int startdow) {
+            this.startdow = startdow;
+        }
+
+        public void setEnddow(int enddow) {
+            this.enddow = enddow;
+        }
+
+        public void setRepetition(List<Integer> repetition) {
+            this.repetition = repetition;
+        }
+
+    }
+
     public Scheduler evaluate() {
         EventCreator ec = new EventCreator();
         Scheduler scheduler = new Scheduler();
         for (Event e:calendar.events
              ) {
-            String location = "";
-            String title = "";
-            String desc = "";
-            String dayStart = null;
-            String dayEnd = null;
-            int start = 0;
-            int end = 0;
-            String startString = null;
-            String endString = null;
-            int dur = 0;
-            int startdow = 0;
-            int enddow = 0;
-            List<Integer> repetition = null;
+            EvalObject evalObject = new EvalObject();
             if (e.getClass().equals(Group.class)) {
                 int tempStart;
                 int tempEnd;
@@ -57,86 +170,43 @@ public class Program implements ASTnode {
                                 found = true;
                                 tempStart = event.getStart().get(Calendar.HOUR_OF_DAY);
                                 tempEnd = event.getEnd().get(Calendar.HOUR_OF_DAY);
-                                if (start == 0 || tempStart < start) {
-                                    startdow = event.getDayOfWeek();
-                                    start = tempStart;
+                                if (evalObject.getStart() == 0 || tempStart < evalObject.getStart()) {
+                                    evalObject.setStartdow(event.getDayOfWeek());
+                                    evalObject.setStart(tempStart);
                                 }
-                                if (end == 0 || tempEnd > end) {
-                                    end = tempEnd;
+                                if (evalObject.getEnd() == 0 || tempEnd > evalObject.getEnd()) {
+                                    evalObject.setEnd(tempEnd);
                                 }
                             }
                         }
                     }
-                    dur = end-start;
+                    evalObject.setDur(evalObject.getEnd()-evalObject.getStart());
                     if (found) {
                         break;
                     }
                 }
             }
-            else if (e.occurrence.getClass().equals(Duration.class)) {
-                dur = ((Duration) e.occurrence).hours;
-            }
-            else if (e.occurrence.range.getClass().equals(Day.class)) {
-                dayStart = ((Day) e.occurrence.range).day;
-                if (((Day) e.occurrence.range).time == null && ((Day) e.occurrence.range).timeRange == null) {
-                    start = 6;
-                    end = 23;
-                } else if (((Day) e.occurrence.range).time != null) {
-                    start = ((Day) e.occurrence.range).getTime();
-                } else {
-                    start = ((Day) e.occurrence.range).timeRange.start.time;
-                    end = ((Day) e.occurrence.range).timeRange.end.time;
-                }
-                dur = end-start;
-            }
-            else if (e.occurrence.range.getClass().equals(DayRange.class)) {
-                dayStart = ((DayRange) e.occurrence.range).from.day;
-                dayEnd = ((DayRange) e.occurrence.range).to.day;
-            }
-            else if (e.occurrence.range.getClass().equals(Time.class)) {
-                start = ((Time) e.occurrence.range).time;
-            }
-            else if (e.occurrence.range.getClass().equals(TimeRange.class)) {
-                if (((TimeRange) e.occurrence.range).day != null) {
-                    dayStart = ((TimeRange) e.occurrence.range).day.day;
-                }
-                start = ((TimeRange) e.occurrence.range).start.time;
-                end = ((TimeRange) e.occurrence.range).end.time;
+            else {
+                e.evaluate(evalObject);
             }
             try {
-                if (dayStart != null) {
-                    startdow = parseDayOfWeek(dayStart);
+                if (evalObject.getDayStart() != null) {
+                    evalObject.setStartdow(parseDayOfWeek(evalObject.getDayStart()));
                 }
-                if (dayEnd != null) {
-                    enddow = parseDayOfWeek(dayStart);
-                }
-                if (e.repeat != null && e.repeat.dayList.size() > 0) {
-                    repetition = new ArrayList<Integer>();
-                    for (String day: e.repeat.dayList) {
-                        repetition.add(parseDayOfWeek(day));
-                    };
+                if (evalObject.getDayEnd() != null) {
+                    evalObject.setEnddow(parseDayOfWeek(evalObject.getDayEnd()));
                 }
             } catch (ParseException parseException) {
                 System.out.println("invalid day");
             }
-            if (start != 0) {
-                startString = convertTime(start);
+            if (evalObject.getStart() != 0) {
+                evalObject.setStartString(convertTime(evalObject.getStart()));
             }
-            if (end != 0) {
-                endString = convertTime(end);
-            }
-            if (e.location != null) {
-                location = e.getLocation();
-            }
-            if (e.title != null) {
-                title = e.getTitle();
-            }
-
-            if (e.description != null) {
-                desc = e.description.desc;
+            if (evalObject.getEnd() != 0) {
+                evalObject.setEndString(convertTime(evalObject.getEnd()));
             }
             try {
-                scheduler.addEvent(ec.createEvent(startString, endString, title, location, desc, dur, startdow, repetition));
+                scheduler.addEvent(ec.createEvent(evalObject.getStartString(), evalObject.getEndString(), evalObject.getTitle(), evalObject.getLocation(), evalObject.getDesc(), evalObject.getDur(), evalObject.getStartdow(), evalObject.getRepetition()));
 
             } catch (Exception exception) {
                 System.out.println("Could not convert to event");
@@ -149,7 +219,7 @@ public class Program implements ASTnode {
     }
 
     // modified from https://stackoverflow.com/questions/18232340/convert-string-to-day-of-week-not-exact-date
-    private static int parseDayOfWeek(String day) throws ParseException {
+    public static int parseDayOfWeek(String day) throws ParseException {
         SimpleDateFormat dayFormat = new SimpleDateFormat("E", Locale.US);
         Date date = dayFormat.parse(day);
         Calendar calendar = Calendar.getInstance();
@@ -179,4 +249,5 @@ public class Program implements ASTnode {
     public void setCalendar(NewCalendar calendar) {
         this.calendar = calendar;
     }
+
 }

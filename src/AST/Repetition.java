@@ -4,9 +4,12 @@ package AST;
 import libs.Keyword;
 import libs.Tokenizer;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static AST.Program.parseDayOfWeek;
 
 
 public class Repetition implements Setting, ASTnode {
@@ -21,6 +24,19 @@ public class Repetition implements Setting, ASTnode {
         setRepetition();
         t.getAndCheckNext(Keyword.keywords.get(";"));
         // todo the repetition values need to be turned into some range of time
+    }
+
+    @Override
+    public void evaluate(Program.EvalObject evalObject) {
+        List<Integer> repetition = new ArrayList<Integer>();
+        for (String day: dayList) {
+            try {
+                repetition.add(parseDayOfWeek(day));
+                evalObject.setRepetition(repetition);
+            } catch (ParseException e) {
+                System.out.println("invalid days given");
+            }
+        };
     }
 
     public void setRepetition() {

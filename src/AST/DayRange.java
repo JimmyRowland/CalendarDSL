@@ -40,4 +40,10 @@ public class DayRange extends Occurrence implements ASTnode{
     public String getDayRange() {
         return from + "to" + to;
     }
+
+    @Override
+    public void evaluate(Program.EvalObject evalObject) {
+        evalObject.setDayStart(this.from.getDay());
+        evalObject.setDayEnd(this.to.getDay());
+    }
 }

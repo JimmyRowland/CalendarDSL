@@ -26,6 +26,20 @@ public class Day implements ASTnode {
         }
     }
 
+    @Override
+    public void evaluate(Program.EvalObject evalObject) {
+        evalObject.setDayStart(day);
+        if (time == null && timeRange == null) {
+            evalObject.setStart(6);
+            evalObject.setEnd(23);
+        } else if (time != null) {
+            time.evaluate(evalObject);
+        } else {
+            timeRange.evaluate(evalObject);
+        }
+        evalObject.setDur(evalObject.getEnd()-evalObject.getStart());
+    }
+
     public String getDay() {
         return day;
     }

@@ -17,6 +17,11 @@ public class Location implements Setting, ASTnode {
         t.getAndCheckNext(";");
     }
 
+    @Override
+    public void evaluate(Program.EvalObject evalObject) {
+        evalObject.setLocation(name);
+    }
+
     public void setName(String name) {
         this.name = name;
     }

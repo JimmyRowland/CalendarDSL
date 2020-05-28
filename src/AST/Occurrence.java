@@ -48,4 +48,8 @@ public class Occurrence implements ASTnode {
     public void setRange(ASTnode range) {
         this.range = range;
     }
+
+    public void evaluate(Program.EvalObject evalObject) {
+        range.evaluate(evalObject);
+    }
 }

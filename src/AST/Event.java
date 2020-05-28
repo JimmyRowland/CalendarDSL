@@ -50,6 +50,23 @@ public class Event implements ASTnode {
         }
     }
 
+    @Override
+    public void evaluate(Program.EvalObject evalObject) {
+        if (title != null) {
+            title.evaluate(evalObject);
+        }
+        occurrence.evaluate(evalObject);
+        if (location != null) {
+            location.evaluate(evalObject);
+        }
+        if (repeat != null) {
+            repeat.evaluate(evalObject);
+        }
+        if (description != null) {
+            description.evaluate(evalObject);
+        }
+    }
+
     public void setTitle(Title title) {
         this.title = title;
     }

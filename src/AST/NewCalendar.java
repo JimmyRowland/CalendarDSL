@@ -47,6 +47,10 @@ public class NewCalendar implements Calendar, ASTnode {
         }
     }
 
+    @Override
+    public void evaluate(Program.EvalObject evalObject) {
+    }
+
     public void setTitle(Title title) {
         this.title = title;
     }

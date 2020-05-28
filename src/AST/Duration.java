@@ -25,5 +25,9 @@ public class Duration extends Occurrence implements ASTnode {
         }
     }
 
+    public void evaluate(Program.EvalObject evalObject) {
+        evalObject.setDur(hours);
+    }
+
 
 }

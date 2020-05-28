@@ -48,4 +48,13 @@ public class TimeRange extends Occurrence implements ASTnode{
     public void setEnd(Time end) {
         this.end = end;
     }
+
+    @Override
+    public void evaluate(Program.EvalObject evalObject) {
+        if (day != null) {
+            evalObject.setDayStart(this.day.getDay());
+        }
+        evalObject.setStart(this.start.getTime());
+        evalObject.setEnd(this.end.getTime());
+    }
 }

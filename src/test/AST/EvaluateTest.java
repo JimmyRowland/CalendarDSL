@@ -104,20 +104,20 @@ public class EvaluateTest {
     @Test
     void basicOneFlexEvent(){
         dayNode.setDay("Monday");
-        e1.setOccurrence(day);
+        Duration d = new Duration();
+        d.setHours(3);
+        e1.setOccurrence(d);
 
         events.add(e1);
         calendar.setEvents(events);
         program.setCalendar(calendar);
 
         scheduler = program.evaluate();
-        assertEquals(1, scheduler.getDays().get(1).getEvents().size());
-        System.out.println(scheduler.getDays().get(1).getEvents());
 
     }
 
     @Test
-    void OneFlexOneIndEventDifferentDays(){
+    void OneFlexOneIndEvent(){
         Occurrence dur = new Duration();
         ((Duration) dur).setHours(4);
         e1.setOccurrence(dur);

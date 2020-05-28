@@ -10,7 +10,7 @@ public class FlexibleEventWithDayField extends FlexibleEvent{
     public FlexibleEventWithDayField(int duration, String name, String location, String description, int dayOfWeek) {
         super(duration,name,location,description);
         this.dayOfWeek = dayOfWeek;
-        this.start = Util.getNewCalendar();
+        this.start = Calendar.getInstance();
         start.set(Calendar.DAY_OF_WEEK, dayOfWeek);
     }
     @Override

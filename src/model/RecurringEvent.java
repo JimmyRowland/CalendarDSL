@@ -57,7 +57,7 @@ public class RecurringEvent implements Event, Comparable<Event>{
     public int getDayOfWeek() {
         return start.get(Calendar.DAY_OF_WEEK);
     }
-
+    //TODO
     @Override
     public boolean hasConflict(Calendar start, Calendar end) {
         return true;

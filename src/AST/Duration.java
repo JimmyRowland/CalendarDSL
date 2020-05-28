@@ -6,6 +6,10 @@ import libs.Tokenizer;
 
 public class Duration extends Occurrence implements ASTnode {
 
+    public void setHours(int hours) {
+        this.hours = hours;
+    }
+
     int hours;
 //    Day day;
 

@@ -72,10 +72,8 @@ public class Day implements FlexibleEventAllocatable {
     }
 
     public void addEvent(IndividualEvent event) {
-        if (hasTimeSlot(event)) {
-            events.add(event);
-            sortEvent();
-        }
+        events.add(event);
+        sortEvent();
     }
 
 //    // Skip events with conflict without throwing exception

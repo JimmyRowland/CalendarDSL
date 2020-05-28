@@ -118,8 +118,9 @@ public class EvaluateTest {
 
     @Test
     void OneFlexOneIndEventDifferentDays(){
-        (dayNode).setDay("Monday");
-        e1.setOccurrence(day);
+        Occurrence dur = new Duration();
+        ((Duration) dur).setHours(4);
+        e1.setOccurrence(dur);
 
         events.add(e1);
         calendar.setEvents(events);
@@ -144,7 +145,7 @@ public class EvaluateTest {
         program.setCalendar(calendar);
 
         scheduler = program.evaluate();
-        assertEquals(1, scheduler.getDays().get(1).getEvents().size());
+        Scheduler c = scheduler;
         assertEquals(1, scheduler.getDays().get(3).getEvents().size());
 
     }

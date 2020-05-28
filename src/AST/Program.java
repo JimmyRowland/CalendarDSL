@@ -2,7 +2,6 @@ package AST;
 
 import libs.Keyword;
 import libs.Tokenizer;
-import model.Event;
 import model.Scheduler;
 import model.EventCreator;
 
@@ -31,30 +30,76 @@ public class Program implements ASTnode {
     public Scheduler evaluate() {
         EventCreator ec = new EventCreator();
         Scheduler scheduler = new Scheduler();
-        for (AST.Event e:calendar.events
+        for (Event e:calendar.events
              ) {
+            String location = "";
+            String title = "";
+            String desc = "";
             String dayStart = null;
             String dayEnd = null;
             int start = 0;
             int end = 0;
             String startString = null;
             String endString = null;
-            int dur = 2; //todo implement duration once AST is implemented
+            int dur = 0;
             int startdow = 0;
             int enddow = 0;
             List<Integer> repetition = null;
-            if (e.occurrence.range.getClass().equals(AST.Day.class)) {
-                dayStart = ((Day) e.occurrence.range).day;
+            if (e.getClass().equals(Group.class)) {
+                int tempStart;
+                int tempEnd;
+                boolean found = false;
+                for (model.Day day: scheduler.getDays()) {
+                    ArrayList<model.Event> events = day.getEvents();
+                    for (model.Event event: events) {
+                        for (AST.Event eventAST: ((Group) e).events) {
+                            if (event.getName() == eventAST.title.title) {
+                                found = true;
+                                tempStart = event.getStart().get(Calendar.HOUR_OF_DAY);
+                                tempEnd = event.getEnd().get(Calendar.HOUR_OF_DAY);
+                                if (start == 0 || tempStart < start) {
+                                    startdow = event.getDayOfWeek();
+                                    start = tempStart;
+                                }
+                                if (end == 0 || tempEnd > end) {
+                                    end = tempEnd;
+                                }
+                            }
+                        }
+                    }
+                    dur = end-start;
+                    if (found) {
+                        break;
+                    }
+                }
             }
-            else if (e.occurrence.range.getClass().equals(AST.DayRange.class)) {
+            else if (e.occurrence.getClass().equals(Duration.class)) {
+                dur = ((Duration) e.occurrence).hours;
+            }
+            else if (e.occurrence.range.getClass().equals(Day.class)) {
+                dayStart = ((Day) e.occurrence.range).day;
+                if (((Day) e.occurrence.range).time == null && ((Day) e.occurrence.range).timeRange == null) {
+                    start = 6;
+                    end = 23;
+                } else if (((Day) e.occurrence.range).time != null) {
+                    start = ((Day) e.occurrence.range).getTime();
+                } else {
+                    start = ((Day) e.occurrence.range).timeRange.start.time;
+                    end = ((Day) e.occurrence.range).timeRange.end.time;
+                }
+                dur = end-start;
+            }
+            else if (e.occurrence.range.getClass().equals(DayRange.class)) {
                 dayStart = ((DayRange) e.occurrence.range).from.day;
                 dayEnd = ((DayRange) e.occurrence.range).to.day;
             }
-            else if (e.occurrence.range.getClass().equals(AST.Time.class)) {
+            else if (e.occurrence.range.getClass().equals(Time.class)) {
                 start = ((Time) e.occurrence.range).time;
             }
-            else if (e.occurrence.range.getClass().equals(AST.TimeRange.class)) {
-                dayStart = ((TimeRange) e.occurrence.range).day.day;
+            else if (e.occurrence.range.getClass().equals(TimeRange.class)) {
+                if (((TimeRange) e.occurrence.range).day != null) {
+                    dayStart = ((TimeRange) e.occurrence.range).day.day;
+                }
                 start = ((TimeRange) e.occurrence.range).start.time;
                 end = ((TimeRange) e.occurrence.range).end.time;
             }
@@ -65,11 +110,14 @@ public class Program implements ASTnode {
                 if (dayEnd != null) {
                     enddow = parseDayOfWeek(dayStart);
                 }
+                if (e.repeat != null && e.repeat.dayList.size() > 0) {
+                    repetition = new ArrayList<Integer>();
+                    for (String day: e.repeat.dayList) {
+                        repetition.add(parseDayOfWeek(day));
+                    };
+                }
             } catch (ParseException parseException) {
                 System.out.println("invalid day");
-            }
-            if (e.repeat != null) {
-                repetition = e.repeat.evaluate();
             }
             if (start != 0) {
                 startString = convertTime(start);
@@ -77,8 +125,18 @@ public class Program implements ASTnode {
             if (end != 0) {
                 endString = convertTime(end);
             }
+            if (e.location != null) {
+                location = e.getLocation();
+            }
+            if (e.title != null) {
+                title = e.getTitle();
+            }
+
+            if (e.description != null) {
+                desc = e.description.desc;
+            }
             try {
-                scheduler.addEvent(ec.createEvent(startString, endString, e.title.title, e.location.name, e.description.desc, dur, startdow, repetition));
+                scheduler.addEvent(ec.createEvent(startString, endString, title, location, desc, dur, startdow, repetition));
             } catch (Exception exception) {
                 System.out.println("Could not convert to event");
                 exception.printStackTrace();
@@ -106,11 +164,13 @@ public class Program implements ASTnode {
 
     public String convertTime(int time) {
         String ret = Integer.toString(time);
-        if (time < 10){
-            ret = "0" + ret + ":00";
-        } else {
-            ret = ret + ":00";
+        if (ret.length() < 2) {
+            ret = "0" + ret;
         }
+        while (ret.length() < 4) {
+            ret = ret + "0";
+        }
+        ret = ret.substring(0, 2) + ":" + ret.substring(2,4);
         return ret;
     }
 

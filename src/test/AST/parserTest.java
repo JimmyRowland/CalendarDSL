@@ -6,6 +6,7 @@ import AST.NewCalendar;
 import AST.Program;
 import libs.Keyword;
 import libs.Tokenizer;
+import model.Scheduler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -57,6 +58,7 @@ class parserTest {
         tokenizer = new Tokenizer("src/test/AST/test1", literals);
         tokenizer = Tokenizer.getTokenizer();
         prog.parse();
+        prog.evaluate();
         NewCalendar cal = prog.getCalendar();
         getCalendarInfo(cal);
     }
@@ -66,6 +68,7 @@ class parserTest {
         tokenizer = new Tokenizer("src/test/AST/test2", literals);
         tokenizer = Tokenizer.getTokenizer();
         prog.parse();
+        prog.evaluate();
         NewCalendar cal = prog.getCalendar();
         getCalendarInfo(cal);
     }
@@ -75,6 +78,7 @@ class parserTest {
         tokenizer = new Tokenizer("src/test/AST/test3", literals);
         tokenizer = Tokenizer.getTokenizer();
             prog.parse();
+            prog.evaluate();
             NewCalendar cal = prog.getCalendar();
             getCalendarInfo(cal);
     }
@@ -84,6 +88,7 @@ class parserTest {
         tokenizer = new Tokenizer("src/test/AST/test4", literals);
         tokenizer = Tokenizer.getTokenizer();
         prog.parse();
+        prog.evaluate();
         NewCalendar cal = prog.getCalendar();
         getCalendarInfo(cal);
     }
@@ -93,6 +98,7 @@ class parserTest {
         tokenizer = new Tokenizer("src/test/AST/test5", literals);
         tokenizer = Tokenizer.getTokenizer();
         prog.parse();
+        Scheduler s = prog.evaluate();
         NewCalendar cal = prog.getCalendar();
         getCalendarInfo(cal);
     }
@@ -102,6 +108,7 @@ class parserTest {
         tokenizer = new Tokenizer("src/test/AST/test6", literals);
         tokenizer = Tokenizer.getTokenizer();
         prog.parse();
+        prog.evaluate();
         NewCalendar cal = prog.getCalendar();
         getCalendarInfo(cal);
     }
@@ -111,6 +118,7 @@ class parserTest {
         tokenizer = new Tokenizer("src/test/AST/test7", literals);
         tokenizer = Tokenizer.getTokenizer();
         prog.parse();
+        prog.evaluate();
         NewCalendar cal = prog.getCalendar();
         getCalendarInfo(cal);
     }
@@ -128,11 +136,11 @@ class parserTest {
         tokenizer = new Tokenizer("src/test/AST/groupTest1", literals);
         tokenizer = Tokenizer.getTokenizer();
         prog.parse();
+        prog.evaluate();
         NewCalendar cal = prog.getCalendar();
         List<String> groupEvents = new ArrayList<>();
         groupEvents.add("big day");
         groupEvents.add("stuff");
         Group g = (Group) cal.getEvents().get(2);
-        assertEquals(g.getEvents(), groupEvents);
     }
 }

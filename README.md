@@ -143,5 +143,5 @@ Output
 [logo]: /img/sample.png "Sample output"
 
 ## Reference
-- Tokenizer and AST structure: professor Alex Summers' [code for TinyVars from class](http://www.students.cs.ubc.ca/~cs-410/repos/tinyVars-complete.zip)
+- Tokenizer structure and AST structure: professor Alex Summers' [code for TinyVars from class](http://www.students.cs.ubc.ca/~cs-410/repos/tinyVars-complete.zip)
 

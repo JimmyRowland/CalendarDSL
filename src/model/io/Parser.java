@@ -6,12 +6,10 @@ import model.EventCreator;
 import model.Scheduler;
 import model.io.ast.EXP;
 import model.io.ast.PROGRAM;
-import org.json.JSONObject;
 
 import java.util.*;
 
 public class Parser {
-    JSONObject jsonObject;
     Tokenizer t;
     Scheduler scheduler;
     List<String> literals = Arrays.asList(Const.ENDOFEVENT, Const.DAYSOFWEEK, Const.DESCRIPTION, Const.NEWCALENDAR,
@@ -22,7 +20,6 @@ public class Parser {
     public Map<String, EXP> exp;
     public Parser(String path){
         this.t = new Tokenizer(path, literals);
-        this.jsonObject = new JSONObject();
 //        this.t = Tokenizer.getTokenizer();
         this.scheduler = new Scheduler();
         this.events = new HashMap<>();

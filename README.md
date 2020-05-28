@@ -139,4 +139,4 @@ Output
 
 ![alt text][logo]
 
-[logo]: /img/sampleOutput.png "Sample output"
+[logo]: /img/sample.png "Sample output"

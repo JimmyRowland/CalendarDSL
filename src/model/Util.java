@@ -1,6 +1,7 @@
 package model;
 
 
+import javax.swing.event.MouseInputListener;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -37,12 +38,19 @@ public class Util {
 
     //https://stackoverflow.com/questions/3463756/is-there-a-good-way-to-get-the-date-of-the-coming-wednesday
     public static Calendar nextDayOfWeek(int dayOfWeek) {
-        Calendar date = Calendar.getInstance();
+        Calendar date = Util.getNewCalendar();
         if(date.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY){
-            date.set(Calendar.DAY_OF_WEEK,dayOfWeek);
             date.add(Calendar.DAY_OF_MONTH, 7);
         }
+        date.set(Calendar.DAY_OF_WEEK,dayOfWeek);
         return date;
+    }
+
+    public static Calendar getNewCalendar(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.SECOND,0);
+        calendar.set(Calendar.MILLISECOND,0);
+        return calendar;
     }
 
     public static void setTime(Calendar calendar, int hour){

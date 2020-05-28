@@ -22,7 +22,7 @@ public class SCHEDULE extends STATEMENT {
     public List<Event> evaluate(Map<String, EXP> exp, Map<String, List<Event>> symbolTable, Parser parser) {
         System.out.println("SCHEDULING: " + scheduled);
         List<Event> events = scheduled.evaluate(exp, symbolTable, parser);
-        if(events == null){
+        if(events == null || events.size() == 0){
             throw new RuntimeException("Unknown event"+scheduled);
         }
         parser.scheduleEvents(events);

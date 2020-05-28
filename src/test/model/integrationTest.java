@@ -111,6 +111,14 @@ class integrationTest {
 
     }
 
+    @Test
+    void scheduleEventsAlreadyScheduled() {
+
+        parse = new Parser("src/test/model/data/scheduleEventsAlreadyScheduled");
+        assertThrows(Exception.class, ()-> parse.calendar());
+
+    }
+
 
 
 }

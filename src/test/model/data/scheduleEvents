@@ -13,18 +13,26 @@ newEvent:big day2
 <Monday>
 endOfEvent
 newEvent:big day3
+location: somewhere
 <Monday from:7:00 to:8:00>
 endOfEvent
 newEvent:big day4
+location: somewhere
 <Tuesday from:7:00 to:8:00>
 endOfEvent
 newEvent:big day5
+location: somewhere
+description: something
 <[Monday|Thursday|Sunday] duration:1>
 endOfEvent
 newEvent:big day6
+location:
+description: something
 <[Thursday|Sunday]>
 endOfEvent
 newEvent:big day7
+location: somewhere
+description:
 <[Thursday|Sunday|Tuesday] from:8:00 to:9:00>
 endOfEvent
 newEvent:big day8

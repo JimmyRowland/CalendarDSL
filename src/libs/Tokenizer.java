@@ -9,8 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Tokenizer {
-
-
+    //From assignment 2
     private String program;
     private static List<String> literals;
     private List<String> tokens = new ArrayList<>();

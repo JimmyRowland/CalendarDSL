@@ -6,6 +6,7 @@
 
 - [EBNF](#ebnf)
 - [Sample input](#sample-input)
+- [Reference](#reference)
 
 ## EBNF
 ```
@@ -140,3 +141,7 @@ Output
 ![alt text][logo]
 
 [logo]: /img/sample.png "Sample output"
+
+## Reference
+- Tokenizer and AST structure: professor Alex Summers' [code for TinyVars from class](http://www.students.cs.ubc.ca/~cs-410/repos/tinyVars-complete.zip)
+

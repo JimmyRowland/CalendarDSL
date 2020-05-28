@@ -20,6 +20,9 @@ public class IndividualEvent implements Event, Comparable<Event>{
     @Override
     public void addToScheduler(Scheduler scheduler) {
         scheduler.addEvent(this);
+//        System.out.println("!!!!!!!!!!!!!");
+//        Util.printCalendar(start);
+//        Util.printCalendar(end);
     }
     @Override
     public int compareTo(Event event) {

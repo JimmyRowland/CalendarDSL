@@ -62,6 +62,7 @@ public class Util {
 
     public static void printCalendar(Calendar calendar){
         System.out.println(calendar.getTime().toString());
+        System.out.println(calendar.get(Calendar.MILLISECOND));
     }
 
 }

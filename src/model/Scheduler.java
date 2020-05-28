@@ -1,5 +1,6 @@
 package model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -83,6 +84,30 @@ public class Scheduler implements FlexibleEventAllocatable {
             }
             if (!allocated) {
                 throw new RuntimeException("Not enough time for event "+ flexibleEvent.toString());
+            }
+        }
+    }
+
+    private enum DaysOfWeek {
+        SUNDAY, MONDAY, TUESDAY, WEDNESDAY,
+        THURSDAY, FRIDAY, SATURDAY
+    }
+
+
+
+    public void print(){
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:");
+        String indent = "   ";
+        for(int i = 0; i < 7; i++){
+            System.out.println(DaysOfWeek.values()[i] + "\n" + "---------------------------");
+            List<Event> events = this.days.get(i).getEvents();
+            for(Event e: events) {
+                String end = "";
+                if (e.getEnd() != null) {
+                }
+                    System.out.println(indent + "Event " + e.getName() + ": " + formatter.format(e.getStart().getTime()) + "-" + formatter.format(e.getEnd().getTime()));
+                    System.out.println(indent + indent + "Location: " + e.getLocation());
+                    System.out.println(indent + indent + "Description: " + e.getDescription());
             }
         }
     }

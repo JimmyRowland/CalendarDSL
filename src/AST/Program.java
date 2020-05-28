@@ -2,13 +2,13 @@ package AST;
 
 import libs.Keyword;
 import libs.Tokenizer;
-import model.Scheduler;
 import model.EventCreator;
+import model.Scheduler;
 
 import java.text.ParseException;
-import java.util.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.*;
 
 
 public class Program implements ASTnode {
@@ -137,12 +137,14 @@ public class Program implements ASTnode {
             }
             try {
                 scheduler.addEvent(ec.createEvent(startString, endString, title, location, desc, dur, startdow, repetition));
+
             } catch (Exception exception) {
                 System.out.println("Could not convert to event");
                 exception.printStackTrace();
             }
         }
         scheduler.allocateFlexibleEvents();
+        scheduler.print();
         return scheduler;
     }
 

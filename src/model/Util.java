@@ -1,6 +1,7 @@
 package model;
 
 
+import javax.swing.event.MouseInputListener;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -17,10 +18,10 @@ public class Util {
         String[] timeList =  time.split(":");
         calendar.set(Calendar.HOUR_OF_DAY,Integer.parseInt(timeList[0]));
         calendar.set(Calendar.MINUTE,Integer.parseInt(timeList[1]));
-        System.out.println("---");
-        System.out.println(time);
-        System.out.println(calendar.getTime().toString());
-        System.out.println("---");
+//        System.out.println("---");
+//        System.out.println(time);
+//        System.out.println(calendar.getTime().toString());
+//        System.out.println("---");
         return calendar;
     }
 
@@ -37,23 +38,31 @@ public class Util {
 
     //https://stackoverflow.com/questions/3463756/is-there-a-good-way-to-get-the-date-of-the-coming-wednesday
     public static Calendar nextDayOfWeek(int dayOfWeek) {
-        Calendar date = Calendar.getInstance();
+        Calendar date = Util.getNewCalendar();
         if(date.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY){
-            date.set(Calendar.DAY_OF_WEEK,dayOfWeek);
             date.add(Calendar.DAY_OF_MONTH, 7);
         }
+        date.set(Calendar.DAY_OF_WEEK,dayOfWeek);
         return date;
     }
 
+    public static Calendar getNewCalendar(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.SECOND,0);
+        calendar.set(Calendar.MILLISECOND,0);
+        return calendar;
+    }
+
     public static void setTime(Calendar calendar, int hour){
-        calendar.set(Calendar.HOUR_OF_DAY,hour-1);
-        calendar.set(Calendar.MINUTE,59);
-        calendar.set(Calendar.SECOND,59);
-        calendar.set(Calendar.MILLISECOND,999);
+        calendar.set(Calendar.HOUR_OF_DAY,hour);
+        calendar.set(Calendar.MINUTE,0);
+        calendar.set(Calendar.SECOND,0);
+        calendar.set(Calendar.MILLISECOND,0);
     }
 
     public static void printCalendar(Calendar calendar){
         System.out.println(calendar.getTime().toString());
+        System.out.println(calendar.get(Calendar.MILLISECOND));
     }
 
 }

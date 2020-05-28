@@ -1,8 +1,6 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 
@@ -28,20 +26,34 @@ public class EventCreator {
     public static Event createEvent(String start, String end, String name, String location, String description, int duration, int dayOfWeek, List<Integer> daysOfWeek) throws Exception {
         // start and end should both be in the format of 16:00 or null
         // dayOfWeek should be integers 1: Sunday, 2: Monday: 3 Tuesday;
-        // TODO recurring event
-        if (start == null && end == null) {
+
+
+        if(duration > 0){
             if (dayOfWeek > 0 && dayOfWeek < 8) {
                 return EventCreator.createEvent(duration, name, location, description, dayOfWeek);
-            } else if (duration > 0) {
+            } else if(daysOfWeek != null){
+                return EventCreator.createEvent(duration,name,location,description,daysOfWeek);
+            } else {
                 return EventCreator.createEvent(duration, name, location, description);
             }
-        } else if (start != null && end != null) {
+        }
+        else {
+            if (start == null){
+                start = "6:00";
+            }
+            if (end == null){
+                end = "23:59";
+            }
             if (daysOfWeek == null) {
                 return EventCreator.createEvent(Util.getNewNextWeekCalendar(dayOfWeek, start), Util.getNewNextWeekCalendar(dayOfWeek, end), name, location, description);
             }
             return EventCreator.createEvent(start, end, name, location, description, daysOfWeek);
         }
-        throw new Exception("Incorrect input");
+//        throw new Exception("Incorrect input");
+    }
+
+    public static FlexibleEventMultiDay createEvent(int duration, String name, String location, String description, List<Integer> daysOfWeek){
+        return new FlexibleEventMultiDay(duration,name,location,description,daysOfWeek);
     }
 
     public static RecurringEvent createEvent(String start, String end, String name, String location, String description, List<Integer> daysOfWeek) throws Exception {

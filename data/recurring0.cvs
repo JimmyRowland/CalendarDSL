@@ -1,0 +1,9 @@
+Subject,Start Date,Start Time,End Date,End Time,All Day Event,Description,Location,Private
+"recurring2","05/31/2020","6:00 AM","05/31/2020","7:00 AM","False","des","loc","False"
+"recurring1","05/31/2020","8:00 AM","05/31/2020","10:00 AM","False","des","loc","False"
+"recurring2","06/1/2020","6:00 AM","06/1/2020","7:00 AM","False","des","loc","False"
+"recurring1","06/1/2020","8:00 AM","06/1/2020","10:00 AM","False","des","loc","False"
+"recurring2","06/2/2020","6:00 AM","06/2/2020","7:00 AM","False","des","loc","False"
+"recurring1","06/2/2020","8:00 AM","06/2/2020","10:00 AM","False","des","loc","False"
+"recurring2","06/3/2020","6:00 AM","06/3/2020","7:00 AM","False","des","loc","False"
+"recurring1","06/3/2020","8:00 AM","06/3/2020","10:00 AM","False","des","loc","False"

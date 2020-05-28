@@ -1,0 +1,99 @@
+newCalendar:
+newEvent:big day0
+description:
+<duration:1>
+endOfEvent
+newEvent:big day0
+<Monday duration:1>
+endOfEvent
+newEvent:big day0
+<Tuesday duration:1>
+endOfEvent
+newEvent:big day2
+<Monday>
+endOfEvent
+newEvent:big day3
+<Monday from:7:00 to:8:00>
+endOfEvent
+newEvent:big day4
+<Tuesday from:7:00 to:8:00>
+endOfEvent
+newEvent:big day5
+<[Monday|Thursday|Sunday] duration:1>
+endOfEvent
+newEvent:big day6
+<[Thursday|Sunday]>
+endOfEvent
+newEvent:big day7
+<[Thursday|Sunday|Tuesday] from:8:00 to:9:00>
+endOfEvent
+newEvent:big day8
+<from:Monday to:Friday duration:1>
+endOfEvent
+newEvent:big day9
+<daysOfWeek: Ss duration:1>
+endOfEvent
+newEvent:big day10
+<daysOfWeek: Ths from:8:00 to:9:00>
+endOfEvent
+newEvent:big day11
+<daysOfWeek: Ths from:9:00 to:10:00>
+endOfEvent
+newEvent:big day12
+<daysOfWeek: daily duration:1>
+endOfEvent
+newEvent:big day13
+<daysOfWeek: MTTh duration:1>
+endOfEvent
+newEvent:big day14
+<daysOfWeek: MT duration:1>
+endOfEvent
+newEvent:big day15
+<daysOfWeek: Ss duration:1>
+endOfEvent
+newEvent:big day16
+description:
+<duration:1>
+endOfEvent
+newEvent:big day17
+<Monday duration:1>
+endOfEvent
+newEvent:big day18
+<[Monday|Thursday|Sunday] duration:1>
+endOfEvent
+newEvent:big day19
+<from:Monday to:Friday duration:1>
+endOfEvent
+newEvent:big day20
+<daysOfWeek: Ss duration:1>
+endOfEvent
+newEvent:big day21
+<daysOfWeek: daily duration:1>
+endOfEvent
+newEvent:big day22
+<daysOfWeek: MTTh duration:1>
+endOfEvent
+newEvent:big day23
+<daysOfWeek: MT duration:1>
+endOfEvent
+newEvent:big day24
+<daysOfWeek: Ss duration:1>
+endOfEvent
+newEvent:big day25
+<Friday duration:1>
+endOfEvent
+newEvent:big day26
+<Friday duration:1>
+endOfEvent
+newEvent:big day27
+<Friday duration:1>
+endOfEvent
+endOfCalendar
+schedule: big day0
+schedule: big day27
+DEF sche(x|y){
+schedule: x
+schedule: y
+}
+CALL sche(big day25|big day26)
+CALL sche(big day25|big day26)

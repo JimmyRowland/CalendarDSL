@@ -1,5 +1,7 @@
 package model;
 
+import model.io.CVS;
+
 import javax.sound.midi.Soundbank;
 import java.util.*;
 
@@ -19,6 +21,8 @@ public class Day implements FlexibleEventAllocatable {
         Calendar endOfTheDay = ((Calendar) startOfTheDay.clone());
         Util.setTime(endOfTheDay,24);
         timeStamps.add(endOfTheDay);
+//        Util.printCalendar(startOfTheDay);
+//        Util.printCalendar(endOfTheDay);
     }
 
 
@@ -27,6 +31,11 @@ public class Day implements FlexibleEventAllocatable {
         for (int i = 0; i < this.timeStamps.size(); i += 2) {
             Calendar start = timeStamps.get(i);
             Calendar end = timeStamps.get(i + 1);
+//                    System.out.println("Individual");
+//        Util.printCalendar(event.getStart());
+//        Util.printCalendar(event.getEnd());
+//            Util.printCalendar(start);
+//            Util.printCalendar(end);
             if (!event.hasConflict(start, end)) {
                 timeStamps.add(event.getStart());
                 timeStamps.add(event.getEnd());
@@ -48,8 +57,10 @@ public class Day implements FlexibleEventAllocatable {
             events.add(flexibleEvent);
             sortEvent();
             return true;
+        }else{
+            System.out.println("Not enough time to schedule " + flexibleEvent.getName() + " duration:" + flexibleEvent.getDuration());
+            return false;
         }
-        return false;
     }
 
     public void addEvent(FlexibleEventWithDayField FlexibleEventWithDayField) {
@@ -72,9 +83,14 @@ public class Day implements FlexibleEventAllocatable {
     }
 
     public void addEvent(IndividualEvent event) {
+//                System.out.println("Individual");
+//        Util.printCalendar(event.getStart());
+//        Util.printCalendar(event.getEnd());
         if (hasTimeSlot(event)) {
             events.add(event);
             sortEvent();
+        }else{
+            System.out.println("Not enough time to schedule " + CVS.eventToString(event));
         }
     }
 
@@ -93,5 +109,10 @@ public class Day implements FlexibleEventAllocatable {
         for (FlexibleEvent flexibleEvent : flexibleEvents) {
             this.addEvent(flexibleEvent);
         }
+        flexibleEvents.clear();
+    }
+
+    public ArrayList<FlexibleEvent> getFlexibleEvents() {
+        return flexibleEvents;
     }
 }
